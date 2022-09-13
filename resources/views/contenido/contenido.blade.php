@@ -1,5 +1,8 @@
         @extends('principal')
         @section('contenido')
+
+        @if(Auth::check())
+            @if(Auth::user()->idrol==1)
        <template v-if="menu==0">
        <paciente></paciente>
        </template>
@@ -51,4 +54,7 @@
        <template v-if="menu==12">
         <h1>cont menu 12</h1>
        </template>
+            @endif
+        @endif
+              
         @endsection
