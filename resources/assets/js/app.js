@@ -18,6 +18,9 @@ window.Vue = require('vue');
 Vue.component('categoria', require('./components/Categoria.vue'));
 Vue.component('paciente', require('./components/Paciente.vue'));
 Vue.component('subcategoria',require('./components/Subcategoria.vue'));
+Vue.component('rol',require('./components/Rol.vue'));
+Vue.component('user',require('./components/User.vue'));
+
 
 const app = new Vue({
     el: '#app',

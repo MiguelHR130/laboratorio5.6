@@ -30,3 +30,13 @@ Route::get('/subcategorias','SubcategoriaController@index');
 Route::post('/subcategorias/registrar','SubcategoriaController@store');
 Route::put('/subcategoria/actualizar','SubcategoriaController@update');
 Route::get('/listadodeCategoria','SubcategoriaController@listadeCategoria');
+
+//rutas para rol
+Route::get('/rol','RolController@index');
+Route::get('/rol/selectRol','RolController@selectrol');
+
+
+//rutas para user
+Route::get('/user','UserController@index');
+Route::post('/user/registrar','UserController@store');
+Route::put('/user/actualizar','UserController@update');
