@@ -23,6 +23,7 @@ Route::group(['middleware'=>['auth']],function(){
         return view('contenido/contenido');
     })->name('main');
     
+    
     //rutas para usar en Paciente.vue
     Route::get('/pacientes','PacienteController@index');
     Route::post('/paciente/registrar','PacienteController@store');
@@ -48,6 +49,14 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('/user','UserController@index');
     Route::post('/user/registrar','UserController@store');
     Route::put('/user/actualizar','UserController@update');
+
+    //rutas para registro de solicitud
+    Route::get('/listadosolicitud','SolicitudController@index');
+    Route::get('/listadoPaciente','SolicitudController@listadoPaciente');
+    Route::post('/solicitud/registrar','SolicitudController@store');
+    Route::put('/solicitud/actualizar','SolicitudController@update');
+    Route::get('solicitudpdf','SolicitudController@pdf');
+
     
     /* Se crean los grupos de rutas para administrador dentro de el middleware auth 
     Route::group(['middleware'=>['Administrador']],function(){

@@ -12,7 +12,7 @@
        </template>
 
        <template v-if="menu==2">
-        <h1>cont menu 2</h1>
+       <solicitud></solicitud>
        </template>
 
        <template v-if="menu==3">

@@ -24,16 +24,14 @@
                 <div class="col-6">
                   <button type="submit" class="btn btn-secondary px-4">Acceder</button>
                 </div>
-                <div class="col-6 text-right">
-                  <button type="button" class="btn btn-link px-0">Olvidaste tu password?</button>
-                </div>
               </div>
              </div>
             </form>
           </div>
-          <div class="card text-white bg-secondary py-5 d-md-down-none" style="width:44%">
+          <div class="card text-white bg-dark py-5 d-md-down-none" style="width:44%">
             <div class="card-body text-center">
               <div>
+                <P></P>
                 <h2>Laboratorio de análisis clínicos</h2>
                 <div><p></p></div>
                 <p>Sistema de automatización para la gestión de exámenes y resultados clínicos en pacientes diversos</p>

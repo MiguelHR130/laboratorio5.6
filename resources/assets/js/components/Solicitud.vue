@@ -1,72 +1,44 @@
 <template>
     <main class="main">
        <!-- Breadcrumb -->
-      
-       <div class="container-fluid">
-           <!-- Ejemplo de tabla Listado -->
-           <div class="card">
-               <div class="card-header">
-                   <i class="fa fa-align-justify"></i> Listado de pacientes
-                   <!-- se agrega la directiva @click en la cual se dirige la funcion abrirmodal
-                y de ahi se le agragan los valores tanto modelo:paciente como accion:registrar -->
-                   <button type="button" @click="abrirModal('paciente','registrar')" class="btn btn-secondary float-sm-right" data-toggle="tooltip" data-placement="right" title="Agregar nuevo paciente">
+      <div class="container-fluid"><br>
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i> Listado de solicitudes <br>
+                <button type="button" @click="abrirModal('solicitud','registrar')" class="btn btn-secondary float-sm-right" data-toggle="tooltip" data-placement="right" title="Agregar solicitud">
                        <i class="icon-user-follow"></i>&nbsp;Nuevo
-                   </button>
-               </div>
-               <div class="card-body">
-                   <div class="form-group row">
-                       <div class="col-md-6">
-                           <div class="input-group">
-                               <select class="form-control col-md-3" v-model="criterio" >
-                                 <option value="nombre">Nombre</option>
-                                 <option value="apPaterno">Apellido Paterno</option>
-                               </select>
-                               <input type="text" v-model="buscar" @keyup.enter="listarPacientes(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
-                               <button type="submit" @click="listarPacientes(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                           </div>
-                       </div>
-                   </div>
+                </button>
+            </div>
+                <div class="card-body">
 
-                   <table class="table table-bordered table-striped table-responsive-sm ">
-                       <thead>
-                           <tr>
-                               <th>Opciones</th>
-                               <th>Nombre</th>
-                               <th>Edad</th>
-                           </tr>
-                       </thead>
-                       <tbody><!-- se crea un for que trae por nombre paciente y en el cual se le pasa el 
-                    contenido de arraypacientes con la key paciente -->
-                           <tr v-for="paciente in arrayPacientes" :key="paciente.id">   
-                               <td><!-- se agrega la directiva @click en el boton y el valor de objeto no lleva comillas -->
-                                   <button type="button" @click="abrirModal('paciente','actualizar',paciente)" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="right" title="clic para actualizar paciente">
-                                     <i class="icon-user"></i>&nbsp;Actualizar
-                                   </button>      
-                                   <button type="button" @click="descargar()" class="btn btn-info">Descargar resultado de laboratorio</button>                             
-                               </td>
-                               <td v-text="paciente.nombreConcatenado||paciente.nombre"></td>
-                               <td v-text="paciente.edad"></td>
-                           </tr>
-                       </tbody>
-                   </table>
+                    <v-client-table :columns="columns" :data="tableData" :options="options" ref="myTable">
+                        <template slot="id" slot-scope="props">
 
-                   <nav>
-                       <ul class="pagination">
-                           <li class="page-item" v-if="pagination.current_page>1">
-                               <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page-1,buscar,criterio)">Ant</a>
-                           </li>
-                           <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                               <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar),criterio" v-text="page"></a>
-                           </li>
-                           <li class="page-item" v-if="pagination.current_page<pagination.last_page">
-                               <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page+1,buscar,criterio)">Sig</a>
-                           </li>
-                       </ul>
-                   </nav>
-               </div>
-           </div>
-           <!-- Fin ejemplo de tabla Listado -->
-       </div>
+                            <button type="button" @click="abrirModal('solicitud','actualizar',props.row)" class="btn btn-warning">Actualizar solicitud</button>
+                           
+   
+                        </template>
+                        <template slot="paciente" slot-scope="props">
+                            <div v-for="pac in props.row" :key="pac.props">
+                                    <span class="help-block">{{pac.nombreConcatenado}}</span><br>
+                            </div>
+                        </template>
+                        <template slot="fecha" slot-scope="props">
+                            <div v-for="fec in props.row" :key="fec.props">
+                                    <span class="help-block">{{fec.fecha}}</span><br>
+                            </div>
+                        </template>
+                        <template slot="categorias" slot-scope="propss">
+                            <div v-for="cat in propss.row.categorias" :key="cat.props">
+                                    <span class="help-block">{{cat.nombreCategoria}}</span><br>
+                            </div>
+                        </template>
+                    </v-client-table>
+                </div>
+            </div>
+        </div>
+     
+      
        <!--Inicio del modal agregar/actualizar-->
        <div class="modal fade"  tabindex="-1" :class="{'mostrar':modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
            <div class="modal-dialog modal-primary modal-lg" role="document">
@@ -80,41 +52,44 @@
                    <div class="modal-body">
                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                            <div class="form-group row">
-                               <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
+                               <label class="col-md-3 form-control-label" for="text-input">Seleccione fecha de análisis.</label>
                                <div class="col-md-9">
-                                   <input type="text" v-model="nombre" class="form-control" placeholder="(*) Ingrese el nombre del paciente">
+                                   <input type="date" v-model="fecha" class="form-control" placeholder="(*) Ingrese el nombre del paciente">
                                </div>
                            </div>
                            <div v-show="errorCajatexto" class="form-group row text-error">
-                                <span class="help-block">(*) Ingrese el nombre del paciente</span>
+                                <span class="help-block">(*) Ingrese fecha </span>
                            </div>
+
+
+                       
                            <div class="form-group row">
-                               <label class="col-md-3 form-control-label" for="text-input">Apellido Paterno</label>
-                               <div class="col-md-9">
-                                   <input type="text" v-model="apPaterno" class="form-control" placeholder="(*) Ingrese apellido paterno">
-                               </div>
+                               <label class="col-md-3 form-control-label" for="text-input">Agregar paciente</label>
+                                        <div class="col-md-9">
+                                            <select class="form-control" id="id"  name="id"  v-model="paciente" data-vv-as="paciente">
+                                            <option value="0">---Nombre---</option>
+                                            <option v-for="item in arrayPacientes" :value="item.id" :key="item.id">{{ item.nombreConcatenado }}</option>
+                                        </select>
+                                        </div>
                            </div>
                            <div v-show="errorCajatexto" class="form-group row text-error">
-                                <span class="help-block">(*) Ingrese el apellido paterno</span>
+                                <span class="help-block">(*) Seleccione paciente</span>
                            </div>
-                           <div class="form-group row">
-                               <label class="col-md-3 form-control-label" for="text-input">Apellido Materno</label>
-                               <div class="col-md-9">
-                                   <input type="text" v-model="apMaterno" class="form-control" placeholder="(*) Ingrese apellido materno">
-                               </div>
+
+
+                            <div class="form-group row">
+                                <label class="col-md-3 form-control-label" for="text-input">Exámen(es) a realizar</label>
+                                <div class="col-md-9">
+                                    <multiselect v-model="categoriaArray" :options="arrayCategoria"  :multiple="true"  :close-on-select="false" :clear-on-select="false" 
+                                     placeholder="Elegir exámen" label="nombres" track-by="nombres" :preselect-first="true"></multiselect>
+                                </div>
+                            </div>
+                            <div v-show="errorCajatexto" class="form-group row text-error">
+                                <span class="help-block">(*) Elige exámen(es)</span>
                            </div>
-                           <div v-show="errorCajatexto" class="form-group row text-error">
-                                <span class="help-block">(*) Ingrese el apellido materno</span>
-                           </div>
-                           <div class="form-group row">
-                               <label class="col-md-3 form-control-label" for="text-input">Edad</label>
-                               <div class="col-md-9">
-                                   <input type="text" v-model="edad" class="form-control" placeholder="(*) Ingrese edad del paciente">
-                               </div>
-                           </div>
-                           <div v-show="errorCajatexto" class="form-group row text-error">
-                                <span class="help-block">(*) Ingrese la edad del paciente</span>
-                           </div>
+
+
+
                        </form>
                    </div>
                    <div class="modal-footer">
@@ -156,22 +131,45 @@
 </template>
 
 <script>
+    
+import Utilerias from '../components/Herramientas/utilerias.js';
+var config = require('../components/Herramientas/config-vuetables-client').call(this);
 
+import Multiselect from 'vue-multiselect'
+// register globally
+Vue.component('multiselect', Multiselect)
 
 export default {
     data (){
         return{
+            fecha:'',
+            paciente:'',
+            registrosolicitud:'',
             nombre:'',
             apPaterno:'',
             apMaterno:'',
             edad:'',
+            arraySolicitud:[],
             arrayPacientes:[],//creamos un array para que reciba los datos de la consulta,
+            arrayCategoria:[],
+            categoriaArray:[],
+            pacientesArray:[],
+            nombreCategoria:'',
             modal:0,
             tituloModal:'',
             tipoAccion:0,
             id:0,
             errorCajatexto : 0,
             errorMostrarmsj:[],
+            columns: ['id', 'paciente','fecha','categorias'],
+            tableData:[],
+            options: {
+                    headings: {
+                        fecha: 'Fecha de solicitud',
+                        categorias: 'Análisis asignado(s)',
+                        paciente: 'Paciente',
+                        id: 'Acción',
+                    },
             pagination:{
                 'total':0,
                 'current_page':0,
@@ -180,6 +178,15 @@ export default {
                 'from':0,
                 'to':0,
             },
+            perPage: 3,
+                    perPageValues: [],
+                    skin: config.skin,
+                    sortIcon: config.sortIcon,
+                    sortable: ['paciente'],
+                    filterable: ['paciente'],
+                    filterByColumn: true,
+                    texts:config.texts
+                },
             offset:3,
             criterio:'nombre',
             buscar:''
@@ -217,49 +224,66 @@ export default {
     },
     methods :{
         //se listan los pacientes desde la base de datos
-        listarPacientes(page,buscar,criterio){
+        listarSolicitudes(){
             let me=this;//creamos variable me
-            var url = '/pacientes?page='+page+'&buscar='+buscar+'&criterio='+criterio;
-            axios.get(url).then(function(response){
-                var respuesta  = response.data;
-                me.arrayPacientes = respuesta.paciente.data;
-                me.pagination=respuesta.pagination;
-               //me.arrayPacientes = response.data;//aqui se reciben los datos que se pasan al array
+            var url = '/listadosolicitud';
+            axios.get(url).then(response=>{
+                me.tableData = response.data;
+                console.log(response.data);
             })
             .catch(function(error){
                 console.log(error);
             });
+        }, 
+        listadodePacientes(){
+            let me= this;
+            axios.get('/listadoPaciente').then(response=>{
+                me.arrayPacientes=response.data;
+                console.log(this.arrayPacientes); 
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+        },
+
+        listarCategoria(){
+            let me= this;
+            axios.get('/listadodeCategoria').then(response=>{
+                me.arrayCategoria=response.data;
+                console.log(this.arrayCategoria); 
+            })
+            .catch(function(error){
+                console.log(error);
+            })
         },
         cambiarPagina(page,buscar,criterio){
             let me = this;
             //actualiza la pagina
             me.pagination.current_page=page;
             //envia la peticion 
-            me.listarPacientes(page,buscar,criterio);
+            me.listarSolicitudes(page,buscar,criterio);
 
         },
         registrarPacientes(){
-            if (this.validarRegistro()){
+           /*  if (this.validarRegistro()){
                 return;
-            }
-
+            } */
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Los datos del paciente han sido almacenados',
+                title: 'Los datos de la solicitud han sido almacenados',
                 showConfirmButton: false,
                 timer: 1500
                 })
             let me = this;
             //se envian 2 parametros, ruta y valores        
-            axios.post('/paciente/registrar',{
-                'nombre':this.nombre,
-                'apPaterno':this.apPaterno,
-                'apMaterno':this.apMaterno,
-                'edad':this.edad
+            axios.post('/solicitud/registrar',{
+                'fecha':this.fecha,
+                'paciente':this.paciente,
+                'categoriaArray':this.categoriaArray,
             }).then(function (response){
                 me.cerrarModal();
-                me.listarPacientes(1,'','nombre');
+                me.listarSolicitudes();
             }).catch(function(error){
                 console.log(error);
             });
@@ -268,22 +292,21 @@ export default {
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Los datos del paciente se han actualizado',
+                title: 'Los datos de la solicitud se han actualizado',
                 showConfirmButton: false,
                 timer: 1500
                 })
            let me = this;
             //se envian 2 parametros, ruta y valores        
-            axios.put('/paciente/actualizar',{
-                'nombre':this.nombre,
-                'apPaterno':this.apPaterno,
-                'apMaterno':this.apMaterno,
-                'edad':this.edad,
+            axios.put('/solicitud/actualizar',{
+                'fecha':this.fecha,
+                'paciente':this.paciente,
+                'categoriaArray':this.categoriaArray,
                 'id':this.id
 
             }).then(function (response){
                 me.cerrarModal();
-                me.listarPacientes(1,'','nombre');
+                me.listarSolicitudes();
             }).catch(function(error){
                 console.log(error);
             }); 
@@ -306,38 +329,34 @@ export default {
             this.apMaterno='';
             this.edad='';
         },
-        descargar(){
-            window.open('solicitudpdf', '_blank');
-        },
+       
         //modelo=nombre
         //accion:registrar o actualizar
-        //data:objeto de la fila de la tabla paciente
+        //data:objeto de la fila de la tabla paciente   
         abrirModal(modelo,accion,data=[]){
             switch(modelo){
-                case "paciente":
+                case "solicitud":
                     {
                         switch(accion){
                             case 'registrar':
                             {
                                 this.modal=1;
-                                this.tituloModal = 'Registrar Paciente';
-                                this.nombre='';
-                                this.apPaterno='';
-                                this.apMaterno='';
-                                this.edad='';
+                                this.tituloModal = 'Registrar Solicitud';
+                                this.fecha='';
+                                this.paciente='';
+                                this.categoriaArray='';
                                 this.tipoAccion=1;
                                 break;
                             }
                             case 'actualizar':
                             {   //console.log(data);
                                 this.modal=1;
-                                this.tituloModal='Actualizar Paciente';
+                                this.tituloModal='Actualizar Solicitud';
                                 this.tipoAccion=2;
                                 this.id=data['id'];
-                                this.nombre=data['nombre'];
-                                this.apPaterno=data['apPaterno'];
-                                this.apMaterno=data['apMaterno'];
-                                this.edad=data['edad'];
+                                this.fecha=data['fecha'];
+                                this.paciente=data['paciente'];
+                                this.categoriaArray=data['idCategoria'];
                                 break; 
 
                             }
@@ -348,7 +367,10 @@ export default {
     },
    mounted() {
     //se carga la lista de pacientes para ser mostrada
-      this.listarPacientes(1,this.buscar,this.criterio);
+      //this.listarPacientes(1,this.buscar,this.criterio);
+      this.listarCategoria();
+      this.listadodePacientes();
+      this.listarSolicitudes();
    }
 }
 </script>
@@ -373,3 +395,6 @@ export default {
         font-weight: bold;
     }
 </style>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+

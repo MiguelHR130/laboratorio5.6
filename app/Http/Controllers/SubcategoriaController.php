@@ -18,7 +18,9 @@ class SubcategoriaController extends Controller
         if($buscar==''){
             $subcategoria=DB::table('subcategoria')
             ->join('categorias','subcategoria.idCategorias','=','categorias.id')
-            ->select('subcategoria.id','subcategoria.nombreSubcategoria','subcategoria.vminH','subcategoria.vmaxH','subcategoria.vminM','subcategoria.vmaxF','subcategoria.unidadMedida','subcategoria.idCategorias','categorias.nombres')->orderBy('subcategoria.id','desc')->paginate(10);
+            ->select('subcategoria.id','subcategoria.nombreSubcategoria','subcategoria.vminH','subcategoria.vmaxH','subcategoria.vminM','subcategoria.vmaxF','subcategoria.unidadMedida','subcategoria.idCategorias','categorias.nombres')
+            ->orderBy('subcategoria.id','desc')
+            ->paginate(10);
             //$subcategoria = Subcategoria::orderBy('id','desc')->paginate(10);
         }else{
             $subcategoria = Subcategoria::where($criterio,'like','%'.$buscar.'%')->orderBy('id','desc')->paginate(5);
