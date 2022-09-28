@@ -26,16 +26,30 @@ class SolicitudController extends Controller
         ->get();
         //se recorre la consulta anterior pasando el valor a value
         foreach($registrosolicitud as $key => $value){
+            $arreglo_child = [];
             $solicitud = DB::table('solicitud')
             ->join('registrosolicitud','registrosolicitud.idSolicitud','=','solicitud.id')
             ->join('categorias','categorias.id','=','registrosolicitud.idCategoria')
-            ->select('categorias.nombres as nombreCategoria')
+            ->select('categorias.nombres as nombreCategoria','categorias.id','registrosolicitud.id AS registroSolicitud')
             ->where('registrosolicitud.idSolicitud','=',$value->id)
             ->get();
+
+            foreach ($solicitud as $key_child => $value_child) {
+                # code...
+                $partidas = DB::table('subcategoria AS s')
+                ->where('s.idCategorias',$value_child->id)
+                ->select('s.*',DB::raw($value_child->registroSolicitud)) 
+                ->get();
+                $arreglo_child [] = [
+                    'categoria' => $value_child,
+                    'partidas' => $partidas
+                ];
+                // $partidas;
+            }
             //se realiza otra consulta en la que se selecciona el idSolicitud que sea igual al id iterado de tabla solicitud
             $arreglo[]=[
                 'registro'=>$value,
-                'categorias'=>$solicitud
+                'categorias'=> $arreglo_child
             ];
            
             }
@@ -137,7 +151,7 @@ class SolicitudController extends Controller
             ->get();
 
             $pdf = PDF::loadView('pdf.solicitud', compact('registrosolicitud'));
-            // $pdf->setPaper('A4', 'landscape');
+            $pdf->setPaper('A4', 'portrait');
             // return $pdf->download('cv-interno.pdf');
             return $pdf->stream();
     }

@@ -57,6 +57,9 @@ Route::group(['middleware'=>['auth']],function(){
     Route::put('/solicitud/actualizar','SolicitudController@update');
     Route::get('solicitudpdf','SolicitudController@pdf');
 
+    //rutas para resultados
+    Route::get('/listadoresultados','ResultadoController@index');
+
     
     /* Se crean los grupos de rutas para administrador dentro de el middleware auth 
     Route::group(['middleware'=>['Administrador']],function(){

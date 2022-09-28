@@ -5,62 +5,34 @@
         <div class="card">
             <div class="card-header">
                 <i class="fa fa-align-justify"></i> Listado de solicitudes <br>
-                <button class="btn btn-secondary float-sm-right" @click="detalle = false" v-show="detalle"> Regresar</button>
                 <button type="button" @click="abrirModal('solicitud','registrar')" class="btn btn-secondary float-sm-right" data-toggle="tooltip" data-placement="right" title="Agregar solicitud">
                        <i class="icon-user-follow"></i>&nbsp;Nuevo
                 </button>
             </div>
                 <div class="card-body">
 
-                    <v-client-table :columns="columns" :data="tableData" :options="options" ref="myTable" v-show="!detalle">
+                    <v-client-table :columns="columns" :data="tableData" :options="options" ref="myTable">
                         <template slot="id" slot-scope="props">
 
-                            <button type="button" @click="abrirModal('solicitud','actualizar',props.row)" class="btn btn-warning">Actualizar solicitud</button>
-                            <button type="button" @click="detalle = true;dataDetalle = props.row.categorias;" class="btn btn-warning">Asignar resultado</button>
-                            <div>{{props.row}}</div>
+                        
    
                         </template>
-                        <template slot="paciente" slot-scope="props">
-                            <div v-for="pac in props.row" :key="pac.props">
-                                    <span class="help-block">{{pac.nombreConcatenado}}</span><br>
+                        <template slot="subcategorias" slot-scope="props">
+                            <div v-for="sub in props.row" :key="sub.props">
+                                <span class="help-block">{{sub.nombreSubcategoria}}</span><br>
                             </div>
                         </template>
-                        <template slot="fecha" slot-scope="props">
+                        <template slot="resultado" slot-scope="props">
                             <div v-for="fec in props.row" :key="fec.props">
-                                    <span class="help-block">{{fec.fecha}}</span><br>
+                                    <input type="text" class="form-control" placeholder="Null"></input>
                             </div>
                         </template>
                         <template slot="categorias" slot-scope="propss">
                             <div v-for="cat in propss.row.categorias" :key="cat.props">
-                                    <span class="help-block">{{cat.nombreCategoria}}</span><br>
+                                <span class="help-block">{{cat.nombreCategoria}}</span><br>
                             </div>
                         </template>
                     </v-client-table>
-
-                    <div v-show="detalle">
-                        <template v-for="item in dataDetalle">
-                            <h3>{{item.categoria.nombreCategoria}}</h3>
-                            <div class="table-responsive">
-                            <table class="table">
-                                <tr>
-                                    <th>Examen</th>
-                                    <th width="20%">Resultado</th>
-                                    <th>U.M.</th>
-                                    <th>Valores de Referencia</th>
-                                </tr>
-                                <tr v-for="itemChild in item.partidas">
-                                    <td>{{itemChild.nombreSubcategoria}}</td>
-                                    <td>
-                                        <input type="text" class="form-control" @keyup:enter="guardarResultado()">
-                                    </td>
-                                    <td>{{itemChild.unidadMedida}}</td>
-                                    <td>{{itemChild.vminH}} - {{itemChild.vmaxH}}</td>
-                                </tr>
-                            </table>
-                        </div>
-                        </template>
-                    
-                    </div>
                 </div>
             </div>
         </div>
@@ -169,8 +141,6 @@ Vue.component('multiselect', Multiselect)
 export default {
     data (){
         return{
-            dataDetalle : null,
-            detalle : false,
             fecha:'',
             paciente:'',
             registrosolicitud:'',
@@ -190,7 +160,7 @@ export default {
             id:0,
             errorCajatexto : 0,
             errorMostrarmsj:[],
-            columns: ['id', 'paciente','fecha','categorias'],
+            columns: ['id', 'subcategoria','resultado','unidadMedida','vminH','vmaxH'],
             tableData:[],
             options: {
                     headings: {
@@ -255,7 +225,7 @@ export default {
         //se listan los pacientes desde la base de datos
         listarSolicitudes(){
             let me=this;//creamos variable me
-            var url = '/listadosolicitud';
+            var url = '/listadoresultados';
             axios.get(url).then(response=>{
                 me.tableData = response.data;
                 console.log(response.data);
