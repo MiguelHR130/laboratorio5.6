@@ -17,34 +17,34 @@ Route::group(['middleware'=>['guest']],function(){
 
 Route::group(['middleware'=>['auth']],function(){
 
-    Route::post('/logout','Auth\LoginController@logout')->name('logout'); 
+    Route::post('/logout','Auth\LoginController@logout')->name('logout');
 
     Route::get('/main', function () {
         return view('contenido/contenido');
     })->name('main');
-    
-    
+
+
     //rutas para usar en Paciente.vue
     Route::get('/pacientes','PacienteController@index');
     Route::post('/paciente/registrar','PacienteController@store');
     Route::put('/paciente/actualizar','PacienteController@update');
-    
+
     //rutas para usar en Categoria.vue
     Route::get('/categorias','CategoriaController@index');
     Route::post('/categorias/registrar','CategoriaController@store');
     Route::put('/categorias/actualizar','CategoriaController@update');
-    
+
     //rutas para usar en Subcategoria.vue
     Route::get('/subcategorias','SubcategoriaController@index');
     Route::post('/subcategorias/registrar','SubcategoriaController@store');
     Route::put('/subcategoria/actualizar','SubcategoriaController@update');
     Route::get('/listadodeCategoria','SubcategoriaController@listadeCategoria');
-    
+
     //rutas para rol
     Route::get('/rol','RolController@index');
     Route::get('/rol/selectRol','RolController@selectrol');
-    
-    
+
+
     //rutas para user
     Route::get('/user','UserController@index');
     Route::post('/user/registrar','UserController@store');
@@ -55,40 +55,42 @@ Route::group(['middleware'=>['auth']],function(){
     Route::get('/listadoPaciente','SolicitudController@listadoPaciente');
     Route::post('/solicitud/registrar','SolicitudController@store');
     Route::put('/solicitud/actualizar','SolicitudController@update');
-    Route::get('solicitudpdf','SolicitudController@pdf');
+    Route::get('solicitudpdf/{id}','SolicitudController@pdf');
+    Route::post('solicitud/guardaresultados','SolicitudController@guardarResultado');
+    Route::get('/resultado/{id}','SolicitudController@resultado');
 
     //rutas para resultados
     Route::get('/listadoresultados','ResultadoController@index');
 
-    
-    /* Se crean los grupos de rutas para administrador dentro de el middleware auth 
+
+    /* Se crean los grupos de rutas para administrador dentro de el middleware auth
     Route::group(['middleware'=>['Administrador']],function(){
     //rutas para usar en Paciente.vue
     Route::get('/pacientes','PacienteController@index');
     Route::post('/paciente/registrar','PacienteController@store');
     Route::put('/paciente/actualizar','PacienteController@update');
-    
+
     //rutas para usar en Categoria.vue
     Route::get('/categorias','CategoriaController@index');
     Route::post('/categorias/registrar','CategoriaController@store');
     Route::put('/categorias/actualizar','CategoriaController@update');
-    
+
     //rutas para usar en Subcategoria.vue
     Route::get('/subcategorias','SubcategoriaController@index');
     Route::post('/subcategorias/registrar','SubcategoriaController@store');
     Route::put('/subcategoria/actualizar','SubcategoriaController@update');
     Route::get('/listadodeCategoria','SubcategoriaController@listadeCategoria');
-    
+
     //rutas para rol
     Route::get('/rol','RolController@index');
     Route::get('/rol/selectRol','RolController@selectrol');
-    
-    
+
+
     //rutas para user
     Route::get('/user','UserController@index');
     Route::post('/user/registrar','UserController@store');
     Route::put('/user/actualizar','UserController@update');
-    
+
 }); */
 
 });

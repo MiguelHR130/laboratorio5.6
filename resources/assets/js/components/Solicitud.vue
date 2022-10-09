@@ -4,21 +4,22 @@
       <div class="container-fluid"><br>
         <div class="card">
             <div class="card-header">
-                <i class="fa fa-align-justify"></i> Listado de solicitudes <br>
-                <button class="btn btn-secondary float-sm-right" @click="detalle = false" v-show="detalle"> Regresar</button>
-                <button type="button" @click="abrirModal('solicitud','registrar')" class="btn btn-secondary float-sm-right" data-toggle="tooltip" data-placement="right" title="Agregar solicitud">
-                       <i class="icon-user-follow"></i>&nbsp;Nuevo
-                </button>
+                <i class="fa fa-align-justify"></i> Listado de solicitudes <br>  
+                    <button class="btn btn-secondary float-sm-right" @click="detalle = false; listarSolicitudes();" v-show="detalle" data-toggle="tooltip" data-placement="right" title="Regresa a listado de solicitudes"> Regresar </button>
+                    <button type="button" @click="abrirModal('solicitud','registrar')" class="btn btn-secondary float-sm-right" data-toggle="tooltip" data-placement="right" title="Agregar solicitud" v-show="!detalle">
+                        <i class="icon-user-follow"></i>&nbsp;Nuevo
+                    </button>
+                    
             </div>
                 <div class="card-body">
 
                     <v-client-table :columns="columns" :data="tableData" :options="options" ref="myTable" v-show="!detalle">
                         <template slot="id" slot-scope="props">
 
-                            <button type="button" @click="abrirModal('solicitud','actualizar',props.row)" class="btn btn-warning">Actualizar solicitud</button>
-                            <button type="button" @click="detalle = true;dataDetalle = props.row.categorias;" class="btn btn-warning">Asignar resultado</button>
-                            <div>{{props.row}}</div>
-   
+                            <!-- <button type="button" @click="abrirModal('solicitud','actualizar',props.row)" class="btn btn-warning">Actualizar solicitud</button> -->
+                            <button type="button" @click="detalle = true; dataDetalle = props.row.categorias;" class="btn btn-warning">Asignar resultado</button> <br>
+                            <button type="button" @click="descargar(props.row)" class="btn btn-info">Descargar resultado de laboratorio</button>        
+
                         </template>
                         <template slot="paciente" slot-scope="props">
                             <div v-for="pac in props.row" :key="pac.props">
@@ -30,42 +31,56 @@
                                     <span class="help-block">{{fec.fecha}}</span><br>
                             </div>
                         </template>
-                        <template slot="categorias" slot-scope="propss">
-                            <div v-for="cat in propss.row.categorias" :key="cat.props">
-                                    <span class="help-block">{{cat.nombreCategoria}}</span><br>
+                        <template slot="categorias" slot-scope="props">
+                            <div v-for="cat in props.row.categorias" :key="cat.props">
+                                    <span class="help-block">{{cat.categoria.nombreCategoria}}</span><br>
                             </div>
                         </template>
                     </v-client-table>
 
                     <div v-show="detalle">
-                        <template v-for="item in dataDetalle">
-                            <h3>{{item.categoria.nombreCategoria}}</h3>
+
+                        <template v-for="itemPaciente,index in dataDetalle">
                             <div class="table-responsive">
-                            <table class="table">
-                                <tr>
-                                    <th>Examen</th>
-                                    <th width="20%">Resultado</th>
-                                    <th>U.M.</th>
-                                    <th>Valores de Referencia</th>
-                                </tr>
-                                <tr v-for="itemChild in item.partidas">
-                                    <td>{{itemChild.nombreSubcategoria}}</td>
-                                    <td>
-                                        <input type="text" class="form-control" @keyup:enter="guardarResultado()">
-                                    </td>
-                                    <td>{{itemChild.unidadMedida}}</td>
-                                    <td>{{itemChild.vminH}} - {{itemChild.vmaxH}}</td>
-                                </tr>
-                            </table>
-                        </div>
+                                <table class="table">
+                                    <tr>
+                                        <th v-if="index === 0">
+                                            <h4>Resultados de laboratorio de: {{itemPaciente.categoria.nombreConcatenado}} </h4> 
+                                        </th>
+                                    </tr>
+                                </table>
+                            </div>
                         </template>
-                    
+
+                        <template v-for="item in dataDetalle" >
+                            <h5>{{item.categoria.nombreCategoria}}</h5>
+                             <div class="table-responsive">
+                                      <table class="table">
+                                             <tr>
+                                                 <th width="10%">Examen</th>
+                                                 <th width="10%">Resultado</th>
+                                                 <th width="10%">U.M.</th>
+                                                 <th width="10%">Valores de Referencia</th>
+                                             </tr>
+                                             <tr v-for="itemChild in item.partidas">
+                                                 <td>{{itemChild.nombreSubcategoria}}</td>
+                                                 <td>
+                                                     <input type="text" :value="itemChild.descripcionResultado" class="form-control" 
+                                                     @keyup.enter="guardarResultado(item.categoria.registroSolicitud, $event, itemChild.id )">
+                                                 </td>
+                                                 <td>{{itemChild.unidadMedida}}</td>
+                                                 <td>{{itemChild.vminH}} - {{itemChild.vmaxH}}</td>
+                                             </tr>
+                                      </table>
+                             </div>                         
+                       </template>
+
                     </div>
                 </div>
             </div>
         </div>
-     
-      
+
+
        <!--Inicio del modal agregar/actualizar-->
        <div class="modal fade"  tabindex="-1" :class="{'mostrar':modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
            <div class="modal-dialog modal-primary modal-lg" role="document">
@@ -76,6 +91,7 @@
                          <span aria-hidden="true">×</span>
                        </button>
                    </div>
+                   
                    <div class="modal-body">
                        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                            <div class="form-group row">
@@ -89,9 +105,9 @@
                            </div>
 
 
-                       
+
                            <div class="form-group row">
-                               <label class="col-md-3 form-control-label" for="text-input">Agregar paciente</label>
+                               <label class="col-md-3 form-control-label" for="text-input">Agregar paciente </label>
                                         <div class="col-md-9">
                                             <select class="form-control" id="id"  name="id"  v-model="paciente" data-vv-as="paciente">
                                             <option value="0">---Nombre---</option>
@@ -107,7 +123,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3 form-control-label" for="text-input">Exámen(es) a realizar</label>
                                 <div class="col-md-9">
-                                    <multiselect v-model="categoriaArray" :options="arrayCategoria"  :multiple="true"  :close-on-select="false" :clear-on-select="false" 
+                                    <multiselect v-model="categoriaArray" :options="arrayCategoria"  :multiple="true"  :close-on-select="false" :clear-on-select="false"
                                      placeholder="Elegir exámen" label="nombres" track-by="nombres" :preselect-first="true"></multiselect>
                                 </div>
                             </div>
@@ -122,7 +138,6 @@
                    <div class="modal-footer">
                        <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
                        <button type="button"  v-if="tipoAccion==1" class="btn btn-primary" @click="registrarPacientes()">Guardar</button>
-                       <button type="button"  v-if="tipoAccion==2" class="btn btn-primary" @click="actualizarPaciente()">Actualizar</button>
                    </div>
                </div>
                <!-- /.modal-content -->
@@ -130,35 +145,15 @@
            <!-- /.modal-dialog -->
        </div>
        <!--Fin del modal-->
-                               
+
        <!-- Inicio del modal Eliminar -->
-       <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-           <div class="modal-dialog modal-danger" role="document">
-               <div class="modal-content">
-                   <div class="modal-header">
-                       <h4 class="modal-title">Eliminar Categoría</h4>
-                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                         <span aria-hidden="true">×</span>
-                       </button>
-                   </div>
-                   <div class="modal-body">
-                       <p>Estas seguro de eliminar la categoría?</p>
-                   </div>
-                   <div class="modal-footer">
-                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                       <button type="button" class="btn btn-danger">Eliminar</button>
-                   </div>
-               </div>
-               <!-- /.modal-content -->
-           </div>
-           <!-- /.modal-dialog -->
-       </div>
+      
        <!-- Fin del modal Eliminar -->
    </main>
 </template>
 
 <script>
-    
+
 import Utilerias from '../components/Herramientas/utilerias.js';
 var config = require('../components/Herramientas/config-vuetables-client').call(this);
 
@@ -173,11 +168,8 @@ export default {
             detalle : false,
             fecha:'',
             paciente:'',
+            id:null,
             registrosolicitud:'',
-            nombre:'',
-            apPaterno:'',
-            apMaterno:'',
-            edad:'',
             arraySolicitud:[],
             arrayPacientes:[],//creamos un array para que reciba los datos de la consulta,
             arrayCategoria:[],
@@ -187,7 +179,6 @@ export default {
             modal:0,
             tituloModal:'',
             tipoAccion:0,
-            id:0,
             errorCajatexto : 0,
             errorMostrarmsj:[],
             columns: ['id', 'paciente','fecha','categorias'],
@@ -207,48 +198,20 @@ export default {
                 'from':0,
                 'to':0,
             },
-            perPage: 3,
+            perPage: 10,
                     perPageValues: [],
                     skin: config.skin,
                     sortIcon: config.sortIcon,
-                    sortable: ['paciente'],
-                    filterable: ['paciente'],
+                    sortable: ['paciente','fecha'],
+                    filterable: ['paciente','fecha'],
                     filterByColumn: true,
                     texts:config.texts
                 },
-            offset:3,
-            criterio:'nombre',
-            buscar:''
+           
         }
     },
     computed:{
-        isActived:function(){
-            return this.pagination.current_page;
-        },
-        //calcula elementos de la paginacion
-        pagesNumber: function(){
-            if(!this.pagination.to){
-                return [];
-            }
-            
-            var from = this.pagination.current_page - this.offset;
-            if(from<1){
-                from = 1;
-            }
-
-            var to = from + (this.offset * 2);
-            if(to>=this.pagination.last_page){
-                to=this.pagination.last_page;
-            }
-
-            var pagesArray = [];
-            while(from <= to){
-                pagesArray.push(from);
-                from++;
-            }
-            return pagesArray;
-
-        }
+       
 
     },
     methods :{
@@ -258,17 +221,16 @@ export default {
             var url = '/listadosolicitud';
             axios.get(url).then(response=>{
                 me.tableData = response.data;
-                console.log(response.data);
+                
             })
             .catch(function(error){
                 console.log(error);
             });
-        }, 
+        },
         listadodePacientes(){
             let me= this;
             axios.get('/listadoPaciente').then(response=>{
                 me.arrayPacientes=response.data;
-                console.log(this.arrayPacientes); 
             })
             .catch(function(error){
                 console.log(error);
@@ -279,24 +241,16 @@ export default {
             let me= this;
             axios.get('/listadodeCategoria').then(response=>{
                 me.arrayCategoria=response.data;
-                console.log(this.arrayCategoria); 
             })
             .catch(function(error){
                 console.log(error);
             })
         },
-        cambiarPagina(page,buscar,criterio){
-            let me = this;
-            //actualiza la pagina
-            me.pagination.current_page=page;
-            //envia la peticion 
-            me.listarSolicitudes(page,buscar,criterio);
 
-        },
         registrarPacientes(){
-           /*  if (this.validarRegistro()){
+            if (this.validarRegistro()){
                 return;
-            } */
+            } 
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -305,7 +259,7 @@ export default {
                 timer: 1500
                 })
             let me = this;
-            //se envian 2 parametros, ruta y valores        
+            //se envian 2 parametros, ruta y valores
             axios.post('/solicitud/registrar',{
                 'fecha':this.fecha,
                 'paciente':this.paciente,
@@ -326,7 +280,7 @@ export default {
                 timer: 1500
                 })
            let me = this;
-            //se envian 2 parametros, ruta y valores        
+            //se envian 2 parametros, ruta y valores
             axios.put('/solicitud/actualizar',{
                 'fecha':this.fecha,
                 'paciente':this.paciente,
@@ -338,13 +292,13 @@ export default {
                 me.listarSolicitudes();
             }).catch(function(error){
                 console.log(error);
-            }); 
+            });
         },
         validarRegistro(){
             this.errorCajatexto=0;//se inicializa en 0
             this.errorMostrarmsj=[];//se inicializa array vacio
             //si la condicion esta vacia se inserta con push que el nombre no puede estar vacio
-            if(!this.nombre)this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if(!this.paciente)this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if(this.errorMostrarmsj.length) this.errorCajatexto = 1;
             return this.errorCajatexto;
 
@@ -353,15 +307,18 @@ export default {
         cerrarModal(){
             this.modal=0;
             this.tituloModal='';
-            this.nombre='';
-            this.apPaterno='';
-            this.apMaterno='';
-            this.edad='';
+            this.fecha='';
+            this.paciente='';
+            this.categoriaArray='';
+           },
+        descargar(data){
+            console.log(data);
+            window.open('solicitudpdf/'+data.registro.paciente_id, '_blank');
         },
-       
+
         //modelo=nombre
         //accion:registrar o actualizar
-        //data:objeto de la fila de la tabla paciente   
+        //data:objeto de la fila de la tabla paciente
         abrirModal(modelo,accion,data=[]){
             switch(modelo){
                 case "solicitud":
@@ -378,25 +335,49 @@ export default {
                                 break;
                             }
                             case 'actualizar':
-                            {   //console.log(data);
+                            {
+                                
                                 this.modal=1;
                                 this.tituloModal='Actualizar Solicitud';
                                 this.tipoAccion=2;
                                 this.id=data['id'];
-                                this.fecha=data['fecha'];
-                                this.paciente=data['paciente'];
-                                this.categoriaArray=data['idCategoria'];
-                                break; 
-
+                                this.fecha=data.registro.fecha;
+                                this.paciente=data.registro.paciente_id;
+                           
+                                data.categorias.forEach((item, i) => {
+                                  this.categoriaArray.push({id : item.categoria.id, nombres: item.categoria.nombreCategoria});
+                                  
+                                  
+                                });
+                                break;
                             }
                         }
                     }
             }
+        },
+
+        guardarResultado(idRegistro, data, idCategoria ){
+
+          axios.post('solicitud/guardaresultados',{
+          'idRegistro':idRegistro,
+          'data':data.target.value,
+          'idCategoria':idCategoria
+          }).then(response => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                  })
+          }).catch(e => {
+            console.log(e);
+          });
         }
     },
    mounted() {
     //se carga la lista de pacientes para ser mostrada
-      //this.listarPacientes(1,this.buscar,this.criterio);
       this.listarCategoria();
       this.listadodePacientes();
       this.listarSolicitudes();
@@ -412,7 +393,7 @@ export default {
         display: list-item !important;
         opacity: 1 !important;
         position: absolute !important;
-        background-color: #3c29297a !important;        
+        background-color: #3c29297a !important;
     }
     .div-error{
         display:flex;
@@ -426,4 +407,3 @@ export default {
 </style>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-

@@ -18,7 +18,7 @@ class SubcategoriaController extends Controller
         if($buscar==''){
             $subcategoria=DB::table('subcategoria')
             ->join('categorias','subcategoria.idCategorias','=','categorias.id')
-            ->select('subcategoria.id','subcategoria.nombreSubcategoria','subcategoria.vminH','subcategoria.vmaxH','subcategoria.vminM','subcategoria.vmaxF','subcategoria.unidadMedida','subcategoria.idCategorias','categorias.nombres')
+            ->select('subcategoria.id','subcategoria.nombreSubcategoria','subcategoria.vminH','subcategoria.vmaxH','subcategoria.unidadMedida','subcategoria.idCategorias','categorias.nombres')
             ->orderBy('subcategoria.id','desc')
             ->paginate(10);
             //$subcategoria = Subcategoria::orderBy('id','desc')->paginate(10);
@@ -46,8 +46,6 @@ class SubcategoriaController extends Controller
        $subcategoria->nombreSubcategoria = $request->nombreSubcategoria;
        $subcategoria->vminH = $request->vminH;
        $subcategoria->vmaxH = $request->vmaxH;
-       $subcategoria->vminM = $request->vminM;
-       $subcategoria->vmaxF = $request->vmaxF;
        $subcategoria->unidadMedida = $request->unidadMedida;
        $subcategoria->idCategorias = $request->idCategorias;
        $subcategoria->save();
@@ -63,8 +61,6 @@ class SubcategoriaController extends Controller
         $subcategoria->nombreSubcategoria = $request->nombreSubcategoria;
         $subcategoria->vminH = $request->vminH;
         $subcategoria->vmaxH = $request->vmaxH;
-        $subcategoria->vminM = $request->vminM;
-        $subcategoria->vmaxF = $request->vmaxF;
         $subcategoria->unidadMedida = $request->unidadMedida;
         $subcategoria->idCategorias = $request->idCategorias;
         $subcategoria->save();

@@ -34,10 +34,8 @@
                            <tr>
                                <th>Opciones</th>
                                <th>Nombre de Subcategoría</th>
-                               <th>Valor mínimo en hombres</th>
-                               <th>Valor máximo en hombres</th>
-                               <th>Valor mínimo en mujeres</th>
-                               <th>Valor máximo en mujeres</th>
+                               <th>Valor mínimo</th>
+                               <th>Valor máximo</th>
                                <th>Unidad de medida</th>
                                <th>Categoría perteneciente</th>
                            </tr>
@@ -59,8 +57,6 @@
                                <td v-text="subcategoria.nombreSubcategoria"></td>
                                <td v-text="subcategoria.vminH"></td>
                                <td v-text="subcategoria.vmaxH"></td>
-                               <td v-text="subcategoria.vminM"></td>
-                               <td v-text="subcategoria.vmaxF"></td>
                                <td v-text="subcategoria.unidadMedida"></td>
                                <td v-text="subcategoria.nombres"></td>
 
@@ -107,7 +103,7 @@
                            </div>
 
                            <div class="form-group row">
-                               <label class="col-md-3 form-control-label" for="text-input">Valor de referencia mínimo en hombres</label>
+                               <label class="col-md-3 form-control-label" for="text-input">Valor de referencia mínimo</label>
                                <div class="col-md-9">
                                    <input type="text" v-model="vminH" class="form-control" placeholder="(*) Ingrese el valor de referencia">
                                </div>
@@ -117,29 +113,9 @@
                            </div>
 
                            <div class="form-group row">
-                               <label class="col-md-3 form-control-label" for="text-input">Valor de referencia máximo en hombres</label>
+                               <label class="col-md-3 form-control-label" for="text-input">Valor de referencia máximo</label>
                                <div class="col-md-9">
                                    <input type="text" v-model="vmaxH" class="form-control" placeholder="(*) Ingrese el valor de referencia">
-                               </div>
-                           </div>
-                           <div v-show="errorCajatexto" class="form-group row text-error">
-                                <span class="help-block">(*) Ingrese el valor de referencia</span>
-                           </div>
-
-                           <div class="form-group row">
-                               <label class="col-md-3 form-control-label" for="text-input">Valor de referencia mínimo en mujeres</label>
-                               <div class="col-md-9">
-                                   <input type="text" v-model="vminM" class="form-control" placeholder="(*) Ingrese el valor de referencia">
-                               </div>
-                           </div>
-                           <div v-show="errorCajatexto" class="form-group row text-error">
-                                <span class="help-block">(*) Ingrese el valor de referencia</span>
-                           </div>
-
-                           <div class="form-group row">
-                               <label class="col-md-3 form-control-label" for="text-input">Valor de referencia máximo en mujeres</label>
-                               <div class="col-md-9">
-                                   <input type="text" v-model="vmaxF" class="form-control" placeholder="(*) Ingrese el valor de referencia">
                                </div>
                            </div>
                            <div v-show="errorCajatexto" class="form-group row text-error">
@@ -194,8 +170,6 @@ export default {
             nombreSubcategoria:'',
             vminH:'',
             vmaxH:'',
-            vminM:'',
-            vmaxF:'',
             unidadMedida:'',
             idCategorias:0,
             nombres:'',
@@ -300,8 +274,6 @@ export default {
                 'nombreSubcategoria':this.nombreSubcategoria,
                 'vminH':this.vminH,
                 'vmaxH':this.vmaxH,
-                'vminM':this.vminM,
-                'vmaxF':this.vmaxF,
                 'unidadMedida':this.unidadMedida,
                 'idCategorias':this.idCategorias
             }).then(function (response){
@@ -326,8 +298,6 @@ export default {
                 'nombreSubcategoria':this.nombreSubcategoria,
                 'vminH':this.vminH,
                 'vmaxH':this.vmaxH,
-                'vminM':this.vminM,
-                'vmaxF':this.vmaxF,
                 'unidadMedida':this.unidadMedida,
                 'idCategorias':this.idCategorias
             }).then(function (response){
@@ -368,8 +338,6 @@ export default {
                                 this.nombreSubcategoria='';
                                 this.vminH='';
                                 this.vmaxH='';
-                                this.vminM='';
-                                this.vmaxF='';
                                 this.unidadMedida='';
                                 this.idCategorias='';
                                 this.tipoAccion=1;
@@ -384,8 +352,6 @@ export default {
                                 this.nombreSubcategoria=data['nombreSubcategoria'];
                                 this.vminH=data['vminH'];
                                 this.vmaxH=data['vmaxH'];
-                                this.vminM=data['vminM'];
-                                this.vmaxF=data['vmaxF'];
                                 this.unidadMedida=data['unidadMedida'];
                                 this.idCategorias=data['idCategorias'];
                                 break; 

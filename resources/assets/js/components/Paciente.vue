@@ -42,7 +42,7 @@
                                    <button type="button" @click="abrirModal('paciente','actualizar',paciente)" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="right" title="clic para actualizar paciente">
                                      <i class="icon-user"></i>&nbsp;Actualizar
                                    </button>      
-                                   <button type="button" @click="descargar()" class="btn btn-info">Descargar resultado de laboratorio</button>                             
+                                                       
                                </td>
                                <td v-text="paciente.nombreConcatenado||paciente.nombre"></td>
                                <td v-text="paciente.edad"></td>
@@ -306,9 +306,7 @@ export default {
             this.apMaterno='';
             this.edad='';
         },
-        descargar(){
-            window.open('solicitudpdf', '_blank');
-        },
+      
         //modelo=nombre
         //accion:registrar o actualizar
         //data:objeto de la fila de la tabla paciente

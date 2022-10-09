@@ -16,9 +16,7 @@ div1 {text-align: center;}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Icons -->
     <link href="css/plantilla.css" rel="stylesheet">
-    <div1>
-    <img src="..\img\logo5.png"  width="700" height="150">    
-    </div1>
+  
    
 
 </head>
