@@ -62,10 +62,16 @@
             }
             .linea {
                 border-top: 1px solid black;
-                }
+            }
+        div.page_break + div.page_break{
+            page-break-before: always;
+            }
+        .borde{
+            margin: 40px 50px 50px 5px;
+            }
     </style>
 </head>
-<body>
+<body class="borde">
     <header>
         <img src="img\logo5.png" width="700" height="130"class="img" alignt="center" style="padding-bottom: 40px; padding-top: 30px;">
     </header>
@@ -89,7 +95,7 @@
   <div class="div" >
     
         @foreach($arreglo as $item)
-        <table  style="padding-top: -20px;" align="center">
+        <table  style="padding-top: -100px;" align="center">
           <tr>
             <td class="letratablam">INFORMACIÓN DEL PACIENTE</td>
           </tr>
@@ -100,17 +106,17 @@
             <td >{{$item['registro']->nombreConcatenado}}</td>
             <td style="background-color: #ffc890;">EDAD</td>
             <td >{{$item['registro']->edad}}</td>
-            <td style="background-color: #ffc890;">SEXO</td>
-            <td>{{$item['registro']->sexo}}</td>
           </tr>
           <tr>
             <td style="background-color: #ffc890;">FECHA DE MUESTRA</td>
-            <td colspan="5">{{$item['registro']->fecha}}</td>
+            <td>{{$item['registro']->fecha}}</td>
+            <td style="background-color: #ffc890;">SEXO</td>
+            <td>{{$item['registro']->sexo}}</td>
           </tr>
         </table>
       </table>
 
-      <table align="center" class="letraRESULT" style="padding-top: 40px;">
+      <table align="center" class="letratablam" style="padding-top: 30px;">
         <tr>
             <td>RESULTADOS DE LABORATORIO</td>
         </tr>
@@ -130,16 +136,22 @@
             @foreach($itemp['partidas'] as $child)
             <tr>
                 <td align="left">{{$child->nombreSubcategoria}}</td>
+                @if($child->descripcionResultado>$child->vmaxH||$child->descripcionResultado<$child->vminH)
+                <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td><font color ="#ff0000">{{$child->vminH}}-{{$child->vmaxH}}</font></td>
+                @elseif($child->descripcionResultado<$child->vmaxH||$child->descripcionResultado>$child->vminH)
                 <td>{{$child->descripcionResultado}}</td>
                 <td>{{$child->unidadMedida}}</td>
                 <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                @endif
             </tr>
             @endforeach
     @endforeach
       </table>
 @endforeach
-
-            <table align="center" style="padding-top: 500px;">
+            <div>
+            <table align="center" style="padding-top: 475px;padding-left:40px">
                 <tr>
                     <th>ATENTAMENTE</th>
                 </tr>
@@ -153,6 +165,8 @@
                     <th>CED.PROF 10307821</th>
                 </tr>
             </table>
+            </div>
+           
 
         </div>
 

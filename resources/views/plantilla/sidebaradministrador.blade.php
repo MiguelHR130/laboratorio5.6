@@ -13,6 +13,9 @@
                             <li @click="menu=2" class="nav-item">
                                 <a class="nav-link" href="#"><i class="icon-bag"></i> Solicitud de Exámen</a>
                             </li>
+                            <li @click="menu=3" class="nav-item">
+                                <a class="nav-link" href="#"><i class="icon-bag"></i> Listado Resultados</a>
+                            </li>
                         </ul>|
                     </li>
                     <li class="nav-item nav-dropdown">

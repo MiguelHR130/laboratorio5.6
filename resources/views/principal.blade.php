@@ -36,7 +36,12 @@ div1 {text-align: center;}
 
         @if(Auth::check())
             @if(Auth::user()->idrol==1)
-                @include('plantilla.sidebar')
+                @include('plantilla.sidebaradministrador')
+            @elseif(Auth::user()->idrol==2)
+                @include('plantilla.sidebarquimica')
+            @elseif(Auth::user()->idrol==3)
+                @include('plantilla.sidebardoctor')
+            @else    
             @endif
         @endif
        

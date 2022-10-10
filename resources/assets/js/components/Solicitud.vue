@@ -18,7 +18,9 @@
 
                             <!-- <button type="button" @click="abrirModal('solicitud','actualizar',props.row)" class="btn btn-warning">Actualizar solicitud</button> -->
                             <button type="button" @click="detalle = true; dataDetalle = props.row.categorias;" class="btn btn-warning">Asignar resultado</button> <br>
-                            <button type="button" @click="descargar(props.row)" class="btn btn-info">Descargar resultado de laboratorio</button>        
+                            <button type="button" @click="descargar(props.row)" class="btn btn-info">Descargar resultado de laboratorio</button>
+                            <button type="button" @click="descargarSobre(props.row)" class="btn btn-success">Descargar sobre</button>
+
 
                         </template>
                         <template slot="paciente" slot-scope="props">
@@ -312,8 +314,12 @@ export default {
             this.categoriaArray='';
            },
         descargar(data){
-            console.log(data);
-            window.open('solicitudpdf/'+data.registro.paciente_id, '_blank');
+            
+            window.open('solicitudpdf/'+data.registro.id, '_blank');
+        },
+        descargarSobre(data){
+           
+            window.open('sobrepdf/'+data.registro.paciente_id, '_blank');
         },
 
         //modelo=nombre

@@ -29,7 +29,8 @@ Vue.component('subcategoria',require('./components/Subcategoria.vue'));
 Vue.component('rol',require('./components/Rol.vue'));
 Vue.component('user',require('./components/User.vue'));
 Vue.component('solicitud',require('./components/Solicitud.vue'));
-Vue.component('resultado',require('./components/Resultado.vue'));
+Vue.component('resultado',require('./components/Resultados.vue'));
+
 
 
 const app = new Vue({

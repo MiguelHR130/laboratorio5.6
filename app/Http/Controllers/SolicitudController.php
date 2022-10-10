@@ -148,7 +148,7 @@ class SolicitudController extends Controller
       $registrosolicitud = DB::table('solicitud')
       ->join('paciente','paciente.id','=','solicitud.idPaciente')
       ->select('solicitud.id','solicitud.fecha',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"), 'paciente.id AS paciente_id','paciente.edad','paciente.sexo')
-      ->where('paciente.id','=',$id)
+      ->where('solicitud.id','=',$id)
       ->orderBy('solicitud.id','desc')
       ->get();
       //se recorre la consulta anterior pasando el valor a value
@@ -190,6 +190,19 @@ class SolicitudController extends Controller
          // return response()->json($arreglo);
             $pdf = PDF::loadView('pdf.solicitud', compact('arreglo'));
             $pdf->setPaper('A4', 'portrait');
+            // return $pdf->download('cv-interno.pdf');
+            return $pdf->stream();
+    }
+
+    public function pdfsobre($id)
+    {
+      $paciente=DB::table('paciente')
+      ->select(DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))
+      ->where('paciente.id','=',$id)
+      ->get();
+      
+      $pdf = PDF::loadView('pdf.sobre', compact('paciente'));
+            $pdf->setPaper(array(0,0,640.187,312.98), 'portrait');
             // return $pdf->download('cv-interno.pdf');
             return $pdf->stream();
     }
@@ -244,7 +257,7 @@ class SolicitudController extends Controller
           return response()->json($arreglo);
     }
 
-    public function guardarResultado(Request $resultado)
+    public function guardarResultado(Request $request)
     {
       // Resultado();
       $find = Resultado::where('idRegistrosolicitud',$request->idRegistro)->where('idSubcategoria',$request->idCategoria)->first();
