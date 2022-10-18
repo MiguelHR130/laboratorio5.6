@@ -293,6 +293,9 @@ export default {
             this.errorMostrarmsj=[];//se inicializa array vacio
             //si la condicion esta vacia se inserta con push que el nombre no puede estar vacio
             if(!this.nombre)this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if(!this.apPaterno)this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if(!this.apMaterno)this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if(!this.edad)this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if(this.errorMostrarmsj.length) this.errorCajatexto = 1;
             return this.errorCajatexto;
 

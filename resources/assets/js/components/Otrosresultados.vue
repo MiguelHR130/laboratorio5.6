@@ -4,7 +4,7 @@
       <div class="container-fluid"><br>
         <div class="card">
             <div class="card-header">
-                <i class="fa fa-align-justify"></i> Listado de solicitudes <br>  
+                <i class="fa fa-align-justify"></i> Listado de otros resultados <br>  
                     <button class="btn btn-secondary float-sm-right" @click="detalle = false; listarSolicitudes();" v-show="detalle" data-toggle="tooltip" data-placement="right" title="Regresa a listado de solicitudes"> Regresar </button>
                     <button type="button" @click="abrirModal('solicitud','registrar')" class="btn btn-secondary float-sm-right" data-toggle="tooltip" data-placement="right" title="Agregar solicitud" v-show="!detalle">
                         <i class="icon-user-follow"></i>&nbsp;Nuevo
@@ -19,73 +19,76 @@
                             <!-- <button type="button" @click="abrirModal('solicitud','actualizar',props.row)" class="btn btn-warning">Actualizar solicitud</button> -->
                             
                             <div class="btn-group btn-group-sm" role="group" aria-label="group">
-                                <button type="button" @click="detalle = true; dataDetalle = props.row.categorias;" class="btn btn-warning">Asignar resultado</button>&nbsp;
+                                <button type="button" @click="detalle = true; dataDetalle = props.row;" class="btn btn-warning">Asignar resultado</button>&nbsp;
                                 <button type="button" @click="descargarSobre(props.row)" class="btn btn-success">Descargar sobre</button>
                             </div>
                         
                                                     
                         </template>
                         <template slot="paciente" slot-scope="props">
-                            <div v-for="pac in props.row" :key="pac.props">
-                                    <span class="help-block">{{pac.nombreConcatenado}}</span><br>
+                            <div>
+                                <span class="help-block">{{props.row.nombreConcatenado}}</span><br>
                             </div>
                         </template>
                         <template slot="fecha" slot-scope="props">
-                            <div v-for="fec in props.row" :key="fec.props">
-                                    <span class="help-block">{{fec.fecha}}</span><br>
-                            </div>
-                        </template>
-                        <template slot="categorias" slot-scope="props">
-                            <div v-for="cat in props.row.categorias" :key="cat.props">
-                                    <span class="help-block">{{cat.categoria.nombreCategoria}}</span><br>
+                            <div >
+                                    <span class="help-block">{{props.row.fecha}}</span><br>
                             </div>
                         </template>
                     </v-client-table>
 
                     <div v-show="detalle">
-                        <template v-for="itemPaciente,index in dataDetalle">    
+                        
+                        <template>    
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" >
                                     <tr>
-                                        <th v-if="index === 0">
-                                            <h4>Resultados de laboratorio de: {{itemPaciente.categoria.nombreConcatenado}} </h4> 
+                                        <th>
+                                            <h4>Resultados de laboratorio de: {{dataDetalle.nombreConcatenado}} </h4> 
                                         </th>
                                     </tr>
+                                    <tr>
+                                        <td>
+                                            
+                                            <label for="exampleFormControlTextarea1">Encabezado:</label>
+                                            <input type="text" :value="dataDetalle.encabezado" class="form-control" 
+                                                @keyup.enter="guardarObservaciones(dataDetalle.idPaciente, $event)">
+                                            
+                                        </td>
+                                    </tr>   
+                                    <tr>
+                                        <td>
+                                            <label for="exampleFormControlTextarea1">Cuerpo:</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" :value="dataDetalle.cuerpo" 
+                                            @keyup.enter="guardarCuerpo(dataDetalle.idPaciente, $event)"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>    
+                                        <td>
+                                            <button type="button" @click="descargar(dataDetalle.idPaciente)" class="btn btn-info">Descargar resultado de laboratorio</button>
+                                        </td>
+                                    </tr>
+
                                 </table>
                             </div>
                         </template>
 
-                        <template v-for="item in dataDetalle" >
-                            <h5>{{item.categoria.nombreCategoria}}</h5>
+                        <template>
+                            <h5></h5>
                              <div class="table-responsive">
                                       <table class="table">
-                                             <tr>
-                                                 <th width="10%">Examen</th>
-                                                 <th width="10%">Resultado</th>
-                                                 <th width="10%">U.M.</th>
-                                                 <th width="10%">Valores de Referencia</th>
-                                             </tr>
-                                             <tr v-for="itemChild in item.partidas">
-                                                 <td>{{itemChild.nombreSubcategoria}}</td>
-                                                 <td>
-                                                     <input type="text" :value="itemChild.descripcionResultado" class="form-control" 
-                                                     @keyup.enter="guardarResultado(item.categoria.registroSolicitud, $event, itemChild.id )">
-                                                 </td>
-                                                 <td>{{itemChild.unidadMedida}}</td>
-                                                 <td>{{itemChild.vminH}} - {{itemChild.vmaxH}}</td>
-                                             </tr>
                                             <tr>
                                                 <td colspan="2">
                                                     
-                                                    <label for="exampleFormControlTextarea1">Observaciones:</label>
+                                                    <!-- <label for="exampleFormControlTextarea1">Observaciones:</label>
                                                     <input type="text" :value="item.categoria.observaciones" class="form-control" 
-                                                     @keyup.enter="guardarObservaciones(item.categoria.registroSolicitud, $event, item.categoria.id )">
+                                                     @keyup.enter="guardarObservaciones(item.categoria.registroSolicitud, $event, item.categoria.id )"> -->
                                                   
                                                 </td>
                                             </tr>   
                                              <tr>    
                                                 <td>
-                                                    <button type="button" @click="descargar(item.categoria.registroSolicitud)" class="btn btn-info">Descargar resultado de laboratorio</button>
+                                                    <!-- <button type="button" @click="descargar(item.categoria.registroSolicitud)" class="btn btn-info">Descargar resultado de laboratorio</button> -->
                                                    
                                                 </td>
                                              </tr>
@@ -137,21 +140,6 @@
                            <div v-show="errorCajatexto" class="form-group row text-error">
                                 <span class="help-block">(*) Seleccione paciente</span>
                            </div>
-
-
-                            <div class="form-group row">
-                                <label class="col-md-3 form-control-label" for="text-input">Exámen(es) a realizar</label>
-                                <div class="col-md-9">
-                                    <multiselect v-model="categoriaArray" :options="arrayCategoria"  :multiple="true"  :close-on-select="false" :clear-on-select="false"
-                                     placeholder="Elegir exámen" label="nombres" track-by="nombres" :preselect-first="true" data-vv-as="categoria"></multiselect>
-                                </div>
-                            </div>
-                            <div v-show="errorCajatexto" class="form-group row text-error">
-                                <span class="help-block">(*) Elige exámen(es)</span>
-                           </div>
-
-
-
                        </form>
                    </div>
                    <div class="modal-footer">
@@ -183,7 +171,7 @@ Vue.component('multiselect', Multiselect)
 export default {
     data (){
         return{
-            dataDetalle : null,
+            dataDetalle : '',
             detalle : false,
             fecha:'',
             paciente:'',
@@ -200,13 +188,12 @@ export default {
             tipoAccion:0,
             errorCajatexto : 0,
             errorMostrarmsj:[],
-            columns: ['id', 'paciente','fecha','categorias'],
+            columns: ['id', 'nombreConcatenado','fecha'],
             tableData:[],
             options: {
                     headings: {
                         fecha: 'Fecha de solicitud',
-                        categorias: 'Análisis asignado(s)',
-                        paciente: 'Paciente',
+                        nombreConcatenado: 'Paciente',
                         id: 'Acción',
                     },
             pagination:{
@@ -221,8 +208,8 @@ export default {
                     perPageValues: [],
                     skin: config.skin,
                     sortIcon: config.sortIcon,
-                    sortable: ['paciente','fecha'],
-                    filterable: ['paciente','fecha'],
+                    sortable: ['nombreConcatenado','fecha'],
+                    filterable: ['nombreConcatenado','fecha'],
                     filterByColumn: true,
                     texts:config.texts
                 },
@@ -237,10 +224,10 @@ export default {
         //se listan los pacientes desde la base de datos
         listarSolicitudes(){
             let me=this;//creamos variable me
-            var url = '/listadosolicitud';
+            var url = '/listadoOtros';
             axios.get(url).then(response=>{
                 me.tableData = response.data;
-                
+                console.log(response.data);
             })
             .catch(function(error){
                 console.log(error);
@@ -279,10 +266,10 @@ export default {
                 })
             let me = this;
             //se envian 2 parametros, ruta y valores
-            axios.post('/solicitud/registrar',{
+            axios.post('/otro/registrar',{
                 'fecha':this.fecha,
                 'paciente':this.paciente,
-                'categoriaArray':this.categoriaArray,
+                
             }).then(function (response){
                 me.cerrarModal();
                 me.listarSolicitudes();
@@ -319,7 +306,6 @@ export default {
             //si la condicion esta vacia se inserta con push que el nombre no puede estar vacio
             if(!this.paciente)this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if(!this.fecha)this.errorMostrarmsj.push("fecha  no puede estar vacio");
-            if(this.categoriaArray==0)this.errorMostrarmsj.push("categoria no puede estar vacio");
             if(this.errorMostrarmsj.length) this.errorCajatexto = 1;
             return this.errorCajatexto;
             
@@ -335,12 +321,13 @@ export default {
            },
         descargar(data){
             
-            window.open('solicitudpdf/'+data, '_blank');
+            window.open('otropdf/'+data, '_blank');
         },
         descargarSobre(data){
            
-            window.open('sobrepdf/'+data.registro.paciente_id, '_blank');
-        },
+           window.open('sobrepdf/'+data.idPaciente, '_blank');
+       },
+       
 
         //modelo=nombre
         //accion:registrar o actualizar
@@ -355,8 +342,7 @@ export default {
                                 this.modal=1;
                                 this.tituloModal = 'Registrar Solicitud';
                                 this.fecha='';
-                                this.paciente='';
-                                this.categoriaArray='';
+                                this.paciente='';                                
                                 this.tipoAccion=1;
                                 break;
                             }
@@ -402,13 +388,34 @@ export default {
           });
         },
 
-        guardarObservaciones(idRegistro, data, idCategoria ){
+        guardarObservaciones(idPaciente, data ){
             
-            axios.post('solicitud/guardarobservaciones',{
+            axios.post('otro/guardarEncabezado',{
             
-            'idRegistro':idRegistro,
+            'idPaciente':idPaciente,
             'data':data.target.value,
-            'idCategoria':idCategoria
+
+            }).then(response => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    })
+            }).catch(e => {
+            console.log(e);
+            });
+            },
+
+            guardarCuerpo(idPaciente, data ){
+            
+            axios.post('otro/guardarCuerpo',{
+            
+            'idPaciente':idPaciente,
+            'data':data.target.value,
+
             }).then(response => {
                 Swal.fire({
                     icon: 'success',

@@ -57,11 +57,19 @@ Route::group(['middleware'=>['auth']],function(){
     Route::put('/solicitud/actualizar','SolicitudController@update');
     Route::get('solicitudpdf/{id}','SolicitudController@pdf');
     Route::post('solicitud/guardaresultados','SolicitudController@guardarResultado');
+    Route::post('solicitud/guardarobservaciones','SolicitudController@guardarObservaciones');
     Route::get('/resultado/{id}','SolicitudController@resultado');
     Route::get('sobrepdf/{id}','SolicitudController@pdfsobre');
 
     //rutas para resultados
     Route::get('/listadoresultados','ResultadoController@index');
+
+    //rutas para otros resultados
+    Route::post('/otro/registrar','OtrosresultadosController@store');
+    Route::get('/listadoOtros','OtrosresultadosController@index');
+    Route::post('otro/guardarEncabezado','OtrosresultadosController@guardarEncabezado');    
+    Route::post('otro/guardarCuerpo','OtrosresultadosController@guardarCuerpo');    
+    Route::get('otropdf/{id}','OtrosresultadosController@pdf');
     }); 
    
     //Se crean los grupos de rutas para administrador dentro de el middleware auth
@@ -81,13 +89,15 @@ Route::group(['middleware'=>['auth']],function(){
             Route::post('/subcategorias/registrar','SubcategoriaController@store');
             Route::put('/subcategoria/actualizar','SubcategoriaController@update');
             Route::get('/listadodeCategoria','SubcategoriaController@listadeCategoria');
-        
+            
+            //rutas para registro de solicitud
             Route::get('/listadosolicitud','SolicitudController@index');
             Route::get('/listadoPaciente','SolicitudController@listadoPaciente');
             Route::post('/solicitud/registrar','SolicitudController@store');
             Route::put('/solicitud/actualizar','SolicitudController@update');
             Route::get('solicitudpdf/{id}','SolicitudController@pdf');
             Route::post('solicitud/guardaresultados','SolicitudController@guardarResultado');
+            Route::post('solicitud/guardarobservaciones','SolicitudController@guardarObservaciones');
             Route::get('/resultado/{id}','SolicitudController@resultado');
             Route::get('sobrepdf/{id}','SolicitudController@pdfsobre');
         }); 
@@ -95,10 +105,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::group(['middleware'=>['Doctor']],function(){
             Route::get('/listadosolicitud','SolicitudController@index');
             Route::get('/listadoPaciente','SolicitudController@listadoPaciente');
-            Route::post('/solicitud/registrar','SolicitudController@store');
-            Route::put('/solicitud/actualizar','SolicitudController@update');
             Route::get('solicitudpdf/{id}','SolicitudController@pdf');
-            Route::post('solicitud/guardaresultados','SolicitudController@guardarResultado');
             Route::get('/resultado/{id}','SolicitudController@resultado');
     });
 

@@ -21,6 +21,7 @@ let mix = require('laravel-mix');
       'resources/assets/plantilla/js/popper.min.js',
       'resources/assets/plantilla/js/bootstrap.min.js',
       'resources/assets/plantilla/js/Chart.min.js',
+      'resources/assets/plantilla/js/jquery.js',
       'resources/assets/plantilla/js/pace.min.js',
       'resources/assets/plantilla/js/template.js',
       'resources/assets/plantilla/js/sweetalert2@11.js'

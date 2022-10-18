@@ -20,7 +20,7 @@
             </template>
 
             <template v-if="menu==4">
-                <resultado></resultado>
+            <resultado></resultado>
             </template>
 
             <template v-if="menu==5">
@@ -40,7 +40,7 @@
             </template>
 
             <template v-if="menu==9">
-                <h1>cont menu 9</h1>
+                <otros></otros>
             </template>
 
             <template v-if="menu==10">
@@ -74,6 +74,10 @@
 
             <template v-if="menu==6">
             <subcategoria></subcategoria>
+            </template>
+            
+            <template v-if="menu==9">
+                <otros></otros>
             </template>
                
             @elseif(Auth::user()->idrol==3)

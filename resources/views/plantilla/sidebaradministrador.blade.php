@@ -16,6 +16,9 @@
                             <li @click="menu=3" class="nav-item">
                                 <a class="nav-link" href="#"><i class="icon-bag"></i> Listado Resultados</a>
                             </li>
+                            <li @click="menu=9" class="nav-item">
+                                <a class="nav-link" href="#"><i class="icon-bag"></i> Asignar otros resultados</a>
+                            </li>
                         </ul>|
                     </li>
                     <li class="nav-item nav-dropdown">

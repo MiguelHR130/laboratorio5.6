@@ -16,20 +16,21 @@ div1 {text-align: center;}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Icons -->
     <link href="css/plantilla.css" rel="stylesheet">
-  
-   
-
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
     <div id="app">
     <header class="app-header navbar">
-  
+     
+        <div>
+           <br> <h4>Usuario Activo:{{Auth::user()->usuario}}</h4>
+        </div>
+
         <div>
             <a  class="dropdown-item" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icon-user-unfollow"></i> Cerrar sesión</a>
             <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">{{csrf_field()}}</form>
         </div>
-        
+       
     </header>
 
     <div class="app-body">

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sobre</title>
 </head>
 <body>
    <div>
@@ -22,7 +22,7 @@
         @foreach($paciente as $item)
         <tr>
             <td>
-                Paciente: {{$item->nombreConcatenado}}
+               <i>Paciente: {{$item->nombreConcatenado}}</i> 
             </td>
         </tr>
         @endforeach

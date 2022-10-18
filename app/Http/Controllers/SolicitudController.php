@@ -21,7 +21,7 @@ class SolicitudController extends Controller
         //se realiza consulta para seleccionar solicitud id, paciente y fecha
         $registrosolicitud = DB::table('solicitud')
         ->join('paciente','paciente.id','=','solicitud.idPaciente')
-        ->select('solicitud.id','solicitud.fecha',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"), 'paciente.id AS paciente_id')
+        ->select('solicitud.id','solicitud.fecha as fecha',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"), 'paciente.id AS paciente_id')
         ->orderBy('solicitud.id','desc')
         ->get();
         //se recorre la consulta anterior pasando el valor a value
@@ -31,7 +31,8 @@ class SolicitudController extends Controller
             ->join('registrosolicitud','registrosolicitud.idSolicitud','=','solicitud.id')
             ->join('categorias','categorias.id','=','registrosolicitud.idCategoria')
             ->join('paciente','paciente.id','=','solicitud.idPaciente')
-            ->select('categorias.nombres as nombreCategoria','categorias.id','registrosolicitud.id AS registroSolicitud','solicitud.idPaciente',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))
+            ->select('categorias.nombres as nombreCategoria','categorias.id','registrosolicitud.id AS registroSolicitud','solicitud.idPaciente','registrosolicitud.observaciones',
+            DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))
             ->where('registrosolicitud.idSolicitud','=',$value->id)
             ->get();
 
@@ -147,10 +148,14 @@ class SolicitudController extends Controller
       //se realiza consulta para seleccionar solicitud id, paciente y fecha
       $registrosolicitud = DB::table('solicitud')
       ->join('paciente','paciente.id','=','solicitud.idPaciente')
-      ->select('solicitud.id','solicitud.fecha',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"), 'paciente.id AS paciente_id','paciente.edad','paciente.sexo')
-      ->where('solicitud.id','=',$id)
+      ->join('registrosolicitud','registrosolicitud.idSolicitud','=','solicitud.id')
+      ->join('categorias','categorias.id','=','registrosolicitud.idCategoria')
+      ->select('registrosolicitud.id','solicitud.fecha as fecha',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"), 'paciente.id AS paciente_id','paciente.edad','paciente.sexo')
+      ->where('registrosolicitud.id','=',$id)
       ->orderBy('solicitud.id','desc')
       ->get();
+
+    
       //se recorre la consulta anterior pasando el valor a value
       foreach($registrosolicitud as $key => $value){
           $arreglo_child = [];
@@ -158,9 +163,11 @@ class SolicitudController extends Controller
           ->join('registrosolicitud','registrosolicitud.idSolicitud','=','solicitud.id')
           ->join('categorias','categorias.id','=','registrosolicitud.idCategoria')
           ->join('paciente','paciente.id','=','solicitud.idPaciente')
-          ->select('categorias.nombres as nombreCategoria','categorias.id','registrosolicitud.id AS registroSolicitud','solicitud.idPaciente',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))
-          ->where('registrosolicitud.idSolicitud','=',$value->id)
+          ->select('categorias.nombres as nombreCategoria','categorias.id','registrosolicitud.id AS registroSolicitud','solicitud.idPaciente','registrosolicitud.observaciones',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))
+          ->where('registrosolicitud.id','=',$value->id)
           ->get();
+
+        $fecha = $value->fecha;
 
           foreach ($solicitud as $key_child => $value_child) {
               # code...
@@ -185,10 +192,20 @@ class SolicitudController extends Controller
               'registro'=>$value,
               'categorias'=> $arreglo_child
           ];
-
           }
-         // return response()->json($arreglo);
-            $pdf = PDF::loadView('pdf.solicitud', compact('arreglo'));
+
+          /* 
+          dia_ingreso = substr($fecha_ingreso,8,2);
+          $mes_ingreso=substr($fecha_ingreso,5,2);
+          $anio_ingreso=substr($fecha_ingreso,0,4);
+          $fecha_final_ingreso= $this->dias($dia_ingreso).' días del mes de '.$this->meses($mes_ingreso).' del '.substr($fecha_ingreso,0,4); */
+
+          $dia = substr($fecha,8,2);
+          $mes = substr($fecha,5,2);
+          $anio = substr($fecha,0,4);
+          $fecha_final= $dia.' / '.$this->meses($mes).' / '.$anio;
+
+            $pdf = PDF::loadView('pdf.solicitud', compact('arreglo','fecha','fecha_final'));
             $pdf->setPaper('A4', 'portrait');
             // return $pdf->download('cv-interno.pdf');
             return $pdf->stream();
@@ -214,8 +231,10 @@ class SolicitudController extends Controller
       //se realiza consulta para seleccionar solicitud id, paciente y fecha
       $registrosolicitud = DB::table('solicitud')
       ->join('paciente','paciente.id','=','solicitud.idPaciente')
-      ->select('solicitud.id','solicitud.fecha',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"), 'paciente.id AS paciente_id')
-      ->where('paciente.id','=',$id)
+      ->join('registrosolicitud','registrosolicitud.idSolicitud','=','solicitud.id')
+      ->join('categorias','categorias.id','=','registrosolicitud.idCategoria')
+      ->select('registrosolicitud.id','solicitud.fecha',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"), 'paciente.id AS paciente_id')
+      ->where('registrosolicitud.id','=',$id)
       ->orderBy('solicitud.id','desc')
       ->get();
       //se recorre la consulta anterior pasando el valor a value
@@ -225,8 +244,8 @@ class SolicitudController extends Controller
           ->join('registrosolicitud','registrosolicitud.idSolicitud','=','solicitud.id')
           ->join('categorias','categorias.id','=','registrosolicitud.idCategoria')
           ->join('paciente','paciente.id','=','solicitud.idPaciente')
-          ->select('categorias.nombres as nombreCategoria','categorias.id','registrosolicitud.id AS registroSolicitud','solicitud.idPaciente',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))
-          ->where('registrosolicitud.idSolicitud','=',$value->id)
+          ->select('categorias.nombres as nombreCategoria','categorias.id','registrosolicitud.id AS registroSolicitud','registrosolicitud.observaciones','solicitud.idPaciente',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))
+          ->where('registrosolicitud.id','=',$value->id)
           ->get();
 
           foreach ($solicitud as $key_child => $value_child) {
@@ -274,5 +293,38 @@ class SolicitudController extends Controller
 
       return response()->json(['status' => true]);
       // code...
+    }
+
+    public function guardarObservaciones(Request $request)
+    {
+      // Resultado();
+      $find = Registrosolicitud::where('id',$request->idRegistro)->where('idCategoria',$request->idCategoria)->first();
+      if (isset($find)) {
+        $find->observaciones = $request->data;
+        $find->save();
+      }
+
+      return response()->json(['status' => true]);
+      // code...
+    }
+
+    public static function meses($mes){
+      $resultado='';
+      $mes = $mes.'';
+      switch ($mes) {
+        case '01'; case '1'; $resultado='Enero'; break;
+        case '02'; case '2'; $resultado='Febrero'; break;
+        case '03'; case '3'; $resultado='Marzo'; break;
+        case '04'; case '4'; $resultado='Abril'; break;
+        case '05'; case '5'; $resultado='Mayo'; break;
+        case '06'; case '6'; $resultado='Junio'; break;
+        case '07'; case '7'; $resultado='Julio'; break;
+        case '08'; case '8'; $resultado='Agosto'; break;
+        case '09'; case '9'; $resultado='Septiembre'; break;
+        case '10': $resultado='Octubre'; break;
+        case '11': $resultado='Noviembre'; break;
+        case '12': $resultado='Diciembre'; break;
+      }
+      return $resultado;
     }
 }

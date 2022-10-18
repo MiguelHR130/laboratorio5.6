@@ -312,6 +312,10 @@ export default {
             this.errorMostrarmsj=[];//se inicializa array vacio
             //si la condicion esta vacia se inserta con push que el nombre no puede estar vacio
             if(!this.nombreSubcategoria)this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if(!this.vminH)this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if(!this.vmaxH)this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if(!this.unidadMedida)this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if(!this.idCategorias)this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if(this.errorMostrarmsj.length) this.errorCajatexto = 1;
             return this.errorCajatexto;
 
