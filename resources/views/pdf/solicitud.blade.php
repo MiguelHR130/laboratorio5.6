@@ -69,7 +69,7 @@
                 left: 110px; 
         }    
         .letraRESULT{
-               font-size: 14px;
+               font-size: 12px;
                font-family: Arial, Helvetica, sans-serif;
                text-align: center;
                color: #000000;
@@ -189,7 +189,7 @@
         <tr><td></td></tr>
         <tr>
             <th>Observaciones:</th>
-            <td colspan="3">{{$itemp['categoria']->observaciones}}</td></tr>
+            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td></tr>
         <tr><td></td></tr>
         @endforeach
             </table>
@@ -305,7 +305,7 @@
         @foreach($item['categorias'] as $itemp)
         <tr>
             <th>Observaciones:</th>
-            <td colspan="3">{{$itemp['categoria']->observaciones}}</td>
+            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
         </tr>
         <tr><td></td></tr>
         @endforeach
@@ -904,7 +904,7 @@
         @foreach($item['categorias'] as $itemp)
         <tr>
             <th>Observaciones:</th>
-            <td colspan="3">{{$itemp['categoria']->observaciones}}</td>
+            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
         </tr>
         <tr><td></td></tr>
         @endforeach

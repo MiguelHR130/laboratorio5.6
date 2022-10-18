@@ -78,9 +78,9 @@
                                                 <td colspan="2">
                                                     
                                                     <label for="exampleFormControlTextarea1">Observaciones:</label>
-                                                    <input type="text" :value="item.categoria.observaciones" class="form-control" 
-                                                     @keyup.enter="guardarObservaciones(item.categoria.registroSolicitud, $event, item.categoria.id )">
-                                                  
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" :value="item.categoria.observaciones" 
+                                                    @keyup.enter="guardarObservaciones(item.categoria.registroSolicitud, $event, item.categoria.id )"></textarea>
+                                                 
                                                 </td>
                                             </tr>   
                                              <tr>    
