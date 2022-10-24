@@ -128,7 +128,7 @@ class SolicitudController extends Controller
 
             foreach($valores as $key =>$value){
 
-                $registro = Registrosolicitud::findOrFail($solicitud->id);
+                $registro = Registrosolicitud::where('idSolicitud',$request->id)->first();
                 $registro->idCategoria = $value['id'];
                 $registro->save();
                 DB::commit();

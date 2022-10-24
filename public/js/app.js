@@ -69707,6 +69707,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -69723,7 +69724,7 @@ Vue.component('multiselect', __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___defau
             detalle: false,
             fecha: '',
             paciente: '',
-            id: null,
+            id: 0,
             registrosolicitud: '',
             arraySolicitud: [],
             arrayPacientes: [], //creamos un array para que reciba los datos de la consulta,
@@ -69819,6 +69820,7 @@ Vue.component('multiselect', __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___defau
             });
         },
         actualizarPaciente: function actualizarPaciente() {
+            console.log();
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -69829,6 +69831,7 @@ Vue.component('multiselect', __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___defau
             var me = this;
             //se envian 2 parametros, ruta y valores
             axios.put('/solicitud/actualizar', {
+
                 'fecha': this.fecha,
                 'paciente': this.paciente,
                 'categoriaArray': this.categoriaArray,
@@ -69892,11 +69895,11 @@ Vue.component('multiselect', __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___defau
                                 }
                             case 'actualizar':
                                 {
-
+                                    console.log(data);
                                     this.modal = 1;
                                     this.tituloModal = 'Actualizar Solicitud';
                                     this.tipoAccion = 2;
-                                    this.id = data['id'];
+                                    this.id = data.registro.id;
                                     this.fecha = data.registro.fecha;
                                     this.paciente = data.registro.paciente_id;
 
@@ -70607,6 +70610,22 @@ var render = function() {
                       },
                       [_vm._v("Guardar")]
                     )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.tipoAccion == 2
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.actualizarPaciente()
+                          }
+                        }
+                      },
+                      [_vm._v("Actualizar")]
+                    )
                   : _vm._e()
               ])
             ])
@@ -71173,7 +71192,7 @@ var render = function() {
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
           _c("i", { staticClass: "fa fa-align-justify" }),
-          _vm._v(" Listado de solicitudes "),
+          _vm._v(" Listado para Medico "),
           _c("br"),
           _vm._v(" "),
           _c(

@@ -157,6 +157,7 @@
                    <div class="modal-footer">
                        <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
                        <button type="button"  v-if="tipoAccion==1" class="btn btn-primary" @click="registrarPacientes()">Guardar</button>
+                       <button type="button"  v-if="tipoAccion==2" class="btn btn-primary" @click="actualizarPaciente()">Actualizar</button>
                    </div>
                </div>
                <!-- /.modal-content -->
@@ -187,7 +188,7 @@ export default {
             detalle : false,
             fecha:'',
             paciente:'',
-            id:null,
+            id:0,
             registrosolicitud:'',
             arraySolicitud:[],
             arrayPacientes:[],//creamos un array para que reciba los datos de la consulta,
@@ -291,6 +292,7 @@ export default {
             });
         },
         actualizarPaciente(){
+            console.log();
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -301,6 +303,7 @@ export default {
            let me = this;
             //se envian 2 parametros, ruta y valores
             axios.put('/solicitud/actualizar',{
+
                 'fecha':this.fecha,
                 'paciente':this.paciente,
                 'categoriaArray':this.categoriaArray,
@@ -362,11 +365,11 @@ export default {
                             }
                             case 'actualizar':
                             {
-                                
+                                console.log(data);
                                 this.modal=1;
                                 this.tituloModal='Actualizar Solicitud';
                                 this.tipoAccion=2;
-                                this.id=data['id'];
+                                this.id=data.registro.id;
                                 this.fecha=data.registro.fecha;
                                 this.paciente=data.registro.paciente_id;
                            

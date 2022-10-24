@@ -42,7 +42,7 @@
                                 <a class="nav-link" href="#"><i class="icon-user-following"></i> Roles</a>
                             </li>
                         </ul>
-                    </li>
+                    </li>    
                 </ul>
             </nav>
             <button class="sidebar-minimizer brand-minimizer" type="button"></button>

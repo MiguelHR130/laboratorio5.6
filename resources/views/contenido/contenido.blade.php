@@ -43,10 +43,6 @@
                 <otros></otros>
             </template>
 
-            <template v-if="menu==10">
-                <h1>cont menu 10</h1>
-            </template>
-
             <template v-if="menu==11">
                 <h1>cont menu 11</h1>
             </template>

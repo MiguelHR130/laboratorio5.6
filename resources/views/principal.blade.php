@@ -54,8 +54,8 @@ div1 {text-align: center;}
     
     </div>
     <footer class="app-footer">
-        <span><a href="http://www.google.com/">Sistema de Gestión Laboratorio San Miguel</a> &copy; 2022</span>
-       
+       <span><a href="/documentos/MANUAL.PDF" style="text-align: center;">MANUAL DE USUARIO</a></span>
+       <span  class="ml-auto"><a href="http://www.google.com/">Sistema de Gestión Laboratorio San Miguel</a> &copy; 2022</span>
     </footer>
 
     <script src="js/app.js"></script>

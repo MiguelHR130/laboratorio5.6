@@ -4,7 +4,7 @@
       <div class="container-fluid"><br>
         <div class="card">
             <div class="card-header">
-                <i class="fa fa-align-justify"></i> Listado de solicitudes <br>  
+                <i class="fa fa-align-justify"></i> Listado para Medico <br>  
                     <button class="btn btn-secondary float-sm-right" @click="detalle = false; listarSolicitudes();" v-show="detalle" data-toggle="tooltip" data-placement="right" title="Regresa a listado de solicitudes"> Regresar </button>
                     
                     
@@ -16,8 +16,8 @@
 
                             <!-- <button type="button" @click="abrirModal('solicitud','actualizar',props.row)" class="btn btn-warning">Actualizar solicitud</button> -->
                            
-                            <button type="button" @click="descargar(props.row)" class="btn btn-info">Descargar resultado de laboratorio</button>        
-
+                            <button type="button" @click="descargar(props.row)" class="btn btn-info">Descargar resultado de laboratorio</button>       
+                            
                         </template>
                         <template slot="paciente" slot-scope="props">
                             <div v-for="pac in props.row" :key="pac.props">
