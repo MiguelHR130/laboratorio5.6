@@ -100,6 +100,12 @@
             position: fixed;
             top: 710px;
             left: 80px; 
+        }
+        .referencia{
+            font-size: 10px;
+            position: fixed;
+            top: 1020px;
+            left: 20px; 
         }    
     </style>
 </head>
@@ -307,20 +313,18 @@
             <th>Observaciones:</th>
             <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
         </tr>
-        <tr><td></td></tr>
         @endforeach
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-            <tr>
-                <td align="left"><b>Valor de referencia:</b></td>
-                <td><b><font color ="#007fff">ALTO</font></b><b>&nbsp;<font color ="#ff0000">BAJO</font></b></td>
-            </th>
       </table>
 @endforeach
     </div>
+        <div>
+            <table class="referencia">
+                <tr>
+                    <td align="left"><b>Valor de referencia:</b></td>
+                    <td><b><font color ="#007fff">ALTO</font></b><b>&nbsp;<font color ="#ff0000">BAJO</font></b></td>
+                </th>
+            </table>
+        </div>
     <div>
         <table class="notacion">
             <tr>
@@ -908,19 +912,17 @@
         </tr>
         <tr><td></td></tr>
         @endforeach
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr>
-            <td align="left"><b>Valor de referencia:</b></td>
-            <td><b><font color ="#007fff">ALTO</font></b><b>&nbsp;<font color ="#ff0000">BAJO</font></b></td>
-        </th>
       </table>
 @endforeach
 </div>
-            
+<div>
+            <table class="referencia">
+                <tr>
+                    <td align="left"><b>Valor de referencia:</b></td>
+                    <td><b><font color ="#007fff">ALTO</font></b><b>&nbsp;<font color ="#ff0000">BAJO</font></b></td>
+                </th>
+            </table>
+        </div>
          
 
             <div>
