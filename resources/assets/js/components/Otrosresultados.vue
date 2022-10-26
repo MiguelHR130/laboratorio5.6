@@ -227,7 +227,6 @@ export default {
             var url = '/listadoOtros';
             axios.get(url).then(response=>{
                 me.tableData = response.data;
-                console.log(response.data);
             })
             .catch(function(error){
                 console.log(error);

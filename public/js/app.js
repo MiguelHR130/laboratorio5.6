@@ -65273,6 +65273,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -65289,6 +65310,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             id: 0,
             errorCajatexto: 0,
             errorMostrarmsj: [],
+            radio: '',
             pagination: {
                 'total': 0,
                 'current_page': 0,
@@ -65371,7 +65393,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'nombre': this.nombre,
                 'apPaterno': this.apPaterno,
                 'apMaterno': this.apMaterno,
-                'edad': this.edad
+                'edad': this.edad,
+                'sexo': this.radio
             }).then(function (response) {
                 me.cerrarModal();
                 me.listarPacientes(1, '', 'nombre');
@@ -65394,6 +65417,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'apPaterno': this.apPaterno,
                 'apMaterno': this.apMaterno,
                 'edad': this.edad,
+                'sexo': this.radio,
                 'id': this.id
 
             }).then(function (response) {
@@ -65408,9 +65432,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.errorMostrarmsj = []; //se inicializa array vacio
             //si la condicion esta vacia se inserta con push que el nombre no puede estar vacio
             if (!this.nombre) this.errorMostrarmsj.push("el nombre no puede estar vacio");
-            if (!this.apPaterno) this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if (!this.apPaterno) this.errorMostrarmsj.push("el apellido no puede estar vacio");
             if (!this.apMaterno) this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if (!this.edad) this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if (!this.radio) this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if (this.errorMostrarmsj.length) this.errorCajatexto = 1;
             return this.errorCajatexto;
         },
@@ -65442,6 +65467,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                     this.apPaterno = '';
                                     this.apMaterno = '';
                                     this.edad = '';
+                                    this.radio = '';
                                     this.tipoAccion = 1;
                                     break;
                                 }
@@ -65456,6 +65482,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                     this.apPaterno = data['apPaterno'];
                                     this.apMaterno = data['apMaterno'];
                                     this.edad = data['edad'];
+                                    this.radio = data['sexo'];
                                     break;
                                 }
                         }
@@ -65651,6 +65678,10 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", {
                       domProps: { textContent: _vm._s(paciente.edad) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      domProps: { textContent: _vm._s(paciente.sexo) }
                     })
                   ])
                 }),
@@ -66030,6 +66061,119 @@ var render = function() {
                           _vm._v("(*) Ingrese la edad del paciente")
                         ])
                       ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-5 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Sexo")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.radio,
+                                  expression: "radio"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "inlineRadioOptions",
+                                id: "inlineRadio1",
+                                value: "H"
+                              },
+                              domProps: { checked: _vm._q(_vm.radio, "H") },
+                              on: {
+                                change: function($event) {
+                                  _vm.radio = "H"
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "inlineRadio1" }
+                              },
+                              [_vm._v("H")]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-check form-check-inline" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.radio,
+                                  expression: "radio"
+                                }
+                              ],
+                              staticClass: "form-check-input",
+                              attrs: {
+                                type: "radio",
+                                name: "inlineRadioOptions",
+                                id: "inlineRadio2",
+                                value: "M"
+                              },
+                              domProps: { checked: _vm._q(_vm.radio, "M") },
+                              on: {
+                                change: function($event) {
+                                  _vm.radio = "M"
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-check-label",
+                                attrs: { for: "inlineRadio2" }
+                              },
+                              [_vm._v("M")]
+                            )
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errorCajatexto,
+                            expression: "errorCajatexto"
+                          }
+                        ],
+                        staticClass: "form-group row text-error"
+                      },
+                      [
+                        _c("span", { staticClass: "help-block" }, [
+                          _vm._v("(*) Seleccione sexo del paciente")
+                        ])
+                      ]
                     )
                   ]
                 )
@@ -66102,7 +66246,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Nombre")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Edad")])
+        _c("th", [_vm._v("Edad")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Sexo")])
       ])
     ])
   },
@@ -72109,7 +72255,6 @@ Vue.component('multiselect', __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___defau
             var url = '/listadoOtros';
             axios.get(url).then(function (response) {
                 me.tableData = response.data;
-                console.log(response.data);
             }).catch(function (error) {
                 console.log(error);
             });

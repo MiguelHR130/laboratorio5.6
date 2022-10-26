@@ -17,7 +17,7 @@ class PacienteController extends Controller
         $criterio=$request->criterio;
 
         if($buscar==''){
-            $paciente = DB::table('paciente')->select('paciente.id','paciente.nombre','paciente.apPaterno','paciente.apMaterno','paciente.edad',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))->orderBy('paciente.id','desc')->paginate(10);
+            $paciente = DB::table('paciente')->select('paciente.id','paciente.nombre','paciente.apPaterno','paciente.apMaterno','paciente.edad','paciente.sexo',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))->orderBy('paciente.id','desc')->paginate(10);
             //$paciente = Paciente::orderBy('id','desc')->paginate(10);
             //$paciente = Paciente::select("paciente.*", DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombre"))->paginate(10)->first();
         }else{
@@ -47,6 +47,7 @@ class PacienteController extends Controller
        $paciente->apPaterno = $request->apPaterno;
        $paciente->apMaterno = $request->apMaterno;
        $paciente->edad = $request->edad;
+       $paciente->sexo = $request->sexo;
        $paciente->save();
 
        return response()->json(array('status' => true));
@@ -61,6 +62,7 @@ class PacienteController extends Controller
         $paciente->apPaterno = $request->apPaterno;
         $paciente->apMaterno = $request->apMaterno;
         $paciente->edad = $request->edad;
+        $paciente->sexo = $request->sexo;
         $paciente->save();
     }
 }

@@ -33,6 +33,7 @@
                                <th>Opciones</th>
                                <th>Nombre</th>
                                <th>Edad</th>
+                               <th>Sexo</th>
                            </tr>
                        </thead>
                        <tbody><!-- se crea un for que trae por nombre paciente y en el cual se le pasa el 
@@ -46,6 +47,7 @@
                                </td>
                                <td v-text="paciente.nombreConcatenado||paciente.nombre"></td>
                                <td v-text="paciente.edad"></td>
+                               <td v-text="paciente.sexo"></td>
                            </tr>
                        </tbody>
                    </table>
@@ -115,6 +117,25 @@
                            <div v-show="errorCajatexto" class="form-group row text-error">
                                 <span class="help-block">(*) Ingrese la edad del paciente</span>
                            </div>
+
+                           <div class="form-group row">
+                               <label class="col-md-5 form-control-label" for="text-input">Sexo</label>
+                               <div class="col-sm">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" v-model="radio" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="H">
+                                        <label class="form-check-label" for="inlineRadio1">H</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" v-model="radio" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="M">
+                                        <label class="form-check-label" for="inlineRadio2">M</label>
+                                    </div>
+                               </div>
+                           </div>
+                           <div v-show="errorCajatexto" class="form-group row text-error">
+                                <span class="help-block">(*) Seleccione sexo del paciente</span>
+                           </div>
                        </form>
                    </div>
                    <div class="modal-footer">
@@ -172,6 +193,7 @@ export default {
             id:0,
             errorCajatexto : 0,
             errorMostrarmsj:[],
+            radio:'',
             pagination:{
                 'total':0,
                 'current_page':0,
@@ -256,7 +278,8 @@ export default {
                 'nombre':this.nombre,
                 'apPaterno':this.apPaterno,
                 'apMaterno':this.apMaterno,
-                'edad':this.edad
+                'edad':this.edad,
+                'sexo':this.radio
             }).then(function (response){
                 me.cerrarModal();
                 me.listarPacientes(1,'','nombre');
@@ -279,6 +302,7 @@ export default {
                 'apPaterno':this.apPaterno,
                 'apMaterno':this.apMaterno,
                 'edad':this.edad,
+                'sexo':this.radio,
                 'id':this.id
 
             }).then(function (response){
@@ -293,9 +317,10 @@ export default {
             this.errorMostrarmsj=[];//se inicializa array vacio
             //si la condicion esta vacia se inserta con push que el nombre no puede estar vacio
             if(!this.nombre)this.errorMostrarmsj.push("el nombre no puede estar vacio");
-            if(!this.apPaterno)this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if(!this.apPaterno)this.errorMostrarmsj.push("el apellido no puede estar vacio");
             if(!this.apMaterno)this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if(!this.edad)this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if(!this.radio)this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if(this.errorMostrarmsj.length) this.errorCajatexto = 1;
             return this.errorCajatexto;
 
@@ -326,6 +351,7 @@ export default {
                                 this.apPaterno='';
                                 this.apMaterno='';
                                 this.edad='';
+                                this.radio='';
                                 this.tipoAccion=1;
                                 break;
                             }
@@ -339,6 +365,7 @@ export default {
                                 this.apPaterno=data['apPaterno'];
                                 this.apMaterno=data['apMaterno'];
                                 this.edad=data['edad'];
+                                this.radio=data['sexo'];
                                 break; 
 
                             }
