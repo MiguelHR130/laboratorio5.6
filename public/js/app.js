@@ -70350,15 +70350,15 @@ var render = function() {
                                     value: itemChild.descripcionResultado
                                   },
                                   on: {
-                                    keyup: function($event) {
+                                    keydown: function($event) {
                                       if (
                                         !$event.type.indexOf("key") &&
                                         _vm._k(
                                           $event.keyCode,
-                                          "enter",
-                                          13,
+                                          "tab",
+                                          9,
                                           $event.key,
-                                          "Enter"
+                                          "Tab"
                                         )
                                       ) {
                                         return null

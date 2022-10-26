@@ -69,7 +69,7 @@
                                                  <td>{{itemChild.nombreSubcategoria}}</td>
                                                  <td>
                                                      <input type="text" :value="itemChild.descripcionResultado" class="form-control" 
-                                                     @keyup.enter="guardarResultado(item.categoria.registroSolicitud, $event, itemChild.id )">
+                                                     @keydown.tab="guardarResultado(item.categoria.registroSolicitud, $event, itemChild.id )">
                                                  </td>
                                                  <td>{{itemChild.unidadMedida}}</td>
                                                  <td>{{itemChild.vminH}} - {{itemChild.vmaxH}}</td>
