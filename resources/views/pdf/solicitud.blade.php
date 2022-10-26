@@ -77,16 +77,43 @@
                top: 180px;
                left: 45px; 
             }
+        .letraRESULT1{
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            color: #000000;
+            position: fixed;
+            top: 180px;
+            left: 70px; 
+        }
+        .resultMaster{
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            color: #000000;
+            position: fixed;
+            top: 180px;
+            left: 100px; 
+        }
         .letrafirma{
-               font-size: 12px;
-               font-family: Arial, Helvetica, sans-serif;
-               position: fixed;
-               top: 950px;
-               left: 250px; 
-            }    
-            .linea {
-                border-top: 1px solid black;
-            }
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+            position: fixed;
+            top: 950px;
+            left: 250px; 
+        }
+        .sedimento{
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            color: #000000;
+            position: fixed;
+            top: 500px;
+            left: 120px; 
+        }    
+        .linea {
+            border-top: 1px solid black;
+        }
         div.page_break + div.page_break{
             page-break-before: always;
             }
@@ -158,49 +185,50 @@
             </tr>
             </table>
         </div>
+        
         <div>
                 <table class="letratablam2">
                     <tr>
                         <td>RESULTADOS DE LABORATORIO</td>
                     </tr>
                 </table>   
-        </div>  
+        </div>
+
         <div>
-            <table class="letraRESULT" width="100%">
+            <table class="resultMaster" width="100%">
                 <tr>
-                    <th>EXAMEN</th><br><br>
+                    <th>&nbsp;</th><br><br>
                     <th>RESULTADO</th><br><br>
-                    <th>U.M</th><br><br>
-                    <th>VALORES DE REFERENCIA</th><br><br>
+                   <!--  <th>U.M</th><br><br>
+                    <th>VALORES DE REFERENCIA</th><br><br> -->
                 </tr>
             @foreach($item['categorias'] as $itemp)
                     <tr>
-                        <th align="left">{{$itemp['categoria']->nombreCategoria}}</th>
+                        <th align="left" width="40%">{{$itemp['categoria']->nombreCategoria}}</th>
                     </tr>
                     @foreach($itemp['partidas'] as $child)
                     <tr>
                         <td align="left">{{$child->nombreSubcategoria}}</td>
                         <td>{{$child->descripcionResultado}}</td>
-                        <td>{{$child->unidadMedida}}</td>
-                        <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+         <!--                <td>{{$child->unidadMedida}}</td>
+                        <td>{{$child->vminH}}-{{$child->vmaxH}}</td> -->
                     </tr>
                     @endforeach
             @endforeach
-            <tr><td></td></tr>
-        @foreach($item['categorias'] as $itemp)
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr>
-            <th>Observaciones:</th>
-            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td></tr>
-        <tr><td></td></tr>
-        @endforeach
-            </table>
-        @endforeach
+            </table>        
         </div>
+
+        @foreach($item['categorias'] as $itemp)
+        <div>
+            <table class="sedimento">
+            <tr>
+                <th>Sedimento Urinario:</th>
+                <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
+            </tr>
+            </table>
+        </div>
+        @endforeach
+
         <div>
             <table class="letrafirma">
                 <tr>
@@ -217,6 +245,7 @@
                 </tr>
             </table>
         </div>
+@endforeach
 </div>
 </body>
         @elseif($itemp['categoria']->id==1)
@@ -274,12 +303,12 @@
       </table>   
     </div>  
     <div>
-      <table class="letraRESULT" width="100%">
+      <table class="letraRESULT1" width="100%">
         <tr>
-            <th>EXAMEN</th><br><br>
+            <th width="40%">EXAMEN</th><br><br>
             <th>RESULTADO</th><br><br>
             <th>U.M</th><br><br>
-            <th>VALORES DE REFERENCIA</th><br><br>
+           <!-- <th>VALORES DE REFERENCIA</th><br><br>  --> 
         </tr>
     @foreach($item['categorias'] as $itemp)
             <tr>
@@ -287,20 +316,9 @@
             </tr>
             @foreach($itemp['partidas'] as $child)
             <tr>
-                <td align="left">{{$child->nombreSubcategoria}}</td>
-                @if($child->descripcionResultado>$child->vmaxH)
-                <td><font color ="#007fff">{{$child->descripcionResultado}}</font></td>
-                <td>{{$child->unidadMedida}}</td>
-                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
-                @elseif($child->descripcionResultado<$child->vminH)
-                <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
-                <td>{{$child->unidadMedida}}</td>
-                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
-                @else
+                <td align="left" width="30%">{{$child->nombreSubcategoria}}</td>
                 <td>{{$child->descripcionResultado}}</td>
                 <td>{{$child->unidadMedida}}</td>
-                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
-                @endif
             </tr>
             @endforeach
     @endforeach
@@ -309,22 +327,16 @@
         </tr>
         <tr><td></td></tr>
         @foreach($item['categorias'] as $itemp)
-        <tr>
+       <!--  <tr>
             <th>Observaciones:</th>
             <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
-        </tr>
+        </tr> -->
         @endforeach
       </table>
 @endforeach
     </div>
         <div>
-            <table class="referencia">
-                <tr>
-                    <td align="left"><b>Valor de referencia:</b></td>
-                    <td><b><font color ="#007fff">ALTO</font></b><b>&nbsp;<font color ="#ff0000">BAJO</font></b></td>
-                </th>
-            </table>
-        </div>
+
     <div>
         <table class="notacion">
             <tr>
@@ -540,25 +552,25 @@
                     Mayor de 18 años
                 </td>
                 <td>
-                    42 - 50
+                    35.0 - 50.0
                 </td>
                 <td>
                     Mayor de 18 años
                 </td>
                 <td>
-                    11.7 - 16.0
+                    11.5 - 17.5
                 </td>
                 <td>
                     Mayor de 18 años
                 </td>
                 <td>
-                    4.5 - 11.0
+                    4.1 - 11.0
                 </td>
                 <td>
                     Mayor de 18 años
                 </td>
                 <td>
-                    1.0 - 4.8
+                    1.10 - 3.8
                 </td>
             </tr>
             <tr>
@@ -774,25 +786,25 @@
                     Mayor de 18 años
                 </td>
                 <td>
-                    27 - 31
+                    31 - 38
                 </td>
                 <td>
                     Mayor de 18 años
                 </td>
                 <td>
-                    83 - 97
+                    80 - 97
                 </td>
                 <td>
                     Mayor de 18 años
                 </td>
                 <td>
-                    1.8 - 7.7
+                    1.5 - 6.5
                 </td>
                 <td>
                     Mayor de 18 años
                 </td>
                 <td>
-                    11.6 - 14.0
+                    11.6 - 16.0
                 </td>
             </tr>            
         </table>
