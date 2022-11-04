@@ -12,14 +12,19 @@ class PacienteController extends Controller
 {
     public function index(Request $request)
     {
-        //$paciente = DB::table('paciente')->paginate(15)->get()->toArray();
+/*         //$paciente = DB::table('paciente')->paginate(15)->get()->toArray();
         $buscar = $request->buscar;
         $criterio=$request->criterio;
 
         if($buscar==''){
-            $paciente = DB::table('paciente')->select('paciente.id','paciente.nombre','paciente.apPaterno','paciente.apMaterno','paciente.edad','paciente.sexo',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))->orderBy('paciente.id','desc')->paginate(10);
+            $paciente = DB::table('paciente')->select('paciente.id','paciente.nombre','paciente.apPaterno','paciente.apMaterno','paciente.edad','paciente.sexo','paciente.fecnac',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))->orderBy('paciente.id','desc')->paginate(10)->items();
             //$paciente = Paciente::orderBy('id','desc')->paginate(10);
             //$paciente = Paciente::select("paciente.*", DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombre"))->paginate(10)->first();
+            $fecha=$paciente;
+            $dia = substr($fecha,8,2);
+            $mes = substr($fecha,5,2);
+            $anio = substr($fecha,0,4);
+            $fecha_final= $dia.' / '.$this->meses($mes).' / '.$anio;
         }else{
             $paciente = Paciente::where($criterio,'like','%'.$buscar.'%')->orderBy('id','desc')->paginate(5);
 
@@ -35,7 +40,14 @@ class PacienteController extends Controller
                 'to'=>$paciente->lastItem(),
         ],
         'paciente'=> $paciente
-    ];
+    ]; */
+
+        $paciente = DB::table('paciente')
+        ->select('paciente.*', DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"),DB::raw('TIMESTAMPDIFF(YEAR,fecnac,CURDATE()) AS edad'))
+        ->get();
+
+        return response()->json($paciente);
+
     }
 
     public function store(Request $request)
@@ -46,8 +58,8 @@ class PacienteController extends Controller
        $paciente->nombre = $request->nombre;
        $paciente->apPaterno = $request->apPaterno;
        $paciente->apMaterno = $request->apMaterno;
-       $paciente->edad = $request->edad;
        $paciente->sexo = $request->sexo;
+       $paciente->fecnac = $request->fecha;
        $paciente->save();
 
        return response()->json(array('status' => true));
@@ -61,8 +73,19 @@ class PacienteController extends Controller
         $paciente->nombre = $request->nombre;
         $paciente->apPaterno = $request->apPaterno;
         $paciente->apMaterno = $request->apMaterno;
-        $paciente->edad = $request->edad;
         $paciente->sexo = $request->sexo;
+        $paciente->fecnac = $request->fecha;
         $paciente->save();
+    }
+
+      public function eliminar(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+        $eliminarPaciente = Paciente::findOrFail($request->id);
+        $eliminarPaciente->delete();
+
+        return response()->json(array(
+            'status' => true
+        ));
     }
 }

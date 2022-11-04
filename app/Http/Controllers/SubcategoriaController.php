@@ -23,7 +23,10 @@ class SubcategoriaController extends Controller
             ->paginate(10);
             //$subcategoria = Subcategoria::orderBy('id','desc')->paginate(10);
         }else{
-            $subcategoria = Subcategoria::where($criterio,'like','%'.$buscar.'%')->orderBy('id','desc')->paginate(5);
+            $subcategoria = Subcategoria::where($criterio,'like','%'.$buscar.'%')
+            ->join('categorias','subcategoria.idCategorias','=','categorias.id')
+            ->select('subcategoria.id','subcategoria.nombreSubcategoria','subcategoria.vminH','subcategoria.vmaxH','subcategoria.unidadMedida','subcategoria.idCategorias','categorias.nombres')
+            ->orderBy('id','desc')->paginate(5);
         }
        
         return [
@@ -76,5 +79,16 @@ class SubcategoriaController extends Controller
         ->get()
         ->toArray();
         return response()->json($categoria);
+    }
+
+    public function eliminar(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+        $eliminarSubcategoria = Subcategoria::findOrFail($request->id);
+        $eliminarSubcategoria->delete();
+
+        return response()->json(array(
+            'status' => true
+        ));
     }
 }

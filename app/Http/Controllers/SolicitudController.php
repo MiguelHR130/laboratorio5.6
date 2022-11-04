@@ -67,7 +67,7 @@ class SolicitudController extends Controller
     public function listadoPaciente(Request $request)
     {
         $paciente = DB::table('paciente')
-        ->select('paciente.id','paciente.nombre','paciente.apPaterno','paciente.apMaterno','paciente.edad',
+        ->select('paciente.id','paciente.nombre','paciente.apPaterno','paciente.apMaterno',
             DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))
         ->orderBy('paciente.id','desc')
         ->get()
@@ -150,7 +150,7 @@ class SolicitudController extends Controller
       ->join('paciente','paciente.id','=','solicitud.idPaciente')
       ->join('registrosolicitud','registrosolicitud.idSolicitud','=','solicitud.id')
       ->join('categorias','categorias.id','=','registrosolicitud.idCategoria')
-      ->select('registrosolicitud.id','solicitud.fecha as fecha',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"), 'paciente.id AS paciente_id','paciente.edad','paciente.sexo')
+      ->select('registrosolicitud.id','solicitud.fecha as fecha','paciente.fecnac as fecnac',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"), DB::raw('TIMESTAMPDIFF(YEAR,paciente.fecnac,CURDATE()) AS edad'), 'paciente.id AS paciente_id','paciente.sexo')
       ->where('registrosolicitud.id','=',$id)
       ->orderBy('solicitud.id','desc')
       ->get();
@@ -168,6 +168,7 @@ class SolicitudController extends Controller
           ->get();
 
         $fecha = $value->fecha;
+        $fechaCumple = $value->fecnac;
 
           foreach ($solicitud as $key_child => $value_child) {
               # code...
@@ -205,7 +206,12 @@ class SolicitudController extends Controller
           $anio = substr($fecha,0,4);
           $fecha_final= $dia.' / '.$this->meses($mes).' / '.$anio;
 
-            $pdf = PDF::loadView('pdf.solicitud', compact('arreglo','fecha','fecha_final'));
+          $diac = substr($fechaCumple,8,2);
+          $mesc = substr($fechaCumple,5,2);
+          $anioc = substr($fechaCumple,0,4);
+          $fecha_finalc= $diac.' / '.$this->meses($mesc).' / '.$anioc;
+
+            $pdf = PDF::loadView('pdf.solicitud', compact('arreglo','fecha','fecha_final','fecha_finalc'));
             $pdf->setPaper('A4', 'portrait');
             // return $pdf->download('cv-interno.pdf');
             return $pdf->stream();
@@ -233,7 +239,7 @@ class SolicitudController extends Controller
       ->join('paciente','paciente.id','=','solicitud.idPaciente')
       ->join('registrosolicitud','registrosolicitud.idSolicitud','=','solicitud.id')
       ->join('categorias','categorias.id','=','registrosolicitud.idCategoria')
-      ->select('registrosolicitud.id','solicitud.fecha',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"), 'paciente.id AS paciente_id')
+      ->select('registrosolicitud.id','solicitud.fecha',DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"), DB::raw('TIMESTAMPDIFF(YEAR,paciente.fecnac,CURDATE()) AS edad'),'paciente.id AS paciente_id')
       ->where('registrosolicitud.id','=',$id)
       ->orderBy('solicitud.id','desc')
       ->get();

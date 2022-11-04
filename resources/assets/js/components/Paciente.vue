@@ -14,57 +14,16 @@
                    </button>
                </div>
                <div class="card-body">
-                   <div class="form-group row">
-                       <div class="col-md-6">
-                           <div class="input-group">
-                               <select class="form-control col-md-3" v-model="criterio" >
-                                 <option value="nombre">Nombre</option>
-                                 <option value="apPaterno">Apellido Paterno</option>
-                               </select>
-                               <input type="text" v-model="buscar" @keyup.enter="listarPacientes(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
-                               <button type="submit" @click="listarPacientes(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                           </div>
-                       </div>
-                   </div>
-
-                   <table class="table table-bordered table-striped table-responsive-sm ">
-                       <thead>
-                           <tr>
-                               <th>Opciones</th>
-                               <th>Nombre</th>
-                               <th>Edad</th>
-                               <th>Sexo</th>
-                           </tr>
-                       </thead>
-                       <tbody><!-- se crea un for que trae por nombre paciente y en el cual se le pasa el 
-                    contenido de arraypacientes con la key paciente -->
-                           <tr v-for="paciente in arrayPacientes" :key="paciente.id">   
-                               <td><!-- se agrega la directiva @click en el boton y el valor de objeto no lleva comillas -->
-                                   <button type="button" @click="abrirModal('paciente','actualizar',paciente)" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="right" title="clic para actualizar paciente">
-                                     <i class="icon-user"></i>&nbsp;Actualizar
-                                   </button>      
-                                                       
-                               </td>
-                               <td v-text="paciente.nombreConcatenado||paciente.nombre"></td>
-                               <td v-text="paciente.edad"></td>
-                               <td v-text="paciente.sexo"></td>
-                           </tr>
-                       </tbody>
-                   </table>
-
-                   <nav>
-                       <ul class="pagination">
-                           <li class="page-item" v-if="pagination.current_page>1">
-                               <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page-1,buscar,criterio)">Ant</a>
-                           </li>
-                           <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                               <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar),criterio" v-text="page"></a>
-                           </li>
-                           <li class="page-item" v-if="pagination.current_page<pagination.last_page">
-                               <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page+1,buscar,criterio)">Sig</a>
-                           </li>
-                       </ul>
-                   </nav>
+                <v-client-table :columns="columns" :data="tableData" :options="options" ref="myTable">
+                    <template slot="id" slot-scope="props">
+                        <button type="button" @click="abrirModal('paciente','actualizar',props.row)" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="right" title="clic para actualizar paciente">
+                            <i class="icon-user"></i>&nbsp;Actualizar
+                        </button>   
+                        <button type="button" @click="eliminarPaciente(props.row)" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="clic para actualizar paciente">
+                            <i class="icon-user"></i>&nbsp;Eliminar
+                        </button>   
+                    </template>
+                </v-client-table>
                </div>
            </div>
            <!-- Fin ejemplo de tabla Listado -->
@@ -108,15 +67,17 @@
                            <div v-show="errorCajatexto" class="form-group row text-error">
                                 <span class="help-block">(*) Ingrese el apellido materno</span>
                            </div>
+
                            <div class="form-group row">
-                               <label class="col-md-3 form-control-label" for="text-input">Edad</label>
+                               <label class="col-md-3 form-control-label" for="text-input">Ingrese fecha de nacimiento</label>
                                <div class="col-md-9">
-                                   <input type="text" v-model="edad" class="form-control" placeholder="(*) Ingrese edad del paciente">
+                                   <input type="date" v-model="fecha" class="form-control" placeholder="(*) Ingrese el nombre del paciente" data-vv-as="fecha">
                                </div>
                            </div>
                            <div v-show="errorCajatexto" class="form-group row text-error">
-                                <span class="help-block">(*) Ingrese la edad del paciente</span>
+                                <span class="help-block">(*) Ingrese fecha </span>
                            </div>
+
 
                            <div class="form-group row">
                                <label class="col-md-5 form-control-label" for="text-input">Sexo</label>
@@ -177,7 +138,7 @@
 </template>
 
 <script>
-
+var config = require('../components/Herramientas/config-vuetables-client').call(this);
 
 export default {
     data (){
@@ -185,7 +146,7 @@ export default {
             nombre:'',
             apPaterno:'',
             apMaterno:'',
-            edad:'',
+            fecha:'',
             arrayPacientes:[],//creamos un array para que reciba los datos de la consulta,
             modal:0,
             tituloModal:'',
@@ -194,6 +155,16 @@ export default {
             errorCajatexto : 0,
             errorMostrarmsj:[],
             radio:'',
+            columns: ['id', 'nombreConcatenado','edad','sexo','fecnac'],
+            tableData:[],
+            options: {
+                    headings: {
+                        nombreConcatenado: 'Paciente',
+                        edad: 'Edad',
+                        sexo: 'Sexo',
+                        fecnac: 'Fecha de nacimiento',
+                        id: 'Acción',
+                    },
             pagination:{
                 'total':0,
                 'current_page':0,
@@ -202,6 +173,15 @@ export default {
                 'from':0,
                 'to':0,
             },
+            perPage: 10,
+                    perPageValues: [],
+                    skin: config.skin,
+                    sortIcon: config.sortIcon,
+                    sortable: ['nombreConcatenado'],
+                    filterable: ['nombreConcatenado'],
+                    filterByColumn: true,
+                    texts:config.texts
+                },
             offset:3,
             criterio:'nombre',
             buscar:''
@@ -239,14 +219,23 @@ export default {
     },
     methods :{
         //se listan los pacientes desde la base de datos
-        listarPacientes(page,buscar,criterio){
-            let me=this;//creamos variable me
+        listarPacientes(){
+           /*  let me=this;//creamos variable me
             var url = '/pacientes?page='+page+'&buscar='+buscar+'&criterio='+criterio;
             axios.get(url).then(function(response){
                 var respuesta  = response.data;
                 me.arrayPacientes = respuesta.paciente.data;
                 me.pagination=respuesta.pagination;
                //me.arrayPacientes = response.data;//aqui se reciben los datos que se pasan al array
+            })
+            .catch(function(error){
+                console.log(error);
+            }); */
+            let me=this;//creamos variable me
+            var url = '/pacientes';
+            axios.get(url).then(response=>{
+                me.tableData = response.data;
+                
             })
             .catch(function(error){
                 console.log(error);
@@ -278,8 +267,8 @@ export default {
                 'nombre':this.nombre,
                 'apPaterno':this.apPaterno,
                 'apMaterno':this.apMaterno,
-                'edad':this.edad,
-                'sexo':this.radio
+                'sexo':this.radio,
+                'fecha':this.fecha
             }).then(function (response){
                 me.cerrarModal();
                 me.listarPacientes(1,'','nombre');
@@ -301,8 +290,8 @@ export default {
                 'nombre':this.nombre,
                 'apPaterno':this.apPaterno,
                 'apMaterno':this.apMaterno,
-                'edad':this.edad,
                 'sexo':this.radio,
+                'fecha':this.fecha,
                 'id':this.id
 
             }).then(function (response){
@@ -312,6 +301,26 @@ export default {
                 console.log(error);
             }); 
         },
+        eliminarPaciente(data){
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Los datos del paciente han sido eliminados',
+                showConfirmButton: false,
+                timer: 1500
+                })
+            let me = this;
+            //se envian 2 parametros, ruta y valores        
+            axios.post('/paciente/eliminar',{
+                'id':data.id
+            }).then(function (response){
+                me.cerrarModal();
+                me.listarPacientes();
+            }).catch(function(error){
+                console.log(error);
+            });
+
+        },
         validarRegistro(){
             this.errorCajatexto=0;//se inicializa en 0
             this.errorMostrarmsj=[];//se inicializa array vacio
@@ -319,8 +328,9 @@ export default {
             if(!this.nombre)this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if(!this.apPaterno)this.errorMostrarmsj.push("el apellido no puede estar vacio");
             if(!this.apMaterno)this.errorMostrarmsj.push("el nombre no puede estar vacio");
-            if(!this.edad)this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if(!this.radio)this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if(!this.fecha)this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if(this.errorMostrarmsj.length) this.errorCajatexto = 1;
             if(this.errorMostrarmsj.length) this.errorCajatexto = 1;
             return this.errorCajatexto;
 
@@ -332,7 +342,8 @@ export default {
             this.nombre='';
             this.apPaterno='';
             this.apMaterno='';
-            this.edad='';
+            this.radio='';
+            this.fecha='';
         },
       
         //modelo=nombre
@@ -350,8 +361,8 @@ export default {
                                 this.nombre='';
                                 this.apPaterno='';
                                 this.apMaterno='';
-                                this.edad='';
                                 this.radio='';
+                                this.fecha='';
                                 this.tipoAccion=1;
                                 break;
                             }
@@ -364,8 +375,8 @@ export default {
                                 this.nombre=data['nombre'];
                                 this.apPaterno=data['apPaterno'];
                                 this.apMaterno=data['apMaterno'];
-                                this.edad=data['edad'];
                                 this.radio=data['sexo'];
+                                this.fecha=data['fecnac'];
                                 break; 
 
                             }

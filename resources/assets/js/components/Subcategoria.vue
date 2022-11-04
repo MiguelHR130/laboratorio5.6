@@ -47,6 +47,9 @@
                                    <button type="button" @click="abrirModal('subcategoria','actualizar',subcategoria)" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="right" title="Click para actualizar subcategoria">
                                      <i class="icon-user"></i>&nbsp;Actualizar
                                    </button> &nbsp;
+                                   <button type="button" @click="eliminarSubcategoria(subcategoria.id)" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="clic para actualizar paciente">
+                                            <i class="icon-user"></i>&nbsp;Eliminar
+                                    </button>   
                                  <!--   <button type="button" @click="abrirModal('categoria','actualizar',categoria)" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="right" title="Asignar solicitud de laboratorio">
                                      <i class="icon-notebook"></i>&nbsp;Agregar Solicitud
                                    </button> &nbsp; -->
@@ -313,6 +316,25 @@ export default {
             }).catch(function(error){
                 console.log(error);
             }); 
+        },
+        eliminarSubcategoria(data){
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'La subcategoria ha sido eliminada',
+                showConfirmButton: false,
+                timer: 1500
+                })
+            let me = this;
+            //se envian 2 parametros, ruta y valores        
+            axios.post('/subcategoria/eliminar',{
+                'id':data
+            }).then(function (response){
+                me.listarSubcategorias(1,'','nombreSubcategoria');
+            }).catch(function(error){
+                console.log(error);
+            });
+
         },
         validarRegistro(){
             this.errorCajatexto=0;//se inicializa en 0

@@ -64,9 +64,10 @@
                 top: 150px;
             }
         .datos{
+                font-size: 12px;
                 position: fixed;
                 top: 100px;
-                left: 110px; 
+                left: 80px; 
         }    
         .letraRESULT{
                font-size: 14px;
@@ -146,13 +147,15 @@
         <div>
             <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
             <tr>
-                <td style="background-color: #fdddca;" width="27%">NOMBRE</td>
+                <td style="background-color: #fdddca;" width="15%">NOMBRE</td>
                 <td  width="40%">&nbsp;&nbsp;{{$otropdf->nombreConcatenado}}</td>
-                <td style="background-color: #fdddca;"  width="7%">EDAD</td>
-                <td >&nbsp;&nbsp;{{$otropdf->edad}}</td>
+                <td style="background-color: #fdddca;"  width="10%">EDAD</td>
+                <td width="15%">&nbsp;&nbsp;{{$otropdf->edad}} años</td>
+                <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
+                <td width="50%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
             </tr>
             <tr>
-                <td style="background-color: #fdddca;">FECHA DE MUESTRA</td>
+                <td style="background-color: #fdddca;" width="25%">TOMA MUESTRA</td>
                 <td >&nbsp;&nbsp;{{$fecha_final}}</td>
                 <td style="background-color: #fdddca;">SEXO</td>
                 <td>&nbsp;&nbsp;{{$otropdf->sexo}}</td>

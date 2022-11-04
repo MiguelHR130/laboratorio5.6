@@ -17,7 +17,7 @@ class OtrosresultadosController extends Controller
     {
         $otroindice = DB::table('otrosresultados')
         ->join('paciente','paciente.id','=','otrosresultados.idPaciente')
-        ->select('otrosresultados.*','paciente.edad', DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))
+        ->select('otrosresultados.*', DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))
         ->orderBy('otrosresultados.id','desc')
         ->get()
         ->toArray();
@@ -67,20 +67,26 @@ class OtrosresultadosController extends Controller
     {
         $otropdf = DB::table('otrosresultados')
         ->join('paciente','paciente.id','=','otrosresultados.idPaciente')
-        ->select('otrosresultados.*','paciente.edad as edad','paciente.sexo as sexo', DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"))
+        ->select('otrosresultados.*','paciente.sexo as sexo','paciente.fecnac', DB::raw("CONCAT(paciente.nombre,' ',paciente.apPaterno,' ',paciente.apMaterno) AS nombreConcatenado"),DB::raw('TIMESTAMPDIFF(YEAR,paciente.fecnac,CURDATE()) AS edad'),)
         ->orderBy('otrosresultados.id','desc')
         ->where('otrosresultados.idPaciente','=',$id)
         ->get()
         ->first();
         
         $fecha = $otropdf->fecha;
+        $fechaCumple = $otropdf->fecnac;
 
         $dia = substr($fecha,8,2);
         $mes = substr($fecha,5,2);
         $anio = substr($fecha,0,4);
         $fecha_final= $dia.' / '.$this->meses($mes).' / '.$anio;
 
-        $pdf = PDF::loadView('pdf.otro', compact('otropdf','fecha_final'));
+        $diac = substr($fechaCumple,8,2);
+        $mesc = substr($fechaCumple,5,2);
+        $anioc = substr($fechaCumple,0,4);
+        $fecha_finalc= $diac.' / '.$this->meses($mesc).' / '.$anioc;
+
+        $pdf = PDF::loadView('pdf.otro', compact('otropdf','fecha_final','fecha_finalc'));
         $pdf->setPaper('A4', 'portrait');
         // return $pdf->download('cv-interno.pdf');
         return $pdf->stream();

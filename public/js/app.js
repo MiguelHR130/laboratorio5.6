@@ -1226,6 +1226,120 @@ if (false) {
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  return {
+    dateColumns: [],
+    listColumns: {},
+    datepickerOptions: {
+      locale: {
+        cancelLabel: 'Clear'
+      }
+    },
+    datepickerPerColumnOptions: {},
+    initialPage: 1,
+    perPage: 10,
+    perPageValues: [10, 25, 50, 100],
+    groupBy: false,
+    collapseGroups: false,
+    destroyEventBus: false,
+    sendEmptyFilters: false,
+    params: {},
+    sortable: true,
+    filterable: true,
+    groupMeta: [],
+    initFilters: {},
+    customFilters: [],
+    templates: {},
+    debounce: 250,
+    dateFormat: "DD/MM/YYYY",
+    dateFormatPerColumn: {},
+    toMomentFormat: false,
+    skin: 'table table-striped table-bordered table-hover table-sm',
+    skinBusqueda: 'table table-striped table-bordered table-hover table-sm busqueda',
+    columnsDisplay: {},
+    columnsDropdown: false,
+    texts: {
+      count: "Mostrando del {from} al  {to} de {count} registros|{count} registros|Un registro",
+      first: 'Primero',
+      last: 'Ultimo',
+      filter: "Buscar:",
+      filterPlaceholder: "Buscar...",
+      limit: "Registros:",
+      page: "Pagina:",
+      noResults: "No se encontraron registros",
+      filterBy: "Filtrar por {column}",
+      loading: 'Cargando...',
+      defaultOption: 'Seleccionar {column}',
+      columns: 'Columnas'
+    },
+    sortIcon: {
+      base: 'fa', up: 'fa-chevron-up', down: 'fa-chevron-down', is: 'fa-sort'
+    },
+    sortingAlgorithm: function sortingAlgorithm(data, column) {
+      return data.sort(this.getSortFn(column));
+    },
+
+    customSorting: {},
+    multiSorting: {},
+    clientMultiSorting: true,
+    serverMultiSorting: false,
+    filterByColumn: false,
+    highlightMatches: false,
+    orderBy: false,
+    descOrderColumns: [],
+    footerHeadings: false,
+    headings: {},
+    headingsTooltips: {},
+    pagination: {
+      dropdown: false,
+      chunk: 10,
+      edge: false,
+      align: 'center',
+      nav: 'fixed'
+    },
+    childRow: false,
+    childRowTogglerFirst: true,
+    uniqueKey: 'id',
+    requestFunction: false,
+    requestAdapter: function requestAdapter(data) {
+      return data;
+    },
+    responseAdapter: function responseAdapter(resp) {
+
+      var data = this.getResponseData(resp);
+
+      return {
+        data: data.data,
+        count: data.count
+      };
+    },
+    requestKeys: {
+      query: 'query',
+      limit: 'limit',
+      orderBy: 'orderBy',
+      ascending: 'ascending',
+      page: 'page',
+      byColumn: 'byColumn'
+    },
+    rowClassCallback: false,
+    preserveState: false,
+    saveState: false,
+    storage: 'local',
+    columnsClasses: {},
+    columnCondicion: [{
+      id: 1,
+      text: 'Activo'
+    }, {
+      id: 0,
+      text: 'Desactivado'
+    }]
+  };
+};
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1329,14 +1443,14 @@ module.exports = defaults;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var win32 = process && process.platform === 'win32';
-var path = __webpack_require__(11);
+var path = __webpack_require__(12);
 var fileRe = __webpack_require__(114);
 var utils = module.exports;
 
@@ -1349,7 +1463,7 @@ utils.unique = __webpack_require__(117);
 utils.braces = __webpack_require__(118);
 utils.brackets = __webpack_require__(130);
 utils.extglob = __webpack_require__(132);
-utils.isExtglob = __webpack_require__(12);
+utils.isExtglob = __webpack_require__(13);
 utils.isGlob = __webpack_require__(133);
 utils.typeOf = __webpack_require__(134);
 utils.normalize = __webpack_require__(136);
@@ -1486,7 +1600,7 @@ module.exports = utils;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// .dirname, .basename, and .extname methods are extracted from Node.js v8.11.1,
@@ -1795,7 +1909,7 @@ var substr = 'ab'.substr(-1) === 'b'
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 /*!
@@ -1812,7 +1926,7 @@ module.exports = function isExtglob(str) {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 /**
@@ -1888,7 +2002,7 @@ module.exports = debounce;
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2010,120 +2124,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         });
     }
 });
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
-module.exports = function () {
-  return {
-    dateColumns: [],
-    listColumns: {},
-    datepickerOptions: {
-      locale: {
-        cancelLabel: 'Clear'
-      }
-    },
-    datepickerPerColumnOptions: {},
-    initialPage: 1,
-    perPage: 10,
-    perPageValues: [10, 25, 50, 100],
-    groupBy: false,
-    collapseGroups: false,
-    destroyEventBus: false,
-    sendEmptyFilters: false,
-    params: {},
-    sortable: true,
-    filterable: true,
-    groupMeta: [],
-    initFilters: {},
-    customFilters: [],
-    templates: {},
-    debounce: 250,
-    dateFormat: "DD/MM/YYYY",
-    dateFormatPerColumn: {},
-    toMomentFormat: false,
-    skin: 'table table-striped table-bordered table-hover table-sm',
-    skinBusqueda: 'table table-striped table-bordered table-hover table-sm busqueda',
-    columnsDisplay: {},
-    columnsDropdown: false,
-    texts: {
-      count: "Mostrando del {from} al  {to} de {count} registros|{count} registros|Un registro",
-      first: 'Primero',
-      last: 'Ultimo',
-      filter: "Buscar:",
-      filterPlaceholder: "Buscar...",
-      limit: "Registros:",
-      page: "Pagina:",
-      noResults: "No se encontraron registros",
-      filterBy: "Filtrar por {column}",
-      loading: 'Cargando...',
-      defaultOption: 'Seleccionar {column}',
-      columns: 'Columnas'
-    },
-    sortIcon: {
-      base: 'fa', up: 'fa-chevron-up', down: 'fa-chevron-down', is: 'fa-sort'
-    },
-    sortingAlgorithm: function sortingAlgorithm(data, column) {
-      return data.sort(this.getSortFn(column));
-    },
-
-    customSorting: {},
-    multiSorting: {},
-    clientMultiSorting: true,
-    serverMultiSorting: false,
-    filterByColumn: false,
-    highlightMatches: false,
-    orderBy: false,
-    descOrderColumns: [],
-    footerHeadings: false,
-    headings: {},
-    headingsTooltips: {},
-    pagination: {
-      dropdown: false,
-      chunk: 10,
-      edge: false,
-      align: 'center',
-      nav: 'fixed'
-    },
-    childRow: false,
-    childRowTogglerFirst: true,
-    uniqueKey: 'id',
-    requestFunction: false,
-    requestAdapter: function requestAdapter(data) {
-      return data;
-    },
-    responseAdapter: function responseAdapter(resp) {
-
-      var data = this.getResponseData(resp);
-
-      return {
-        data: data.data,
-        count: data.count
-      };
-    },
-    requestKeys: {
-      query: 'query',
-      limit: 'limit',
-      orderBy: 'orderBy',
-      ascending: 'ascending',
-      page: 'page',
-      byColumn: 'byColumn'
-    },
-    rowClassCallback: false,
-    preserveState: false,
-    saveState: false,
-    storage: 'local',
-    columnsClasses: {},
-    columnCondicion: [{
-      id: 1,
-      text: 'Activo'
-    }, {
-      id: 0,
-      text: 'Desactivado'
-    }]
-  };
-};
 
 /***/ }),
 /* 16 */
@@ -40368,7 +40368,7 @@ module.exports = __webpack_require__(52);
 var utils = __webpack_require__(1);
 var bind = __webpack_require__(19);
 var Axios = __webpack_require__(54);
-var defaults = __webpack_require__(9);
+var defaults = __webpack_require__(10);
 
 /**
  * Create an instance of Axios
@@ -40441,7 +40441,7 @@ module.exports = function isBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(9);
+var defaults = __webpack_require__(10);
 var utils = __webpack_require__(1);
 var InterceptorManager = __webpack_require__(62);
 var dispatchRequest = __webpack_require__(63);
@@ -40937,7 +40937,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(1);
 var transformData = __webpack_require__(64);
 var isCancel = __webpack_require__(22);
-var defaults = __webpack_require__(9);
+var defaults = __webpack_require__(10);
 var isAbsoluteURL = __webpack_require__(65);
 var combineURLs = __webpack_require__(66);
 
@@ -55138,7 +55138,7 @@ function noop(val) {
 
 
 var expand = __webpack_require__(113);
-var utils = __webpack_require__(10);
+var utils = __webpack_require__(11);
 
 /**
  * The main function. Pass an array of filepaths,
@@ -55575,7 +55575,7 @@ module.exports = micromatch;
 
 
 
-var utils = __webpack_require__(10);
+var utils = __webpack_require__(11);
 var Glob = __webpack_require__(150);
 
 /**
@@ -57578,7 +57578,7 @@ module.exports = function isPosixBracket(str) {
  * Module dependencies
  */
 
-var isExtglob = __webpack_require__(12);
+var isExtglob = __webpack_require__(13);
 var re, cache = {};
 
 /**
@@ -57756,7 +57756,7 @@ function toRegex(pattern, contains, isNegated) {
  * Licensed under the MIT License.
  */
 
-var isExtglob = __webpack_require__(12);
+var isExtglob = __webpack_require__(13);
 
 module.exports = function isGlob(str) {
   return typeof str === 'string'
@@ -58251,7 +58251,7 @@ module.exports = function isGlob(str) {
 
 
 
-var path = __webpack_require__(11);
+var path = __webpack_require__(12);
 var parent = __webpack_require__(144);
 var isGlob = __webpack_require__(37);
 
@@ -58302,7 +58302,7 @@ function dirname(glob) {
 "use strict";
 
 
-var path = __webpack_require__(11);
+var path = __webpack_require__(12);
 var isglob = __webpack_require__(37);
 
 module.exports = function globParent(str) {
@@ -58486,7 +58486,7 @@ module.exports = function isPrimitive(value) {
 
 
 var chars = __webpack_require__(151);
-var utils = __webpack_require__(10);
+var utils = __webpack_require__(11);
 
 /**
  * Expose `Glob`
@@ -60837,7 +60837,7 @@ module.exports = function (h) {
 "use strict";
 
 
-var debounce = __webpack_require__(13);
+var debounce = __webpack_require__(14);
 
 module.exports = function (h) {
     var _this = this;
@@ -60870,7 +60870,7 @@ module.exports = function (h) {
 "use strict";
 
 
-var debounce = __webpack_require__(13);
+var debounce = __webpack_require__(14);
 
 module.exports = function (h) {
   var _this = this;
@@ -61033,7 +61033,7 @@ module.exports = function (h) {
 "use strict";
 
 
-var debounce = __webpack_require__(13);
+var debounce = __webpack_require__(14);
 
 module.exports = function (h, inputClass) {
   var _this = this;
@@ -65255,46 +65255,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
+var config = __webpack_require__(9).call(this);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -65302,7 +65264,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             nombre: '',
             apPaterno: '',
             apMaterno: '',
-            edad: '',
+            fecha: '',
             arrayPacientes: [], //creamos un array para que reciba los datos de la consulta,
             modal: 0,
             tituloModal: '',
@@ -65311,13 +65273,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             errorCajatexto: 0,
             errorMostrarmsj: [],
             radio: '',
-            pagination: {
-                'total': 0,
-                'current_page': 0,
-                'per_page': 0,
-                'last_page': 0,
-                'from': 0,
-                'to': 0
+            columns: ['id', 'nombreConcatenado', 'edad', 'sexo', 'fecnac'],
+            tableData: [],
+            options: {
+                headings: {
+                    nombreConcatenado: 'Paciente',
+                    edad: 'Edad',
+                    sexo: 'Sexo',
+                    fecnac: 'Fecha de nacimiento',
+                    id: 'Acción'
+                },
+                pagination: {
+                    'total': 0,
+                    'current_page': 0,
+                    'per_page': 0,
+                    'last_page': 0,
+                    'from': 0,
+                    'to': 0
+                },
+                perPage: 10,
+                perPageValues: [],
+                skin: config.skin,
+                sortIcon: config.sortIcon,
+                sortable: ['nombreConcatenado'],
+                filterable: ['nombreConcatenado'],
+                filterByColumn: true,
+                texts: config.texts
             },
             offset: 3,
             criterio: 'nombre',
@@ -65356,14 +65337,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         //se listan los pacientes desde la base de datos
-        listarPacientes: function listarPacientes(page, buscar, criterio) {
-            var me = this; //creamos variable me
-            var url = '/pacientes?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
-            axios.get(url).then(function (response) {
-                var respuesta = response.data;
-                me.arrayPacientes = respuesta.paciente.data;
-                me.pagination = respuesta.pagination;
+        listarPacientes: function listarPacientes() {
+            /*  let me=this;//creamos variable me
+             var url = '/pacientes?page='+page+'&buscar='+buscar+'&criterio='+criterio;
+             axios.get(url).then(function(response){
+                 var respuesta  = response.data;
+                 me.arrayPacientes = respuesta.paciente.data;
+                 me.pagination=respuesta.pagination;
                 //me.arrayPacientes = response.data;//aqui se reciben los datos que se pasan al array
+             })
+             .catch(function(error){
+                 console.log(error);
+             }); */
+            var me = this; //creamos variable me
+            var url = '/pacientes';
+            axios.get(url).then(function (response) {
+                me.tableData = response.data;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -65393,8 +65382,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'nombre': this.nombre,
                 'apPaterno': this.apPaterno,
                 'apMaterno': this.apMaterno,
-                'edad': this.edad,
-                'sexo': this.radio
+                'sexo': this.radio,
+                'fecha': this.fecha
             }).then(function (response) {
                 me.cerrarModal();
                 me.listarPacientes(1, '', 'nombre');
@@ -65416,13 +65405,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'nombre': this.nombre,
                 'apPaterno': this.apPaterno,
                 'apMaterno': this.apMaterno,
-                'edad': this.edad,
                 'sexo': this.radio,
+                'fecha': this.fecha,
                 'id': this.id
 
             }).then(function (response) {
                 me.cerrarModal();
                 me.listarPacientes(1, '', 'nombre');
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        eliminarPaciente: function eliminarPaciente(data) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'Los datos del paciente han sido eliminados',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            var me = this;
+            //se envian 2 parametros, ruta y valores        
+            axios.post('/paciente/eliminar', {
+                'id': data.id
+            }).then(function (response) {
+                me.cerrarModal();
+                me.listarPacientes();
             }).catch(function (error) {
                 console.log(error);
             });
@@ -65434,8 +65442,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (!this.nombre) this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if (!this.apPaterno) this.errorMostrarmsj.push("el apellido no puede estar vacio");
             if (!this.apMaterno) this.errorMostrarmsj.push("el nombre no puede estar vacio");
-            if (!this.edad) this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if (!this.radio) this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if (!this.fecha) this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if (this.errorMostrarmsj.length) this.errorCajatexto = 1;
             if (this.errorMostrarmsj.length) this.errorCajatexto = 1;
             return this.errorCajatexto;
         },
@@ -65445,7 +65454,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.nombre = '';
             this.apPaterno = '';
             this.apMaterno = '';
-            this.edad = '';
+            this.radio = '';
+            this.fecha = '';
         },
 
 
@@ -65466,8 +65476,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                     this.nombre = '';
                                     this.apPaterno = '';
                                     this.apMaterno = '';
-                                    this.edad = '';
                                     this.radio = '';
+                                    this.fecha = '';
                                     this.tipoAccion = 1;
                                     break;
                                 }
@@ -65481,8 +65491,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                     this.nombre = data['nombre'];
                                     this.apPaterno = data['apPaterno'];
                                     this.apMaterno = data['apMaterno'];
-                                    this.edad = data['edad'];
                                     this.radio = data['sexo'];
+                                    this.fecha = data['fecnac'];
                                     break;
                                 }
                         }
@@ -65534,111 +65544,22 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "form-group row" }, [
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("div", { staticClass: "input-group" }, [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.criterio,
-                        expression: "criterio"
-                      }
-                    ],
-                    staticClass: "form-control col-md-3",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.criterio = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "nombre" } }, [
-                      _vm._v("Nombre")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "apPaterno" } }, [
-                      _vm._v("Apellido Paterno")
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.buscar,
-                      expression: "buscar"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "Texto a buscar" },
-                  domProps: { value: _vm.buscar },
-                  on: {
-                    keyup: function($event) {
-                      if (
-                        !$event.type.indexOf("key") &&
-                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                      ) {
-                        return null
-                      }
-                      return _vm.listarPacientes(1, _vm.buscar, _vm.criterio)
-                    },
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.buscar = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "submit" },
-                    on: {
-                      click: function($event) {
-                        return _vm.listarPacientes(1, _vm.buscar, _vm.criterio)
-                      }
-                    }
-                  },
-                  [_c("i", { staticClass: "fa fa-search" }), _vm._v(" Buscar")]
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "table",
-            {
-              staticClass:
-                "table table-bordered table-striped table-responsive-sm"
-            },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.arrayPacientes, function(paciente) {
-                  return _c("tr", { key: paciente.id }, [
-                    _c("td", [
+        _c(
+          "div",
+          { staticClass: "card-body" },
+          [
+            _c("v-client-table", {
+              ref: "myTable",
+              attrs: {
+                columns: _vm.columns,
+                data: _vm.tableData,
+                options: _vm.options
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "id",
+                  fn: function(props) {
+                    return [
                       _c(
                         "button",
                         {
@@ -65654,121 +65575,46 @@ var render = function() {
                               return _vm.abrirModal(
                                 "paciente",
                                 "actualizar",
-                                paciente
+                                props.row
                               )
                             }
                           }
                         },
                         [
                           _c("i", { staticClass: "icon-user" }),
-                          _vm._v(
-                            " Actualizar\n                                "
-                          )
+                          _vm._v(" Actualizar\n                     ")
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          attrs: {
+                            type: "button",
+                            "data-toggle": "tooltip",
+                            "data-placement": "right",
+                            title: "clic para actualizar paciente"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.eliminarPaciente(props.row)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "icon-user" }),
+                          _vm._v(" Eliminar\n                     ")
                         ]
                       )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: {
-                        textContent: _vm._s(
-                          paciente.nombreConcatenado || paciente.nombre
-                        )
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(paciente.edad) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(paciente.sexo) }
-                    })
-                  ])
-                }),
-                0
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("nav", [
-            _c(
-              "ul",
-              { staticClass: "pagination" },
-              [
-                _vm.pagination.current_page > 1
-                  ? _c("li", { staticClass: "page-item" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "page-link",
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.cambiarPagina(
-                                _vm.pagination.current_page - 1,
-                                _vm.buscar,
-                                _vm.criterio
-                              )
-                            }
-                          }
-                        },
-                        [_vm._v("Ant")]
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm._l(_vm.pagesNumber, function(page) {
-                  return _c(
-                    "li",
-                    {
-                      key: page,
-                      staticClass: "page-item",
-                      class: [page == _vm.isActived ? "active" : ""]
-                    },
-                    [
-                      _c("a", {
-                        staticClass: "page-link",
-                        attrs: { href: "#" },
-                        domProps: { textContent: _vm._s(page) },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.cambiarPagina(page, _vm.buscar), _vm.criterio
-                          }
-                        }
-                      })
                     ]
-                  )
-                }),
-                _vm._v(" "),
-                _vm.pagination.current_page < _vm.pagination.last_page
-                  ? _c("li", { staticClass: "page-item" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "page-link",
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.cambiarPagina(
-                                _vm.pagination.current_page + 1,
-                                _vm.buscar,
-                                _vm.criterio
-                              )
-                            }
-                          }
-                        },
-                        [_vm._v("Sig")]
-                      )
-                    ])
-                  : _vm._e()
-              ],
-              2
-            )
-          ])
-        ])
+                  }
+                }
+              ])
+            })
+          ],
+          1
+        )
       ])
     ]),
     _vm._v(" "),
@@ -66012,7 +65858,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Edad")]
+                        [_vm._v("Ingrese fecha de nacimiento")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -66021,22 +65867,23 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.edad,
-                              expression: "edad"
+                              value: _vm.fecha,
+                              expression: "fecha"
                             }
                           ],
                           staticClass: "form-control",
                           attrs: {
-                            type: "text",
-                            placeholder: "(*) Ingrese edad del paciente"
+                            type: "date",
+                            placeholder: "(*) Ingrese el nombre del paciente",
+                            "data-vv-as": "fecha"
                           },
-                          domProps: { value: _vm.edad },
+                          domProps: { value: _vm.fecha },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.edad = $event.target.value
+                              _vm.fecha = $event.target.value
                             }
                           }
                         })
@@ -66058,7 +65905,7 @@ var render = function() {
                       },
                       [
                         _c("span", { staticClass: "help-block" }, [
-                          _vm._v("(*) Ingrese la edad del paciente")
+                          _vm._v("(*) Ingrese fecha ")
                         ])
                       ]
                     ),
@@ -66232,26 +66079,10 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(0)
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Opciones")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Nombre")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Edad")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Sexo")])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -66597,6 +66428,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -66741,6 +66575,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'idCategorias': this.idCategorias
             }).then(function (response) {
                 me.cerrarModal();
+                me.listarSubcategorias(1, '', 'nombreSubcategoria');
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        eliminarSubcategoria: function eliminarSubcategoria(data) {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'warning',
+                title: 'La subcategoria ha sido eliminada',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            var me = this;
+            //se envian 2 parametros, ruta y valores        
+            axios.post('/subcategoria/eliminar', {
+                'id': data
+            }).then(function (response) {
                 me.listarSubcategorias(1, '', 'nombreSubcategoria');
             }).catch(function (error) {
                 console.log(error);
@@ -66983,7 +66835,28 @@ var render = function() {
                           )
                         ]
                       ),
-                      _vm._v("  \n                              ")
+                      _vm._v("  \n                                "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger",
+                          attrs: {
+                            type: "button",
+                            "data-toggle": "tooltip",
+                            "data-placement": "right",
+                            title: "clic para actualizar paciente"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.eliminarSubcategoria(subcategoria.id)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "icon-user" }),
+                          _vm._v(" Eliminar\n                                 ")
+                        ]
+                      )
                     ]),
                     _vm._v(" "),
                     _c("td", {
@@ -69677,7 +69550,7 @@ exports.push([module.i, "\nfieldset[disabled] .multiselect{pointer-events:none\n
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Herramientas_utilerias_js__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Herramientas_utilerias_js__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_multiselect__);
 //
@@ -69857,7 +69730,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var config = __webpack_require__(15).call(this);
+var config = __webpack_require__(9).call(this);
 
 
 // register globally
@@ -70944,7 +70817,7 @@ exports.push([module.i, "\nfieldset[disabled] .multiselect{pointer-events:none\n
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Herramientas_utilerias_js__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Herramientas_utilerias_js__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_multiselect__);
 //
@@ -71102,7 +70975,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var config = __webpack_require__(15).call(this);
+var config = __webpack_require__(9).call(this);
 
 
 // register globally
@@ -72025,7 +71898,7 @@ exports.push([module.i, "\nfieldset[disabled] .multiselect{pointer-events:none\n
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Herramientas_utilerias_js__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Herramientas_utilerias_js__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_multiselect__);
 //
@@ -72192,7 +72065,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-var config = __webpack_require__(15).call(this);
+var config = __webpack_require__(9).call(this);
 
 
 // register globally
