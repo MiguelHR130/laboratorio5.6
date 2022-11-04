@@ -80,6 +80,8 @@ Route::group(['middleware'=>['auth']],function(){
             Route::get('/pacientes','PacienteController@index');
             Route::post('/paciente/registrar','PacienteController@store');
             Route::put('/paciente/actualizar','PacienteController@update');
+            Route::post('/paciente/eliminar','PacienteController@eliminar');
+
         
             //rutas para usar en Categoria.vue
             Route::get('/categorias','CategoriaController@index');
@@ -91,6 +93,8 @@ Route::group(['middleware'=>['auth']],function(){
             Route::post('/subcategorias/registrar','SubcategoriaController@store');
             Route::put('/subcategoria/actualizar','SubcategoriaController@update');
             Route::get('/listadodeCategoria','SubcategoriaController@listadeCategoria');
+            Route::post('/subcategoria/eliminar','SubcategoriaController@eliminar');
+
             
             //rutas para registro de solicitud
             Route::get('/listadosolicitud','SolicitudController@index');
