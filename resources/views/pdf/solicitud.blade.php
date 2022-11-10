@@ -53,6 +53,7 @@
                 position: fixed;
                 left: 230px;
                 top: 45px;
+                text-transform: uppercase; 
             }
         .letratablam2{
                 font-size: 18px;
@@ -62,6 +63,17 @@
                 position: fixed;
                 left: 215px;
                 top: 160px;
+                text-transform: uppercase; 
+            }
+            .letratablambiometria{
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                color: #000000;
+                position: fixed;
+                left: 215px;
+                top: 120px;
+                text-transform: uppercase; 
             }
             .letratablamcopro{
                 font-size: 18px;
@@ -71,6 +83,7 @@
                 position: fixed;
                 left: 310px;
                 top: 120px;
+                text-transform: uppercase; 
             }
             .letratablamlipidos{
                 font-size: 18px;
@@ -80,6 +93,7 @@
                 position: fixed;
                 left: 260px;
                 top: 160px;
+                text-transform: uppercase; 
             }
             .letraresultfebriles{
                 font-size: 17px;
@@ -88,7 +102,8 @@
                 color: #000000;
                 position: fixed;
                 top: 250px;
-                left: 100px; 
+                left: 100px;
+                
 
             }
             .letratablamcurva{
@@ -99,6 +114,7 @@
                 position: fixed;
                 left: 180px;
                 top: 160px;
+                text-transform: uppercase; 
             }
             .letratablamreumatico{
                 font-size: 18px;
@@ -108,6 +124,7 @@
                 position: fixed;
                 left: 260px;
                 top: 160px;
+                text-transform: uppercase; 
             }
             .letratablaorina{
                 font-size: 18px;
@@ -117,12 +134,14 @@
                 position: fixed;
                 left: 215px;
                 top: 120px;
+                text-transform: uppercase; 
             }
         .datos{
                 font-size: 13px;
                 position: fixed;
                 top: 80px;
-                left: 40px; 
+                left: 40px;
+                text-transform: uppercase;  
         }    
         .letraRESULT{
                font-size: 17px;
@@ -131,7 +150,8 @@
                color: #000000;
                position: fixed;
                top: 200px;
-               left: 45px; 
+               left: 45px;
+               
             }
         .letraresultElse{
             font-size: 17px;
@@ -140,7 +160,8 @@
             color: #000000;
             position: fixed;
             top: 250px;
-            left: 45px; 
+            left: 45px;
+            
         }
         .letraresultcopro{
             font-size: 16px;
@@ -149,7 +170,8 @@
             color: #000000;
             position: fixed;
             top: 140px;
-            left: 35px; 
+            left: 35px;
+            
         }
         .letraRESULT1{
             font-size: 17px;
@@ -157,8 +179,9 @@
             text-align: center;
             color: #000000;
             position: fixed;
-            top: 180px;
-            left: 70px; 
+            top: 155px;
+            left: 70px;
+            
         }
         .resultMaster{
             font-size: 17px;
@@ -167,7 +190,8 @@
             color: #000000;
             position: fixed;
             top: 150px;
-            left: 100px; 
+            left: 100px;
+           
         }
         .letrafirma{
             font-size: 12px;
@@ -192,6 +216,7 @@
             top: 800px;
             left: 40px; 
             border: 1px solid black;
+            text-transform: uppercase; 
         }    
         .linea {
             border-top: 1px solid black;
@@ -207,7 +232,7 @@
             border-collapse: collapse;
             text-align: left;
             position: fixed;
-            top: 715px;
+            top: 700px;
             left: 50px; 
         }
         .referencia{
@@ -386,9 +411,9 @@
     </div>
     <div>
     @foreach($item['categorias'] as $itemp)
-      <table class="letratablam2">
+      <table class="letratablambiometria">
         <tr>
-        <th align="left" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
+        <th align="center">{{$itemp['categoria']->nombreCategoria}}</th>
         </tr>
       </table>   
     </div>  
@@ -400,7 +425,6 @@
             <th>U.M</th><br><br>
            <!-- <th>VALORES DE REFERENCIA</th><br><br>  --> 
         </tr>
-   
             <tr>
                <td>&nbsp;</td>
             </tr>
@@ -1129,9 +1153,10 @@
         </table>
         </div>
       <div>
+      @foreach($item['categorias'] as $itemp)
       <table class="letratablam2">
         <tr>
-            <td>RESULTADOS DE LABORATORIO</td>
+        <th align="left" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
         </tr>
       </table>   
       </div>  
@@ -1143,34 +1168,13 @@
             <th>U.M</th><br><br>
             <th>VALORES DE REFERENCIA</th><br><br>
         </tr>
-    @foreach($item['categorias'] as $itemp)
+    
             <tr>
-                <th align="left" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
+            <td>&nbsp;</td> 
             </tr>
             @foreach($itemp['partidas'] as $child)
             <tr>
                 <td align="left">{{$child->nombreSubcategoria}}</td>
-                @if($child->descripcionResultado>$child->vmaxH)
-                @if(($child->id==74 || $child->id==75 || $child->id==76 || $child->id==77))
-                <td><font color ="#007fff">{{$child->descripcionResultado}}</font></td>
-                <td>{{$child->unidadMedida}}</td>
-                <td>Hasta {{$child->vmaxH}}</td>
-                @else
-                <td><font color ="#007fff">{{$child->descripcionResultado}}</font></td>
-                <td>{{$child->unidadMedida}}</td>
-                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
-                @endif
-                @elseif($child->descripcionResultado<$child->vminH)
-                @if(($child->id==74 || $child->id==75) || ($child->id==76 || $child->id==77))
-                <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
-                <td>{{$child->unidadMedida}}</td>
-                <td>Hasta {{$child->vmaxH}}</td>
-                @else
-                <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
-                <td>{{$child->unidadMedida}}</td>
-                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
-                @endif
-                @else
                 @if(($child->id==74 || $child->id==75) || ($child->id==76 || $child->id==77))
                 <td>{{$child->descripcionResultado}}</td>
                 <td>{{$child->unidadMedida}}</td>
@@ -1180,7 +1184,9 @@
                 <td>{{$child->unidadMedida}}</td>
                 <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
                 @endif
-                @endif
+            </tr>
+            <tr>
+            <td>&nbsp;</td>
             </tr>
             @endforeach
     @endforeach
@@ -1203,16 +1209,7 @@
         @endforeach
       </table>
 @endforeach
-</div>
-<div>
-            <table class="referencia">
-                <tr>
-                    <td align="left"><b>Valor de referencia:</b></td>
-                    <td><b><font color ="#007fff">ALTO</font></b><b>&nbsp;<font color ="#ff0000">BAJO</font></b></td>
-                </th>
-            </table>
-        </div>
-         
+</div>   
 
             <div>
             <table class="letrafirma">
@@ -2247,7 +2244,150 @@
 
         </div>
 </body>
+@elseif($itemp['categoria']->id==16)
+<body class="borde">
+    <header>
+        <img src="img\logo5.png" width="700" height="130"class="img" alignt="center" style="padding-bottom: 40px; padding-top: 30px;">
+    </header>
+    <footer>
+        <table>
+        <tr>
+            <td>
+                <p class="izq">
+                Laboratorio de Análisis Clínicos San Miguel
+                </p>
+            </td>
+            <td>
+            <p class="page">
+                Pág.
+            </p>
+            </td>
+        </tr>
+        </table>
+  </footer>
 
+  <div class="div" >
+    
+        @foreach($arreglo as $item)
+        <div>
+            <table class="letratablam">
+                <tr>
+                    <td>INFORMACIÓN DEL PACIENTE</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+        <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
+          <tr>
+            <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
+            <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}} </td>
+            <td style="background-color: #fdddca;">EDAD</td>
+            <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
+            <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
+            <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #fdddca;">FECHA </td>
+            <td >&nbsp;&nbsp;{{$fecha_final}}</td>
+            <td style="background-color: #fdddca;">SEXO</td>
+            <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
+          </tr>
+        </table>
+        </div>
+      <div>
+         
+      @foreach($item['categorias'] as $itemp)           
+      <table class="letratablam2">
+        <tr>
+            <th>{{$itemp['categoria']->nombreCategoria}}</th>
+        </tr>
+            <td>&nbsp;</td>
+        @endforeach
+      </table>   
+      </div>  
+      <div>
+      <table class="letraresultElse" width="100%">
+        <tr>
+            <th align="left">EXAMEN</th><br><br>
+            <th>RESULTADO</th><br><br>
+            <th>U.M</th><br><br>
+            <th>VALORES DE REFERENCIA</th><br><br>
+        </tr>
+            @foreach($item['categorias'] as $itemp)
+            <tr>
+               <td>&nbsp;</td>
+            </tr>
+            @foreach($itemp['partidas'] as $child)
+            <tr>
+                <td align="left">{{$child->nombreSubcategoria}}</td>
+                @if($child->descripcionResultado>$child->vmaxH)
+                <td><font color ="#007fff">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                @elseif($child->descripcionResultado<$child->vminH)
+                <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                @else
+                <td>{{$child->descripcionResultado}}</td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                @endif
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            @endforeach
+    @endforeach
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr><td></td></tr>
+        @foreach($item['categorias'] as $itemp)
+        @if($itemp['categoria']->observaciones==null)
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        @else
+        <tr>
+            <th>Observaciones:</th>
+            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
+        </tr>
+        <tr><td></td></tr>
+        @endif
+        @endforeach
+      </table>
+@endforeach
+</div>
+<div>
+            <table class="referencia">
+                <tr>
+                    <td align="left"><b>Valor de referencia:</b></td>
+                    <td><b><font color ="#007fff">ALTO</font></b><b>&nbsp;<font color ="#ff0000">BAJO</font></b></td>
+                </th>
+            </table>
+        </div>
+         
+
+            <div>
+            <table class="letrafirma">
+                <tr>
+                    <th>ATENTAMENTE</th>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                </tr>
+                <tr >
+                    <th class="linea">Q.F.B MALENY GUZMAN HERNANDEZ</th>
+                </tr>
+                <tr>
+                    <th>CED.PROF 10307821</th>
+                </tr>
+            </table>
+            </div>
+           
+
+        </div>
+
+</body>
        
     @else
         <body class="borde">
