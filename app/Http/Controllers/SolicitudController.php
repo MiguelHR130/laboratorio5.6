@@ -154,7 +154,6 @@ class SolicitudController extends Controller
       ->where('registrosolicitud.id','=',$id)
       ->orderBy('solicitud.id','desc')
       ->get();
-
     
       //se recorre la consulta anterior pasando el valor a value
       foreach($registrosolicitud as $key => $value){
@@ -204,12 +203,12 @@ class SolicitudController extends Controller
           $dia = substr($fecha,8,2);
           $mes = substr($fecha,5,2);
           $anio = substr($fecha,0,4);
-          $fecha_final= $dia.' / '.$this->meses($mes).' / '.$anio;
+          $fecha_final= $dia.'/'.$this->meses($mes).'/'.$anio;
 
           $diac = substr($fechaCumple,8,2);
           $mesc = substr($fechaCumple,5,2);
           $anioc = substr($fechaCumple,0,4);
-          $fecha_finalc= $diac.' / '.$this->meses($mesc).' / '.$anioc;
+          $fecha_finalc= $diac.'/'.$this->meses($mesc).'/'.$anioc;
 
             $pdf = PDF::loadView('pdf.solicitud', compact('arreglo','fecha','fecha_final','fecha_finalc'));
             $pdf->setPaper('A4', 'portrait');

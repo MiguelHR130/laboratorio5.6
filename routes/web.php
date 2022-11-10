@@ -73,6 +73,9 @@ Route::group(['middleware'=>['auth']],function(){
     Route::post('otro/guardarCuerpo','OtrosresultadosController@guardarCuerpo');    
     Route::get('otropdf/{id}','OtrosresultadosController@pdf');
     }); 
+
+    //rutas para examen coprologico
+    Route::get('/listadoCopro','CoprologicoController@index');
    
     //Se crean los grupos de rutas para administrador dentro de el middleware auth
         Route::group(['middleware'=>['Quimica']],function(){

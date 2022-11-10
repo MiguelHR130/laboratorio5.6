@@ -65368,7 +65368,7 @@ var config = __webpack_require__(9).call(this);
             if (this.validarRegistro()) {
                 return;
             }
-
+            console.log(this.radio);
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -65443,7 +65443,6 @@ var config = __webpack_require__(9).call(this);
             if (!this.apPaterno) this.errorMostrarmsj.push("el apellido no puede estar vacio");
             if (!this.apMaterno) this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if (!this.radio) this.errorMostrarmsj.push("el nombre no puede estar vacio");
-            if (!this.fecha) this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if (this.errorMostrarmsj.length) this.errorCajatexto = 1;
             if (this.errorMostrarmsj.length) this.errorCajatexto = 1;
             return this.errorCajatexto;
@@ -65939,12 +65938,12 @@ var render = function() {
                                 type: "radio",
                                 name: "inlineRadioOptions",
                                 id: "inlineRadio1",
-                                value: "H"
+                                value: "M"
                               },
-                              domProps: { checked: _vm._q(_vm.radio, "H") },
+                              domProps: { checked: _vm._q(_vm.radio, "M") },
                               on: {
                                 change: function($event) {
-                                  _vm.radio = "H"
+                                  _vm.radio = "M"
                                 }
                               }
                             }),
@@ -65955,7 +65954,7 @@ var render = function() {
                                 staticClass: "form-check-label",
                                 attrs: { for: "inlineRadio1" }
                               },
-                              [_vm._v("H")]
+                              [_vm._v("M")]
                             )
                           ]
                         )
@@ -65980,12 +65979,12 @@ var render = function() {
                                 type: "radio",
                                 name: "inlineRadioOptions",
                                 id: "inlineRadio2",
-                                value: "M"
+                                value: "F"
                               },
-                              domProps: { checked: _vm._q(_vm.radio, "M") },
+                              domProps: { checked: _vm._q(_vm.radio, "F") },
                               on: {
                                 change: function($event) {
-                                  _vm.radio = "M"
+                                  _vm.radio = "F"
                                 }
                               }
                             }),
@@ -65996,7 +65995,7 @@ var render = function() {
                                 staticClass: "form-check-label",
                                 attrs: { for: "inlineRadio2" }
                               },
-                              [_vm._v("M")]
+                              [_vm._v("F")]
                             )
                           ]
                         )

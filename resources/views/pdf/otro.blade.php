@@ -76,10 +76,10 @@
                color: #000000;
                position: fixed;
                top: 180px;
-               left: 45px; 
+               left: 20px; 
                border-width: 1px;
                border-style: solid;
-               border-color: black;
+               border-color: white;
             }
         .letrafirma{
                font-size: 12px;
@@ -148,7 +148,7 @@
             <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
             <tr>
                 <td style="background-color: #fdddca;" width="15%">NOMBRE</td>
-                <td  width="40%">&nbsp;&nbsp;{{$otropdf->nombreConcatenado}}</td>
+                <td  width="50%">&nbsp;&nbsp;{{$otropdf->nombreConcatenado}}</td>
                 <td style="background-color: #fdddca;"  width="10%">EDAD</td>
                 <td width="15%">&nbsp;&nbsp;{{$otropdf->edad}} años</td>
                 <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
@@ -156,7 +156,7 @@
             </tr>
             <tr>
                 <td style="background-color: #fdddca;" width="25%">TOMA MUESTRA</td>
-                <td >&nbsp;&nbsp;{{$fecha_final}}</td>
+                <td  width="50%">&nbsp;&nbsp;{{$fecha_final}}</td>
                 <td style="background-color: #fdddca;">SEXO</td>
                 <td>&nbsp;&nbsp;{{$otropdf->sexo}}</td>
             </tr>

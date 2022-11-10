@@ -61,7 +61,53 @@
                 color: #000000;
                 position: fixed;
                 left: 215px;
-                top: 155px;
+                top: 160px;
+            }
+            .letratablamcopro{
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                color: #000000;
+                position: fixed;
+                left: 310px;
+                top: 120px;
+            }
+            .letratablamlipidos{
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                color: #000000;
+                position: fixed;
+                left: 260px;
+                top: 160px;
+            }
+            .letraresultfebriles{
+                font-size: 17px;
+                font-family: Arial, Helvetica, sans-serif;
+                text-align: center;
+                color: #000000;
+                position: fixed;
+                top: 250px;
+                left: 100px; 
+
+            }
+            .letratablamcurva{
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                color: #000000;
+                position: fixed;
+                left: 180px;
+                top: 160px;
+            }
+            .letratablamreumatico{
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                color: #000000;
+                position: fixed;
+                left: 260px;
+                top: 160px;
             }
             .letratablaorina{
                 font-size: 18px;
@@ -70,13 +116,13 @@
                 color: #000000;
                 position: fixed;
                 left: 215px;
-                top: 200px;
+                top: 120px;
             }
         .datos{
-                font-size: 15px;
+                font-size: 13px;
                 position: fixed;
                 top: 80px;
-                left: 50px; 
+                left: 40px; 
         }    
         .letraRESULT{
                font-size: 17px;
@@ -84,9 +130,27 @@
                text-align: center;
                color: #000000;
                position: fixed;
-               top: 180px;
+               top: 200px;
                left: 45px; 
             }
+        .letraresultElse{
+            font-size: 17px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            color: #000000;
+            position: fixed;
+            top: 250px;
+            left: 45px; 
+        }
+        .letraresultcopro{
+            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            color: #000000;
+            position: fixed;
+            top: 140px;
+            left: 35px; 
+        }
         .letraRESULT1{
             font-size: 17px;
             font-family: Arial, Helvetica, sans-serif;
@@ -102,7 +166,7 @@
             text-align: center;
             color: #000000;
             position: fixed;
-            top: 300px;
+            top: 150px;
             left: 100px; 
         }
         .letrafirma{
@@ -122,11 +186,12 @@
         .sedimento{
             font-size: 17px;
             font-family: Arial, Helvetica, sans-serif;
-            text-align: center;
+            text-align: left;
             color: #000000;
             position: fixed;
-            top: 700px;
-            left: 100px; 
+            top: 800px;
+            left: 40px; 
+            border: 1px solid black;
         }    
         .linea {
             border-top: 1px solid black;
@@ -187,28 +252,29 @@
                 </table>
         </div>
         <div>
-            <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
-            <tr>
-                <td style="background-color: #fdddca;" width="25%">NOMBRE</td>
-                <td  width="50%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}}</td>
-                <td style="background-color: #fdddca;"  width="7%">EDAD</td>
-                <td width="20%">&nbsp;&nbsp;{{$item['registro']->edad}} años</td>
-                <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
-                <td width="60%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
-            </tr>
-            <tr>
-                <td style="background-color: #fdddca;">FECHA DE MUESTRA</td>
-                <td >&nbsp;&nbsp;{{$fecha_final}}</td>
-                <td style="background-color: #fdddca;">SEXO</td>
-                <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
-            </tr>
-            </table>
+        <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
+          <tr>
+            <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
+            <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}}</td>
+            <td style="background-color: #fdddca;">EDAD</td>
+            <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
+            <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
+            <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #fdddca;">FECHA </td>
+            <td >&nbsp;&nbsp;{{$fecha_final}}</td>
+            <td style="background-color: #fdddca;">SEXO</td>
+            <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
+          </tr>
+        </table>
         </div>
         
         <div>
+        @foreach($item['categorias'] as $itemp)
                 <table class="letratablaorina">
                     <tr>
-                        <td>RESULTADOS DE LABORATORIO</td>
+                    <th align="left" width="40%" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
                     </tr>
                 </table>   
         </div>
@@ -216,14 +282,13 @@
         <div>
             <table class="resultMaster" width="100%">
                 <tr>
-                    <th>&nbsp;</th><br><br>
+                    <th align="left">PARÁMETRO</th><br><br>
                     <th>RESULTADO</th><br><br>
                    <!--  <th>U.M</th><br><br>
                     <th>VALORES DE REFERENCIA</th><br><br> -->
                 </tr>
-            @foreach($item['categorias'] as $itemp)
                     <tr>
-                        <th align="left" width="40%" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
+                        <td>&nbsp;</td>
                     </tr>
                     @foreach($itemp['partidas'] as $child)
                     <tr>
@@ -232,6 +297,7 @@
          <!--                <td>{{$child->unidadMedida}}</td>
                         <td>{{$child->vminH}}-{{$child->vmaxH}}</td> -->
                     </tr>
+                    <tr><td>&nbsp;</td></tr>
                     @endforeach
             @endforeach
             </table>        
@@ -239,10 +305,12 @@
 
         @foreach($item['categorias'] as $itemp)
         <div>
-            <table class="sedimento">
+            <table class="sedimento" width="100%">
             <tr>
-                <th>Sedimento Urinario:</th>
-                <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
+                <th align="left">Sedimento Urinario</th>
+            </tr>
+            <tr>
+            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
             </tr>
             </table>
         </div>
@@ -300,40 +368,41 @@
     </div>
     <div>
         <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
-          <tr>
-            <td style="background-color: #fdddca;" width="25%">NOMBRE</td>
-            <td  width="50%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}}</td>
-            <td style="background-color: #fdddca;"  width="7%">EDAD</td>
-            <td  width="20%">&nbsp;&nbsp;{{$item['registro']->edad }} años</td>
-            <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
-            <td width="60%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
-          </tr>
-          <tr>
-            <td style="background-color: #fdddca;">FECHA DE MUESTRA</td>
-            <td >&nbsp;&nbsp;{{$fecha_final}}</td>
-            <td style="background-color: #fdddca;">SEXO</td>
-            <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
-          </tr>
-        </table>
+            <tr>
+                <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
+                <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}} </td>
+                <td style="background-color: #fdddca;">EDAD</td>
+                <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
+                <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
+                <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
+            </tr>
+            <tr>
+                <td style="background-color: #fdddca;">FECHA </td>
+                <td >&nbsp;&nbsp;{{$fecha_final}}</td>
+                <td style="background-color: #fdddca;">SEXO</td>
+                <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
+            </tr>
+            </table>
     </div>
     <div>
+    @foreach($item['categorias'] as $itemp)
       <table class="letratablam2">
         <tr>
-            <td>RESULTADOS DE LABORATORIO</td>
+        <th align="left" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
         </tr>
       </table>   
     </div>  
     <div>
       <table class="letraRESULT1" width="100%">
         <tr>
-            <th width="40%">EXAMEN</th><br><br>
+            <th width="40%" align="left">EXAMEN</th><br><br>
             <th>RESULTADO</th><br><br>
             <th>U.M</th><br><br>
            <!-- <th>VALORES DE REFERENCIA</th><br><br>  --> 
         </tr>
-    @foreach($item['categorias'] as $itemp)
+   
             <tr>
-                <th align="left" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
+               <td>&nbsp;</td>
             </tr>
             @foreach($itemp['partidas'] as $child)
             <tr>
@@ -883,15 +952,15 @@
         <div>
         <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
           <tr>
-            <td style="background-color: #fdddca;" width="25%">NOMBRE</td>
-            <td  width="50%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}}</td>
-            <td style="background-color: #fdddca;"  width="7%">EDAD</td>
-            <td  width="20%">&nbsp;&nbsp;{{$item['registro']->edad }} años</td>
+            <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
+            <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}} </td>
+            <td style="background-color: #fdddca;">EDAD</td>
+            <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
             <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
-            <td width="60%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
+            <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
           </tr>
           <tr>
-            <td style="background-color: #fdddca;">FECHA DE MUESTRA</td>
+            <td style="background-color: #fdddca;">FECHA </td>
             <td >&nbsp;&nbsp;{{$fecha_final}}</td>
             <td style="background-color: #fdddca;">SEXO</td>
             <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
@@ -899,29 +968,30 @@
         </table>
         </div>
       <div>
+      @foreach($item['categorias'] as $itemp)
       <table class="letratablam2">
         <tr>
-            <td>RESULTADOS DE LABORATORIO</td>
+        <th align="left" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
         </tr>
       </table>   
       </div>  
       <div>
       <table class="letraRESULT" width="100%">
         <tr>
-            <th>EXAMEN</th><br><br>
+            <th align="left">EXAMEN</th><br><br>
             <th>RESULTADO</th><br><br>
             <th>U.M</th><br><br>
             <th>VALORES DE REFERENCIA</th><br><br>
         </tr>
-    @foreach($item['categorias'] as $itemp)
+   
             <tr>
-                <th align="left" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
+                <td>&nbsp;</td>
             </tr>
             @foreach($itemp['partidas'] as $child)
             <tr>
                 <td align="left">{{$child->nombreSubcategoria}}</td>
                 @if($child->descripcionResultado>$child->vmaxH)
-                 @if($child->id==88)
+                 @if($child->id==121)
                 <td><font color ="#007fff">{{$child->descripcionResultado}}</font></td>
                 <td>{{$child->unidadMedida}}</td>
                 <td>Hasta {{$child->vmaxH}}</td>
@@ -931,7 +1001,7 @@
                 <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
                 @endif
                 @elseif($child->descripcionResultado<$child->vminH)
-                @if($child->id==88)
+                @if($child->id==121)
                 <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
                 <td>{{$child->unidadMedida}}</td>
                 <td>Hasta {{$child->vmaxH}}</td>
@@ -941,7 +1011,7 @@
                 <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
                 @endif
                 @else
-                @if($child->id==88)
+                @if($child->id==121)
                 <td>{{$child->descripcionResultado}}</td>
                 <td>{{$child->unidadMedida}}</td>
                 <td>Hasta {{$child->vmaxH}}</td>
@@ -951,6 +1021,9 @@
                 <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
                 @endif
                 @endif
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
             </tr>
             @endforeach
     @endforeach
@@ -1040,15 +1113,15 @@
         <div>
         <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
           <tr>
-            <td style="background-color: #fdddca;" width="25%">NOMBRE</td>
-            <td  width="50%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}}</td>
-            <td style="background-color: #fdddca;"  width="7%">EDAD</td>
-            <td  width="20%">&nbsp;&nbsp;{{$item['registro']->edad }} años</td>
+            <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
+            <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}} </td>
+            <td style="background-color: #fdddca;">EDAD</td>
+            <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
             <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
-            <td width="60%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
+            <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
           </tr>
           <tr>
-            <td style="background-color: #fdddca;">FECHA DE MUESTRA</td>
+            <td style="background-color: #fdddca;">FECHA </td>
             <td >&nbsp;&nbsp;{{$fecha_final}}</td>
             <td style="background-color: #fdddca;">SEXO</td>
             <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
@@ -1065,7 +1138,7 @@
       <div>
       <table class="letraRESULT" width="100%">
         <tr>
-            <th>EXAMEN</th><br><br>
+            <th align="left">EXAMEN</th><br><br>
             <th>RESULTADO</th><br><br>
             <th>U.M</th><br><br>
             <th>VALORES DE REFERENCIA</th><br><br>
@@ -1162,6 +1235,1020 @@
         </div>
 
 </body>
+@elseif($itemp['categoria']->id==10)
+<body class="borde">
+    <header>
+        <img src="img\logo5.png" width="700" height="130"class="img" alignt="center" style="padding-bottom: 40px; padding-top: 30px;">
+    </header>
+    <footer>
+        <table>
+        <tr>
+            <td>
+                <p class="izq">
+                Laboratorio de Análisis Clínicos San Miguel
+                </p>
+            </td>
+            <td>
+            <p class="page">
+                Pág.
+            </p>
+            </td>
+        </tr>
+        </table>
+  </footer>
+
+  <div class="div" >
+    
+        @foreach($arreglo as $item)
+        <div>
+            <table class="letratablam">
+                <tr>
+                    <td>INFORMACIÓN DEL PACIENTE</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+        <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
+          <tr>
+            <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
+            <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}} </td>
+            <td style="background-color: #fdddca;">EDAD</td>
+            <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
+            <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
+            <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #fdddca;">FECHA </td>
+            <td >&nbsp;&nbsp;{{$fecha_final}}</td>
+            <td style="background-color: #fdddca;">SEXO</td>
+            <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
+          </tr>
+        </table>
+        </div>
+      <div>
+      <table class="letratablamlipidos">
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr> <td>&nbsp;</td></tr>
+        @foreach($item['categorias'] as $itemp)           
+            <th align="center">{{$itemp['categoria']->nombreCategoria}}</th>
+            <td>&nbsp;</td>
+        @endforeach
+      </table>   
+      </div>  
+      <div>
+      <table class="letraresultElse" width="100%">
+        <tr>
+            <th align="left">EXAMEN</th><br><br>
+            <th>RESULTADO</th><br><br>
+            <th>U.M</th><br><br>
+            <th>VALORES DE REFERENCIA</th><br><br>
+        </tr>
+            @foreach($item['categorias'] as $itemp)
+            <tr>
+               <td>&nbsp;</td>
+            </tr>
+            @foreach($itemp['partidas'] as $child)
+            <tr>
+                <td align="left">{{$child->nombreSubcategoria}}</td>
+                @if($child->descripcionResultado>$child->vmaxH)
+                @if(($child->id==51 || $child->id==52 || $child->id==53 || $child->id==54))
+                <td><font color ="#007fff">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>Hasta {{$child->vmaxH}}</td>
+                @else
+                <td><font color ="#007fff">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                @endif
+                @elseif($child->descripcionResultado<$child->vminH)
+                @if(($child->id==51 || $child->id==52 || $child->id==53 || $child->id==54))
+                <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>Hasta {{$child->vmaxH}}</td>
+                @else
+                <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                @endif
+                @else
+                @if(($child->id==51 || $child->id==52 || $child->id==53 || $child->id==54))
+                <td>{{$child->descripcionResultado}}</td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>Hasta {{$child->vmaxH}}</td>
+                @else
+                <td>{{$child->descripcionResultado}}</td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                @endif
+                @endif
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            @endforeach
+    @endforeach
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr><td></td></tr>
+        @foreach($item['categorias'] as $itemp)
+        @if($itemp['categoria']->observaciones==null)
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        @else
+        <tr>
+            <th>Observaciones:</th>
+            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
+        </tr>
+        <tr><td></td></tr>
+        @endif
+        @endforeach
+      </table>
+@endforeach
+</div>
+<div>
+            <table class="referencia">
+                <tr>
+                    <td align="left"><b>Valor de referencia:</b></td>
+                    <td><b><font color ="#007fff">ALTO</font></b><b>&nbsp;<font color ="#ff0000">BAJO</font></b></td>
+                </th>
+            </table>
+        </div>
+         
+
+            <div>
+            <table class="letrafirma">
+                <tr>
+                    <th>ATENTAMENTE</th>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                </tr>
+                <tr >
+                    <th class="linea">Q.F.B MALENY GUZMAN HERNANDEZ</th>
+                </tr>
+                <tr>
+                    <th>CED.PROF 10307821</th>
+                </tr>
+            </table>
+            </div>
+           
+
+        </div>
+
+</body>
+@elseif($itemp['categoria']->id==11)
+<body class="borde">
+    <header>
+        <img src="img\logo5.png" width="700" height="130"class="img" alignt="center" style="padding-bottom: 40px; padding-top: 30px;">
+    </header>
+    <footer>
+        <table>
+        <tr>
+            <td>
+                <p class="izq">
+                Laboratorio de Análisis Clínicos San Miguel
+                </p>
+            </td>
+            <td>
+            <p class="page">
+                Pág.
+            </p>
+            </td>
+        </tr>
+        </table>
+  </footer>
+
+  <div class="div" >
+    
+        @foreach($arreglo as $item)
+        <div>
+            <table class="letratablam">
+                <tr>
+                    <td>INFORMACIÓN DEL PACIENTE</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+        <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
+          <tr>
+            <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
+            <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}} </td>
+            <td style="background-color: #fdddca;">EDAD</td>
+            <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
+            <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
+            <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #fdddca;">FECHA </td>
+            <td >&nbsp;&nbsp;{{$fecha_final}}</td>
+            <td style="background-color: #fdddca;">SEXO</td>
+            <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
+          </tr>
+        </table>
+        </div>
+      <div>
+      <table class="letratablam2">
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr> <td>&nbsp;</td></tr>
+        @foreach($item['categorias'] as $itemp)           
+            <th align="center" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
+            <td>&nbsp;</td>
+        @endforeach
+      </table>   
+      </div>  
+      <div>
+      <table class="letraresultElse" width="100%">
+        <tr>
+            <th align="left">EXAMEN</th><br><br>
+            <th>RESULTADO</th><br><br>
+            <th>U.M</th><br><br>
+            <th>VALORES DE REFERENCIA</th><br><br>
+        </tr>
+            @foreach($item['categorias'] as $itemp)
+            <tr>
+               <td>&nbsp;</td>
+            </tr>
+            @foreach($itemp['partidas'] as $child)
+            <tr>
+                <td align="left">{{$child->nombreSubcategoria}}</td>
+                @if($child->descripcionResultado>$child->vmaxH)
+                @if(($child->id==58))
+                <td><font color ="#007fff">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>Hasta {{$child->vmaxH}}</td>
+                @else
+                <td><font color ="#007fff">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                @endif
+                @elseif($child->descripcionResultado<$child->vminH)
+                @if(($child->id==58))
+                <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>Hasta {{$child->vmaxH}}</td>
+                @else
+                <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                @endif
+                @else
+                @if(($child->id==58))
+                <td>{{$child->descripcionResultado}}</td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>Hasta {{$child->vmaxH}}</td>
+                @else
+                <td>{{$child->descripcionResultado}}</td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                @endif
+                @endif
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            @endforeach
+    @endforeach
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr><td></td></tr>
+        @foreach($item['categorias'] as $itemp)
+        @if($itemp['categoria']->observaciones==null)
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        @else
+        <tr>
+            <th>Observaciones:</th>
+            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
+        </tr>
+        <tr><td></td></tr>
+        @endif
+        @endforeach
+      </table>
+@endforeach
+</div>
+<div>
+            <table class="referencia">
+                <tr>
+                    <td align="left"><b>Valor de referencia:</b></td>
+                    <td><b><font color ="#007fff">ALTO</font></b><b>&nbsp;<font color ="#ff0000">BAJO</font></b></td>
+                </th>
+            </table>
+        </div>
+         
+
+            <div>
+            <table class="letrafirma">
+                <tr>
+                    <th>ATENTAMENTE</th>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                </tr>
+                <tr >
+                    <th class="linea">Q.F.B MALENY GUZMAN HERNANDEZ</th>
+                </tr>
+                <tr>
+                    <th>CED.PROF 10307821</th>
+                </tr>
+            </table>
+            </div>
+           
+
+        </div>
+
+</body>
+@elseif($itemp['categoria']->id==12)
+        <body class="borde">
+    <header>
+        <img src="img\logo5.png" width="700" height="130"class="img" alignt="center" style="padding-bottom: 40px; padding-top: 30px;">
+    </header>
+    <footer>
+        <table>
+        <tr>
+            <td>
+                <p class="izq">
+                Laboratorio de Análisis Clínicos San Miguel
+                </p>
+            </td>
+            <td>
+            <p class="page">
+                Pág.
+            </p>
+            </td>
+        </tr>
+        </table>
+  </footer>
+
+  <div class="div" >
+    
+        @foreach($arreglo as $item)
+        <div>
+            <table class="letratablam">
+                <tr>
+                    <td>INFORMACIÓN DEL PACIENTE</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+        <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
+          <tr>
+            <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
+            <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}} </td>
+            <td style="background-color: #fdddca;">EDAD</td>
+            <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
+            <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
+            <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #fdddca;">FECHA </td>
+            <td >&nbsp;&nbsp;{{$fecha_final}}</td>
+            <td style="background-color: #fdddca;">SEXO</td>
+            <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
+          </tr>
+        </table>
+        </div>
+      <div>
+      <table class="letratablamcurva">
+        @foreach($item['categorias'] as $itemp)       
+        <tr>
+        <th align="center">{{$itemp['categoria']->nombreCategoria}}</th>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        </tr>
+        @endforeach
+      </table>   
+      </div>  
+      <div>
+      <table class="letraresultElse" width="100%">
+        <tr>
+            <th align="left">EXAMEN</th><br><br>
+            <th>RESULTADO</th><br><br>
+            <th>U.M</th><br><br>
+            <th>VALORES DE REFERENCIA</th><br><br>
+        </tr>
+            @foreach($item['categorias'] as $itemp)
+            <tr>
+               <td>&nbsp;</td>
+            </tr>
+            @foreach($itemp['partidas'] as $child)
+            <tr>
+                <td align="left">{{$child->nombreSubcategoria}}</td>
+                <td>{{$child->descripcionResultado}}</td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            @endforeach
+    @endforeach
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr><td></td></tr>
+        @foreach($item['categorias'] as $itemp)
+        @if($itemp['categoria']->observaciones==null)
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        @else
+        <tr>
+            <th>Observaciones:</th>
+            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
+        </tr>
+        <tr><td></td></tr>
+        @endif
+        @endforeach
+      </table>
+@endforeach
+</div>
+<div>
+            <table class="referencia">
+                <tr>
+                    <td align="left"><b>Valor de referencia:</b></td>
+                    <td><b><font color ="#007fff">ALTO</font></b><b>&nbsp;<font color ="#ff0000">BAJO</font></b></td>
+                </th>
+            </table>
+        </div>
+         
+
+            <div>
+            <table class="letrafirma">
+                <tr>
+                    <th>ATENTAMENTE</th>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                </tr>
+                <tr >
+                    <th class="linea">Q.F.B MALENY GUZMAN HERNANDEZ</th>
+                </tr>
+                <tr>
+                    <th>CED.PROF 10307821</th>
+                </tr>
+            </table>
+            </div>
+           
+
+        </div>
+
+</body>
+@elseif($itemp['categoria']->id==13)
+<body class="borde">
+    <header>
+        <img src="img\logo5.png" width="700" height="130"class="img" alignt="center" style="padding-bottom: 40px; padding-top: 30px;">
+    </header>
+    <footer>
+        <table>
+        <tr>
+            <td>
+                <p class="izq">
+                Laboratorio de Análisis Clínicos San Miguel
+                </p>
+            </td>
+            <td>
+            <p class="page">
+                Pág.
+            </p>
+            </td>
+        </tr>
+        </table>
+  </footer>
+
+  <div class="div" >
+    
+        @foreach($arreglo as $item)
+        <div>
+            <table class="letratablam">
+                <tr>
+                    <td>INFORMACIÓN DEL PACIENTE</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+        <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
+          <tr>
+            <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
+            <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}} </td>
+            <td style="background-color: #fdddca;">EDAD</td>
+            <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
+            <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
+            <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #fdddca;">FECHA </td>
+            <td >&nbsp;&nbsp;{{$fecha_final}}</td>
+            <td style="background-color: #fdddca;">SEXO</td>
+            <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
+          </tr>
+        </table>
+        </div>
+      <div>
+      @foreach($item['categorias'] as $itemp)          
+      <table class="letratablamreumatico">
+        <tr>
+        <th align="center" colspan="4">{{$itemp['categoria']->nombreCategoria}}</th>
+        </tr>
+        <tr> <td>&nbsp;</td></tr>
+        @endforeach
+      </table>   
+      </div>  
+      <div>
+      <table class="letraresultElse" width="100%">
+        <tr>
+            <th align="left">EXAMEN</th><br><br>
+            <th>RESULTADO</th><br><br>
+            <th>U.M</th><br><br>
+            <th>VALORES DE REFERENCIA</th><br><br>
+        </tr>
+            @foreach($item['categorias'] as $itemp)
+            <tr>
+               <td>&nbsp;</td>
+            </tr>
+            @foreach($itemp['partidas'] as $child)
+            <tr>
+                <td align="left">{{$child->nombreSubcategoria}}</td>
+                @if($child->descripcionResultado>$child->vmaxH)
+                @if(($child->id==65 || $child->id==66 || $child->id==67))
+                <td><font color ="#007fff">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>Hasta {{$child->vmaxH}}</td>
+                @else
+                <td><font color ="#007fff">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                @endif
+                @elseif($child->descripcionResultado<$child->vminH)
+                @if(($child->id==65 || $child->id==66 || $child->id==67))
+                <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>Hasta {{$child->vmaxH}}</td>
+                @else
+                <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                @endif
+                @else
+                @if(($child->id==65 || $child->id==66 || $child->id==67))
+                <td>{{$child->descripcionResultado}}</td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>Hasta {{$child->vmaxH}}</td>
+                @else
+                <td>{{$child->descripcionResultado}}</td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                @endif
+                @endif
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            @endforeach
+    @endforeach
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr><td></td></tr>
+        @foreach($item['categorias'] as $itemp)
+        @if($itemp['categoria']->observaciones==null)
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        @else
+        <tr>
+            <th>Observaciones:</th>
+            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
+        </tr>
+        <tr><td></td></tr>
+        @endif
+        @endforeach
+      </table>
+@endforeach
+</div>
+<div>
+            <table class="referencia">
+                <tr>
+                    <td align="left"><b>Valor de referencia:</b></td>
+                    <td><b><font color ="#007fff">ALTO</font></b><b>&nbsp;<font color ="#ff0000">BAJO</font></b></td>
+                </th>
+            </table>
+        </div>
+         
+
+            <div>
+            <table class="letrafirma">
+                <tr>
+                    <th>ATENTAMENTE</th>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                </tr>
+                <tr >
+                    <th class="linea">Q.F.B MALENY GUZMAN HERNANDEZ</th>
+                </tr>
+                <tr>
+                    <th>CED.PROF 10307821</th>
+                </tr>
+            </table>
+            </div>
+           
+
+        </div>
+
+</body>
+@elseif($itemp['categoria']->id==18)
+<body class="borde">
+    <header>
+        <img src="img\logo5.png" width="700" height="130"class="img" alignt="center" style="padding-bottom: 40px; padding-top: 30px;">
+    </header>
+    <footer>
+        <table>
+        <tr>
+            <td>
+                <p class="izq">
+                Laboratorio de Análisis Clínicos San Miguel
+                </p>
+            </td>
+            <td>
+            <p class="page">
+                Pág.
+            </p>
+            </td>
+        </tr>
+        </table>
+  </footer>
+
+  <div class="div" >
+    
+        @foreach($arreglo as $item)
+        <div>
+            <table class="letratablam">
+                <tr>
+                    <td>INFORMACIÓN DEL PACIENTE</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+        <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
+          <tr>
+            <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
+            <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}} </td>
+            <td style="background-color: #fdddca;">EDAD</td>
+            <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
+            <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
+            <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #fdddca;">FECHA </td>
+            <td >&nbsp;&nbsp;{{$fecha_final}}</td>
+            <td style="background-color: #fdddca;">SEXO</td>
+            <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
+          </tr>
+        </table>
+        </div>
+      <div>
+      @foreach($item['categorias'] as $itemp) 
+      <table class="letratablam2">
+        <tr>
+        <th align="left" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
+        </tr>
+        <tr> <td>&nbsp;</td></tr>
+        @endforeach
+      </table>   
+      </div>  
+      <div>
+      <table class="letraresultfebriles" width="100%">
+        <tr>
+            <th align="left">EXAMEN</th><br><br>
+            <th>RESULTADO</th><br><br>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+           
+        </tr>
+            @foreach($item['categorias'] as $itemp)
+            <tr>
+               <td>&nbsp;</td>
+            </tr>
+            @foreach($itemp['partidas'] as $child)
+            <tr>
+                <td align="left">{{$child->nombreSubcategoria}}</td>
+                <td>{{$child->descripcionResultado}}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            @endforeach
+    @endforeach
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr><td></td></tr>
+        @foreach($item['categorias'] as $itemp)
+        @if($itemp['categoria']->observaciones==null)
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        @else
+        <tr>
+            <th>Observaciones:</th>
+            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
+        </tr>
+        <tr><td></td></tr>
+        @endif
+        @endforeach
+      </table>
+@endforeach
+</div>
+<div>
+
+        </div>
+         
+
+            <div>
+            <table class="letrafirma">
+                <tr>
+                    <th>ATENTAMENTE</th>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                </tr>
+                <tr >
+                    <th class="linea">Q.F.B MALENY GUZMAN HERNANDEZ</th>
+                </tr>
+                <tr>
+                    <th>CED.PROF 10307821</th>
+                </tr>
+            </table>
+            </div>
+           
+
+        </div>
+
+</body>
+@elseif($itemp['categoria']->id==14)
+<body class="borde">
+    <header>
+        <img src="img\logo5.png" width="700" height="130"class="img" alignt="center" style="padding-bottom: 40px; padding-top: 30px;">
+    </header>
+    <footer>
+        <table>
+        <tr>
+            <td>
+                <p class="izq">
+                Laboratorio de Análisis Clínicos San Miguel
+                </p>
+            </td>
+            <td>
+            <p class="page">
+                Pág.
+            </p>
+            </td>
+        </tr>
+        </table>
+  </footer>
+
+  <div class="div" >
+    
+        @foreach($arreglo as $item)
+        <div>
+            <table class="letratablam">
+                <tr>
+                    <td>INFORMACIÓN DEL PACIENTE</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+        <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
+          <tr>
+            <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
+            <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}} </td>
+            <td style="background-color: #fdddca;">EDAD</td>
+            <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
+            <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
+            <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #fdddca;">FECHA </td>
+            <td >&nbsp;&nbsp;{{$fecha_final}}</td>
+            <td style="background-color: #fdddca;">SEXO</td>
+            <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
+          </tr>
+        </table>
+        </div>
+      <div>
+      @foreach($item['categorias'] as $itemp)           
+      <table class="letratablam2">
+        <tr>
+        <th align="center">{{$itemp['categoria']->nombreCategoria}}</th>
+        </tr>
+        <tr> <td>&nbsp;</td></tr>
+        @endforeach
+      </table>   
+      </div>  
+      <div>
+      <table class="letraresultElse" width="100%">
+        <tr>
+            <th align="left">EXAMEN</th><br><br>
+            <th>RESULTADO</th><br><br>
+            <th>U.M</th><br><br>
+            <th>VALORES DE REFERENCIA</th><br><br>
+        </tr>
+            @foreach($item['categorias'] as $itemp)
+            <tr>
+               <td>&nbsp;</td>
+            </tr>
+            @foreach($itemp['partidas'] as $child)
+            <tr>
+                <td align="left">{{$child->nombreSubcategoria}}</td>
+                <td>{{$child->descripcionResultado}}</td>
+                <td>{{$child->unidadMedida}}</td>
+                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            @endforeach
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
+
+            <tr>
+                <td colspan="2" align="left">MENOR 5.90% NORMAL NO DIABETICO</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="left">6.0 - 7.0% BUEN CONTROL</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="left">8.0 - 14.0 % MAL CONTROL</td>               
+            </tr>
+            @endforeach
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr><td></td></tr>
+        @foreach($item['categorias'] as $itemp)
+        @if($itemp['categoria']->observaciones==null)
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        @else
+        <tr>
+            <th>Observaciones:</th>
+            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
+        </tr>
+        <tr><td></td></tr>
+        @endif
+        @endforeach
+      </table>
+@endforeach
+</div>
+        <div>
+            <table class="letrafirma">
+                <tr>
+                    <th>ATENTAMENTE</th>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                </tr>
+                <tr >
+                    <th class="linea">Q.F.B MALENY GUZMAN HERNANDEZ</th>
+                </tr>
+                <tr>
+                    <th>CED.PROF 10307821</th>
+                </tr>
+            </table>
+            </div>
+           
+
+        </div>
+
+</body>
+     
+    @elseif($itemp['categoria']->id==19)
+    <body class="borde">
+    <header>
+        <img src="img\logo5.png" width="700" height="130"class="img" alignt="center" style="padding-bottom: 40px; padding-top: 30px;">
+    </header>
+    <footer>
+        <table>
+        <tr>
+            <td>
+                <p class="izq">
+                Laboratorio de Análisis Clínicos San Miguel
+                </p>
+            </td>
+            <td>
+            <p class="page">
+                Pág.
+            </p>
+            </td>
+        </tr>
+        </table>
+  </footer>
+
+  <div class="div" >
+    
+        @foreach($arreglo as $item)
+        <div>
+            <table class="letratablam">
+                <tr>
+                    <td>INFORMACIÓN DEL PACIENTE</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+        <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
+          <tr>
+            <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
+            <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}} </td>
+            <td style="background-color: #fdddca;">EDAD</td>
+            <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
+            <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
+            <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #fdddca;">FECHA </td>
+            <td >&nbsp;&nbsp;{{$fecha_final}}</td>
+            <td style="background-color: #fdddca;">SEXO</td>
+            <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
+          </tr>
+        </table>
+        </div>
+      <div>
+      @foreach($item['categorias'] as $itemp)  
+      <table class="letratablamcopro">
+        <tr>
+             <th align="left" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
+        </tr>
+        <tr> <td>&nbsp;</td></tr>
+        @endforeach
+      </table>   
+      </div>  
+      <div>
+      <table class="letraresultcopro" width="100%">
+        <tr>
+            <th align="left" colspan="2">PARÁMETRO</th><br><br>
+            <th>RESULTADO</th><br><br>
+            <th>VALOR DE REFERENCIA</th><br><br>
+           
+        </tr>
+            @foreach($item['categorias'] as $itemp)
+            <tr>
+               <td>&nbsp;</td>
+            </tr>
+            @foreach($itemp['partidas'] as $child)
+            <tr>
+                <td align="left" colspan="2">{{$child->nombreSubcategoria}}</td>
+                <td>{{$child->descripcionResultado}}</td>
+                <td>{{$child->unidadMedida}}</td>      
+            </tr>
+            @endforeach
+    @endforeach
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr><td></td></tr>
+        @foreach($item['categorias'] as $itemp)
+        @if($itemp['categoria']->observaciones==null)
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        @else
+        <tr>
+            <th>Observaciones:</th>
+            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
+        </tr>
+        <tr><td></td></tr>
+        @endif
+        @endforeach
+      </table>
+@endforeach
+</div>
+        
+         
+
+            <div>
+            <table class="letrafirma">
+                <tr>
+                    <th>ATENTAMENTE</th>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                </tr>
+                <tr >
+                    <th class="linea">Q.F.B MALENY GUZMAN HERNANDEZ</th>
+                </tr>
+                <tr>
+                    <th>CED.PROF 10307821</th>
+                </tr>
+            </table>
+            </div>
+           
+
+        </div>
+</body>
+
+       
     @else
         <body class="borde">
     <header>
@@ -1197,15 +2284,15 @@
         <div>
         <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
           <tr>
-            <td style="background-color: #fdddca;" width="25%">NOMBRE</td>
-            <td  width="50%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}}</td>
-            <td style="background-color: #fdddca;"  width="7%">EDAD</td>
-            <td  width="20%">&nbsp;&nbsp;{{$item['registro']->edad }} años</td>
+            <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
+            <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}} </td>
+            <td style="background-color: #fdddca;">EDAD</td>
+            <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
             <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
-            <td width="60%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
+            <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
           </tr>
           <tr>
-            <td style="background-color: #fdddca;">FECHA DE MUESTRA</td>
+            <td style="background-color: #fdddca;">FECHA </td>
             <td >&nbsp;&nbsp;{{$fecha_final}}</td>
             <td style="background-color: #fdddca;">SEXO</td>
             <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
@@ -1217,19 +2304,24 @@
         <tr>
             <td>RESULTADOS DE LABORATORIO</td>
         </tr>
+        <tr> <td>&nbsp;</td></tr>
+        @foreach($item['categorias'] as $itemp)           
+            <th align="left" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
+            <td>&nbsp;</td>
+        @endforeach
       </table>   
       </div>  
       <div>
-      <table class="letraRESULT" width="100%">
+      <table class="letraresultElse" width="100%">
         <tr>
-            <th>EXAMEN</th><br><br>
+            <th align="left">EXAMEN</th><br><br>
             <th>RESULTADO</th><br><br>
             <th>U.M</th><br><br>
             <th>VALORES DE REFERENCIA</th><br><br>
         </tr>
-    @foreach($item['categorias'] as $itemp)
+            @foreach($item['categorias'] as $itemp)
             <tr>
-                <th align="left" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
+               <td>&nbsp;</td>
             </tr>
             @foreach($itemp['partidas'] as $child)
             <tr>
@@ -1248,6 +2340,7 @@
                 <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
                 @endif
             </tr>
+            <tr><td>&nbsp;</td></tr>
             @endforeach
     @endforeach
         <tr>

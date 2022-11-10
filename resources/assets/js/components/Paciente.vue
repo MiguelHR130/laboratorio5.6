@@ -83,14 +83,14 @@
                                <label class="col-md-5 form-control-label" for="text-input">Sexo</label>
                                <div class="col-sm">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" v-model="radio" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="H">
-                                        <label class="form-check-label" for="inlineRadio1">H</label>
+                                        <input class="form-check-input" v-model="radio" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="M">
+                                        <label class="form-check-label" for="inlineRadio1">M</label>
                                     </div>
                                 </div>
                                 <div class="col-sm">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" v-model="radio" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="M">
-                                        <label class="form-check-label" for="inlineRadio2">M</label>
+                                        <input class="form-check-input" v-model="radio" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="F">
+                                        <label class="form-check-label" for="inlineRadio2">F</label>
                                     </div>
                                </div>
                            </div>
@@ -253,7 +253,7 @@ export default {
             if (this.validarRegistro()){
                 return;
             }
-
+            console.log(this.radio);
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -329,7 +329,6 @@ export default {
             if(!this.apPaterno)this.errorMostrarmsj.push("el apellido no puede estar vacio");
             if(!this.apMaterno)this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if(!this.radio)this.errorMostrarmsj.push("el nombre no puede estar vacio");
-            if(!this.fecha)this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if(this.errorMostrarmsj.length) this.errorCajatexto = 1;
             if(this.errorMostrarmsj.length) this.errorCajatexto = 1;
             return this.errorCajatexto;
