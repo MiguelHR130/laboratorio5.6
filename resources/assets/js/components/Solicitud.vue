@@ -20,7 +20,8 @@
                             
                             <div class="btn-group btn-group-sm" role="group" aria-label="group">
                                 <button type="button" @click="detalle = true; dataDetalle = props.row.categorias;" class="btn btn-warning">Asignar resultado</button>&nbsp;
-                                <button type="button" @click="descargarSobre(props.row)" class="btn btn-success">Descargar sobre</button>
+                                <button type="button" @click="descargarSobre(props.row)" class="btn btn-success">Descargar sobre</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="button" @click="eliminarSolicitud(props.row.registro.id)" class="btn btn-danger" data-toggle="tooltip" data-placement="right" title="clic para actualizar paciente">Eliminar</button>   
                             </div>
                         
                                                     
@@ -343,6 +344,26 @@ export default {
         descargarSobre(data){
            
             window.open('sobrepdf/'+data.registro.paciente_id, '_blank');
+        },
+        eliminarSolicitud(data){
+           
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'La solicitud ha sido eliminada',
+                showConfirmButton: false,
+                timer: 1500
+                })
+            let me = this;
+            //se envian 2 parametros, ruta y valores        
+            axios.post('/solicitud/eliminar',{
+                'id':data
+            }).then(function (response){
+                me.listarSolicitudes();
+            }).catch(function(error){
+                console.log(error);
+            });
+
         },
 
         //modelo=nombre

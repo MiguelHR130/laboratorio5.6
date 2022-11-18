@@ -62,6 +62,8 @@ Route::group(['middleware'=>['auth']],function(){
     Route::post('solicitud/guardarobservaciones','SolicitudController@guardarObservaciones');
     Route::get('/resultado/{id}','SolicitudController@resultado');
     Route::get('sobrepdf/{id}','SolicitudController@pdfsobre');
+    Route::post('/solicitud/eliminar','SolicitudController@eliminar');
+
 
     //rutas para resultados
     Route::get('/listadoresultados','ResultadoController@index');
@@ -76,7 +78,32 @@ Route::group(['middleware'=>['auth']],function(){
 
     //rutas para examen coprologico
     Route::get('/listadoCopro','CoprologicoController@index');
-   
+    Route::post('/copro/registrar','CoprologicoController@store');
+    Route::post('copro/guardarColor','CoprologicoController@guardarColor'); 
+    Route::post('copro/guardarOlor','CoprologicoController@guardarOlor'); 
+    Route::post('copro/guardarRestos','CoprologicoController@guardarRestos');
+    Route::post('copro/guardarConsistencia','CoprologicoController@guardarConsistencia'); 
+    Route::post('copro/guardarElementos','CoprologicoController@guardarElementos'); 
+    Route::post('copro/guardarMoco','CoprologicoController@guardarMoco'); 
+    Route::post('copro/guardarPehache','CoprologicoController@guardarPehache'); 
+    Route::post('copro/guardarSangre','CoprologicoController@guardarSangre'); 
+    Route::post('copro/guardarPigmentos','CoprologicoController@guardarPigmentos'); 
+    Route::post('copro/guardarAzucares','CoprologicoController@guardarAzucares'); 
+    Route::post('copro/guardarOtros','CoprologicoController@guardarOtros'); 
+    Route::post('copro/guardarFibra','CoprologicoController@guardarFibra'); 
+    Route::post('copro/guardarFibrano','CoprologicoController@guardarFibrano'); 
+    Route::post('copro/guardarFibraveg','CoprologicoController@guardarFibraveg'); 
+    Route::post('copro/guardarGrasa','CoprologicoController@guardarGrasa'); 
+    Route::post('copro/guardarAlmidon','CoprologicoController@guardarAlmidon'); 
+    Route::post('copro/guardarLeuco','CoprologicoController@guardarLeuco'); 
+    Route::post('copro/guardarEri','CoprologicoController@guardarEri'); 
+    Route::post('copro/guardarLevadura','CoprologicoController@guardarLevadura'); 
+    Route::post('copro/guardarCristal','CoprologicoController@guardarCristal'); 
+    Route::post('copro/guardarParasito','CoprologicoController@guardarParasito'); 
+    Route::post('copro/guardarObservacion','CoprologicoController@guardarObservacion'); 
+    Route::get('copropdf/{id}','CoprologicoController@pdf');
+
+
     //Se crean los grupos de rutas para administrador dentro de el middleware auth
         Route::group(['middleware'=>['Quimica']],function(){
             //rutas para usar en Paciente.vue
@@ -109,6 +136,43 @@ Route::group(['middleware'=>['auth']],function(){
             Route::post('solicitud/guardarobservaciones','SolicitudController@guardarObservaciones');
             Route::get('/resultado/{id}','SolicitudController@resultado');
             Route::get('sobrepdf/{id}','SolicitudController@pdfsobre');
+            Route::post('/solicitud/eliminar','SolicitudController@eliminar');
+
+             //rutas para otros resultados
+            Route::post('/otro/registrar','OtrosresultadosController@store');
+            Route::get('/listadoOtros','OtrosresultadosController@index');
+            Route::post('otro/guardarEncabezado','OtrosresultadosController@guardarEncabezado');    
+            Route::post('otro/guardarCuerpo','OtrosresultadosController@guardarCuerpo');    
+            Route::get('otropdf/{id}','OtrosresultadosController@pdf');
+            
+
+            //rutas para examen coprologico
+            Route::get('/listadoCopro','CoprologicoController@index');
+            Route::post('/copro/registrar','CoprologicoController@store');
+            Route::post('copro/guardarColor','CoprologicoController@guardarColor'); 
+            Route::post('copro/guardarOlor','CoprologicoController@guardarOlor'); 
+            Route::post('copro/guardarRestos','CoprologicoController@guardarRestos');
+            Route::post('copro/guardarConsistencia','CoprologicoController@guardarConsistencia'); 
+            Route::post('copro/guardarElementos','CoprologicoController@guardarElementos'); 
+            Route::post('copro/guardarMoco','CoprologicoController@guardarMoco'); 
+            Route::post('copro/guardarPehache','CoprologicoController@guardarPehache'); 
+            Route::post('copro/guardarSangre','CoprologicoController@guardarSangre'); 
+            Route::post('copro/guardarPigmentos','CoprologicoController@guardarPigmentos'); 
+            Route::post('copro/guardarAzucares','CoprologicoController@guardarAzucares'); 
+            Route::post('copro/guardarOtros','CoprologicoController@guardarOtros'); 
+            Route::post('copro/guardarFibra','CoprologicoController@guardarFibra'); 
+            Route::post('copro/guardarFibrano','CoprologicoController@guardarFibrano'); 
+            Route::post('copro/guardarFibraveg','CoprologicoController@guardarFibraveg'); 
+            Route::post('copro/guardarGrasa','CoprologicoController@guardarGrasa'); 
+            Route::post('copro/guardarAlmidon','CoprologicoController@guardarAlmidon'); 
+            Route::post('copro/guardarLeuco','CoprologicoController@guardarLeuco'); 
+            Route::post('copro/guardarEri','CoprologicoController@guardarEri'); 
+            Route::post('copro/guardarLevadura','CoprologicoController@guardarLevadura'); 
+            Route::post('copro/guardarCristal','CoprologicoController@guardarCristal'); 
+            Route::post('copro/guardarParasito','CoprologicoController@guardarParasito'); 
+            Route::post('copro/guardarObservacion','CoprologicoController@guardarObservacion'); 
+            Route::get('copropdf/{id}','CoprologicoController@pdf');
+
         }); 
         //Rutas para Doctor
         Route::group(['middleware'=>['Doctor']],function(){

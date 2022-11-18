@@ -164,7 +164,7 @@
             
         }
         .letraresultcopro{
-            font-size: 16px;
+            font-size: 14px;
             font-family: Arial, Helvetica, sans-serif;
             text-align: center;
             color: #000000;
@@ -174,7 +174,7 @@
             
         }
         .letraRESULT1{
-            font-size: 17px;
+            font-size: 15px;
             font-family: Arial, Helvetica, sans-serif;
             text-align: center;
             color: #000000;
@@ -1474,23 +1474,23 @@
                 <td align="left">{{$child->nombreSubcategoria}}</td>
                 @if($child->descripcionResultado>$child->vmaxH)
                 @if(($child->id==58))
-                <td><font color ="#007fff">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->descripcionResultado}}</td>
                 <td>{{$child->unidadMedida}}</td>
                 <td>Hasta {{$child->vmaxH}}</td>
                 @else
-                <td><font color ="#007fff">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->descripcionResultado}}</td>
                 <td>{{$child->unidadMedida}}</td>
-                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                <td>{{$child->vminH}} {{$child->vmaxH}}</td>
                 @endif
                 @elseif($child->descripcionResultado<$child->vminH)
                 @if(($child->id==58))
-                <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->descripcionResultado}}</td>
                 <td>{{$child->unidadMedida}}</td>
                 <td>Hasta {{$child->vmaxH}}</td>
                 @else
-                <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
+                <td>{{$child->descripcionResultado}}</td>
                 <td>{{$child->unidadMedida}}</td>
-                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                <td>{{$child->vminH}} {{$child->vmaxH}}</td>
                 @endif
                 @else
                 @if(($child->id==58))
@@ -1500,7 +1500,7 @@
                 @else
                 <td>{{$child->descripcionResultado}}</td>
                 <td>{{$child->unidadMedida}}</td>
-                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                <td>{{$child->vminH}} {{$child->vmaxH}}</td>
                 @endif
                 @endif
             </tr>
@@ -1526,16 +1526,7 @@
         @endforeach
       </table>
 @endforeach
-</div>
-<div>
-            <table class="referencia">
-                <tr>
-                    <td align="left"><b>Valor de referencia:</b></td>
-                    <td><b><font color ="#007fff">ALTO</font></b><b>&nbsp;<font color ="#ff0000">BAJO</font></b></td>
-                </th>
-            </table>
-        </div>
-         
+</div>        
 
             <div>
             <table class="letrafirma">
@@ -2046,7 +2037,7 @@
       <div>
       <table class="letraresultElse" width="100%">
         <tr>
-            <th align="left">EXAMEN</th><br><br>
+           
             <th>RESULTADO</th><br><br>
             <th>U.M</th><br><br>
             <th>VALORES DE REFERENCIA</th><br><br>
@@ -2057,10 +2048,13 @@
             </tr>
             @foreach($itemp['partidas'] as $child)
             <tr>
-                <td align="left">{{$child->nombreSubcategoria}}</td>
+             
                 <td>{{$child->descripcionResultado}}</td>
                 <td>{{$child->unidadMedida}}</td>
-                <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
+                <td rowspan="3">MENOR 5.90% NORMAL NO DIABETICO <br>
+                6.0 - 7.0% BUEN CONTROL <br>
+                8.0 - 14.0 % MAL CONTROL
+                </td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             @endforeach
@@ -2068,16 +2062,6 @@
             <tr><td>&nbsp;</td></tr>
             <tr><td>&nbsp;</td></tr>
             <tr><td>&nbsp;</td></tr>
-
-            <tr>
-                <td colspan="2" align="left">MENOR 5.90% NORMAL NO DIABETICO</td>
-            </tr>
-            <tr>
-                <td colspan="2" align="left">6.0 - 7.0% BUEN CONTROL</td>
-            </tr>
-            <tr>
-                <td colspan="2" align="left">8.0 - 14.0 % MAL CONTROL</td>               
-            </tr>
             @endforeach
         <tr>
             <td>&nbsp;</td>
@@ -2090,7 +2074,7 @@
         </tr>
         @else
         <tr>
-            <th>Observaciones:</th>
+            <th>Glucosa sérica:</th>
             <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
         </tr>
         <tr><td></td></tr>
@@ -2121,129 +2105,6 @@
 
 </body>
      
-    @elseif($itemp['categoria']->id==19)
-    <body class="borde">
-    <header>
-        <img src="img\logo5.png" width="700" height="130"class="img" alignt="center" style="padding-bottom: 40px; padding-top: 30px;">
-    </header>
-    <footer>
-        <table>
-        <tr>
-            <td>
-                <p class="izq">
-                Laboratorio de Análisis Clínicos San Miguel
-                </p>
-            </td>
-            <td>
-            <p class="page">
-                Pág.
-            </p>
-            </td>
-        </tr>
-        </table>
-  </footer>
-
-  <div class="div" >
-    
-        @foreach($arreglo as $item)
-        <div>
-            <table class="letratablam">
-                <tr>
-                    <td>INFORMACIÓN DEL PACIENTE</td>
-                </tr>
-            </table>
-        </div>
-        <div>
-        <table class="datos" width="100%" style="border-collapse: collapse;  color: #e66900;">
-          <tr>
-            <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
-            <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}} </td>
-            <td style="background-color: #fdddca;">EDAD</td>
-            <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
-            <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
-            <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
-          </tr>
-          <tr>
-            <td style="background-color: #fdddca;">FECHA </td>
-            <td >&nbsp;&nbsp;{{$fecha_final}}</td>
-            <td style="background-color: #fdddca;">SEXO</td>
-            <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
-          </tr>
-        </table>
-        </div>
-      <div>
-      @foreach($item['categorias'] as $itemp)  
-      <table class="letratablamcopro">
-        <tr>
-             <th align="left" colspan="2">{{$itemp['categoria']->nombreCategoria}}</th>
-        </tr>
-        <tr> <td>&nbsp;</td></tr>
-        @endforeach
-      </table>   
-      </div>  
-      <div>
-      <table class="letraresultcopro" width="100%">
-        <tr>
-            <th align="left" colspan="2">PARÁMETRO</th><br><br>
-            <th>RESULTADO</th><br><br>
-            <th>VALOR DE REFERENCIA</th><br><br>
-           
-        </tr>
-            @foreach($item['categorias'] as $itemp)
-            <tr>
-               <td>&nbsp;</td>
-            </tr>
-            @foreach($itemp['partidas'] as $child)
-            <tr>
-                <td align="left" colspan="2">{{$child->nombreSubcategoria}}</td>
-                <td>{{$child->descripcionResultado}}</td>
-                <td>{{$child->unidadMedida}}</td>      
-            </tr>
-            @endforeach
-    @endforeach
-        <tr>
-            <td>&nbsp;</td>
-        </tr>
-        <tr><td></td></tr>
-        @foreach($item['categorias'] as $itemp)
-        @if($itemp['categoria']->observaciones==null)
-        <tr>
-            <td>&nbsp;</td>
-        </tr>
-        @else
-        <tr>
-            <th>Observaciones:</th>
-            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
-        </tr>
-        <tr><td></td></tr>
-        @endif
-        @endforeach
-      </table>
-@endforeach
-</div>
-        
-         
-
-            <div>
-            <table class="letrafirma">
-                <tr>
-                    <th>ATENTAMENTE</th>
-                </tr>
-                <tr>
-                    <th>&nbsp;</th>
-                </tr>
-                <tr >
-                    <th class="linea">Q.F.B MALENY GUZMAN HERNANDEZ</th>
-                </tr>
-                <tr>
-                    <th>CED.PROF 10307821</th>
-                </tr>
-            </table>
-            </div>
-           
-
-        </div>
-</body>
 @elseif($itemp['categoria']->id==16)
 <body class="borde">
     <header>

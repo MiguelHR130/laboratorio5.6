@@ -7788,6 +7788,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('user', __webpack_require_
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('solicitud', __webpack_require__(281));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('resultado', __webpack_require__(288));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('otros', __webpack_require__(295));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('copro', __webpack_require__(302));
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   el: '#app',
@@ -66425,11 +66426,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -66602,7 +66598,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.errorMostrarmsj = []; //se inicializa array vacio
             //si la condicion esta vacia se inserta con push que el nombre no puede estar vacio
             if (!this.nombreSubcategoria) this.errorMostrarmsj.push("el nombre no puede estar vacio");
-            if (!this.unidadMedida) this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if (!this.idCategorias) this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if (this.errorMostrarmsj.length) this.errorCajatexto = 1;
             return this.errorCajatexto;
@@ -66670,8 +66665,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
-    _vm._m(0),
-    _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
@@ -66800,7 +66793,7 @@ var render = function() {
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -67401,20 +67394,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ol", { staticClass: "breadcrumb" }, [
-      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Home")]),
-      _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item" }, [
-        _c("a", { attrs: { href: "#" } }, [_vm._v("Admin")])
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Dashboard")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -69726,6 +69705,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -69886,6 +69866,25 @@ Vue.component('multiselect', __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___defau
         descargarSobre: function descargarSobre(data) {
 
             window.open('sobrepdf/' + data.registro.paciente_id, '_blank');
+        },
+        eliminarSolicitud: function eliminarSolicitud(data) {
+
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'La solicitud ha sido eliminada',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            var me = this;
+            //se envian 2 parametros, ruta y valores        
+            axios.post('/solicitud/eliminar', {
+                'id': data
+            }).then(function (response) {
+                me.listarSolicitudes();
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
 
 
@@ -70112,6 +70111,27 @@ var render = function() {
                               }
                             },
                             [_vm._v("Descargar sobre")]
+                          ),
+                          _vm._v("     \n                             "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger",
+                              attrs: {
+                                type: "button",
+                                "data-toggle": "tooltip",
+                                "data-placement": "right",
+                                title: "clic para actualizar paciente"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.eliminarSolicitud(
+                                    props.row.registro.id
+                                  )
+                                }
+                              }
+                            },
+                            [_vm._v("Eliminar")]
                           )
                         ]
                       )
@@ -72894,6 +72914,2461 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-50a6ac0e", module.exports)
+  }
+}
+
+/***/ }),
+/* 302 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(303)
+  __webpack_require__(305)
+}
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(307)
+/* template */
+var __vue_template__ = __webpack_require__(308)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Copro.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d3f702cc", Component.options)
+  } else {
+    hotAPI.reload("data-v-d3f702cc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 303 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(304);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("3fe5ddd9", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d3f702cc\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Copro.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d3f702cc\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Copro.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 304 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.modal-content{\n    width: 100% !important;\n    position: absolute !important;\n}\n.mostrar{\n    display: list-item !important;\n    opacity: 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n.div-error{\n    display:flex;\n    justify-content: center;\n}\n.text-error{\n    justify-content: center;\n    color: red !important;\n    font-weight: bold;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 305 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(306);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("c338a674", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d3f702cc\",\"scoped\":false,\"hasInlineConfig\":true}!./vue-multiselect.min.css", function() {
+     var newContent = require("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-d3f702cc\",\"scoped\":false,\"hasInlineConfig\":true}!./vue-multiselect.min.css");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 306 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nfieldset[disabled] .multiselect{pointer-events:none\n}\n.multiselect__spinner{position:absolute;right:1px;top:1px;width:48px;height:35px;background:#fff;display:block\n}\n.multiselect__spinner:after,.multiselect__spinner:before{position:absolute;content:\"\";top:50%;left:50%;margin:-8px 0 0 -8px;width:16px;height:16px;border-radius:100%;border:2px solid transparent;border-top-color:#41b883;box-shadow:0 0 0 1px transparent\n}\n.multiselect__spinner:before{animation:spinning 2.4s cubic-bezier(.41,.26,.2,.62);animation-iteration-count:infinite\n}\n.multiselect__spinner:after{animation:spinning 2.4s cubic-bezier(.51,.09,.21,.8);animation-iteration-count:infinite\n}\n.multiselect__loading-enter-active,.multiselect__loading-leave-active{transition:opacity .4s ease-in-out;opacity:1\n}\n.multiselect__loading-enter,.multiselect__loading-leave-active{opacity:0\n}\n.multiselect,.multiselect__input,.multiselect__single{font-family:inherit;font-size:16px;-ms-touch-action:manipulation;touch-action:manipulation\n}\n.multiselect{box-sizing:content-box;display:block;position:relative;width:100%;min-height:40px;text-align:left;color:#35495e\n}\n.multiselect *{box-sizing:border-box\n}\n.multiselect:focus{outline:none\n}\n.multiselect--disabled{background:#ededed;pointer-events:none;opacity:.6\n}\n.multiselect--active{z-index:50\n}\n.multiselect--active:not(.multiselect--above) .multiselect__current,.multiselect--active:not(.multiselect--above) .multiselect__input,.multiselect--active:not(.multiselect--above) .multiselect__tags{border-bottom-left-radius:0;border-bottom-right-radius:0\n}\n.multiselect--active .multiselect__select{transform:rotate(180deg)\n}\n.multiselect--above.multiselect--active .multiselect__current,.multiselect--above.multiselect--active .multiselect__input,.multiselect--above.multiselect--active .multiselect__tags{border-top-left-radius:0;border-top-right-radius:0\n}\n.multiselect__input,.multiselect__single{position:relative;display:inline-block;min-height:20px;line-height:20px;border:none;border-radius:5px;background:#fff;padding:0 0 0 5px;width:100%;transition:border .1s ease;box-sizing:border-box;margin-bottom:8px;vertical-align:top\n}\n.multiselect__input:-ms-input-placeholder{color:#35495e\n}\n.multiselect__input::placeholder{color:#35495e\n}\n.multiselect__tag~.multiselect__input,.multiselect__tag~.multiselect__single{width:auto\n}\n.multiselect__input:hover,.multiselect__single:hover{border-color:#cfcfcf\n}\n.multiselect__input:focus,.multiselect__single:focus{border-color:#a8a8a8;outline:none\n}\n.multiselect__single{padding-left:5px;margin-bottom:8px\n}\n.multiselect__tags-wrap{display:inline\n}\n.multiselect__tags{min-height:40px;display:block;padding:8px 40px 0 8px;border-radius:5px;border:1px solid #e8e8e8;background:#fff;font-size:14px\n}\n.multiselect__tag{position:relative;display:inline-block;padding:4px 26px 4px 10px;border-radius:5px;margin-right:10px;color:#fff;line-height:1;background:#41b883;margin-bottom:5px;white-space:nowrap;overflow:hidden;max-width:100%;text-overflow:ellipsis\n}\n.multiselect__tag-icon{cursor:pointer;margin-left:7px;position:absolute;right:0;top:0;bottom:0;font-weight:700;font-style:normal;width:22px;text-align:center;line-height:22px;transition:all .2s ease;border-radius:5px\n}\n.multiselect__tag-icon:after{content:\"\\D7\";color:#266d4d;font-size:14px\n}\n.multiselect__tag-icon:focus,.multiselect__tag-icon:hover{background:#369a6e\n}\n.multiselect__tag-icon:focus:after,.multiselect__tag-icon:hover:after{color:#fff\n}\n.multiselect__current{min-height:40px;overflow:hidden;padding:8px 30px 0 12px;white-space:nowrap;border-radius:5px;border:1px solid #e8e8e8\n}\n.multiselect__current,.multiselect__select{line-height:16px;box-sizing:border-box;display:block;margin:0;text-decoration:none;cursor:pointer\n}\n.multiselect__select{position:absolute;width:40px;height:38px;right:1px;top:1px;padding:4px 8px;text-align:center;transition:transform .2s ease\n}\n.multiselect__select:before{position:relative;right:0;top:65%;color:#999;margin-top:4px;border-color:#999 transparent transparent;border-style:solid;border-width:5px 5px 0;content:\"\"\n}\n.multiselect__placeholder{color:#adadad;display:inline-block;margin-bottom:10px;padding-top:2px\n}\n.multiselect--active .multiselect__placeholder{display:none\n}\n.multiselect__content-wrapper{position:absolute;display:block;background:#fff;width:100%;max-height:240px;overflow:auto;border:1px solid #e8e8e8;border-top:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;z-index:50;-webkit-overflow-scrolling:touch\n}\n.multiselect__content{list-style:none;display:inline-block;padding:0;margin:0;min-width:100%;vertical-align:top\n}\n.multiselect--above .multiselect__content-wrapper{bottom:100%;border-bottom-left-radius:0;border-bottom-right-radius:0;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom:none;border-top:1px solid #e8e8e8\n}\n.multiselect__content::webkit-scrollbar{display:none\n}\n.multiselect__element{display:block\n}\n.multiselect__option{display:block;padding:12px;min-height:40px;line-height:16px;text-decoration:none;text-transform:none;vertical-align:middle;position:relative;cursor:pointer;white-space:nowrap\n}\n.multiselect__option:after{top:0;right:0;position:absolute;line-height:40px;padding-right:12px;padding-left:20px;font-size:13px\n}\n.multiselect__option--highlight{background:#41b883;outline:none;color:#fff\n}\n.multiselect__option--highlight:after{content:attr(data-select);background:#41b883;color:#fff\n}\n.multiselect__option--selected{background:#f3f3f3;color:#35495e;font-weight:700\n}\n.multiselect__option--selected:after{content:attr(data-selected);color:silver\n}\n.multiselect__option--selected.multiselect__option--highlight{background:#ff6a6a;color:#fff\n}\n.multiselect__option--selected.multiselect__option--highlight:after{background:#ff6a6a;content:attr(data-deselect);color:#fff\n}\n.multiselect--disabled .multiselect__current,.multiselect--disabled .multiselect__select{background:#ededed;color:#a6a6a6\n}\n.multiselect__option--disabled{background:#ededed!important;color:#a6a6a6!important;cursor:text;pointer-events:none\n}\n.multiselect__option--group{background:#ededed;color:#35495e\n}\n.multiselect__option--group.multiselect__option--highlight{background:#35495e;color:#fff\n}\n.multiselect__option--group.multiselect__option--highlight:after{background:#35495e\n}\n.multiselect__option--disabled.multiselect__option--highlight{background:#dedede\n}\n.multiselect__option--group-selected.multiselect__option--highlight{background:#ff6a6a;color:#fff\n}\n.multiselect__option--group-selected.multiselect__option--highlight:after{background:#ff6a6a;content:attr(data-deselect);color:#fff\n}\n.multiselect-enter-active,.multiselect-leave-active{transition:all .15s ease\n}\n.multiselect-enter,.multiselect-leave-active{opacity:0\n}\n.multiselect__strong{margin-bottom:8px;line-height:20px;display:inline-block;vertical-align:top\n}\n[dir=rtl] .multiselect{text-align:right\n}\n[dir=rtl] .multiselect__select{right:auto;left:1px\n}\n[dir=rtl] .multiselect__tags{padding:8px 8px 0 40px\n}\n[dir=rtl] .multiselect__content{text-align:right\n}\n[dir=rtl] .multiselect__option:after{right:auto;left:0\n}\n[dir=rtl] .multiselect__clear{right:auto;left:12px\n}\n[dir=rtl] .multiselect__spinner{right:auto;left:1px\n}\n@keyframes spinning{\n0%{transform:rotate(0)\n}\nto{transform:rotate(2turn)\n}\n}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 307 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Herramientas_utilerias_js__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_multiselect__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+var config = __webpack_require__(9).call(this);
+
+
+// register globally
+Vue.component('multiselect', __WEBPACK_IMPORTED_MODULE_1_vue_multiselect___default.a);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            dataDetalle: '',
+            detalle: false,
+            fecha: '',
+            paciente: '',
+            id: null,
+            registrosolicitud: '',
+            arraySolicitud: [],
+            arrayPacientes: [], //creamos un array para que reciba los datos de la consulta,
+            arrayCategoria: [],
+            categoriaArray: [],
+            pacientesArray: [],
+            nombreCategoria: '',
+            modal: 0,
+            tituloModal: '',
+            tipoAccion: 0,
+            errorCajatexto: 0,
+            errorMostrarmsj: [],
+            columns: ['id', 'nombreConcatenado', 'fecha'],
+            tableData: [],
+            options: {
+                headings: {
+                    fecha: 'Fecha de solicitud',
+                    nombreConcatenado: 'Paciente',
+                    id: 'Acción'
+                },
+                pagination: {
+                    'total': 0,
+                    'current_page': 0,
+                    'per_page': 0,
+                    'last_page': 0,
+                    'from': 0,
+                    'to': 0
+                },
+                perPage: 10,
+                perPageValues: [],
+                skin: config.skin,
+                sortIcon: config.sortIcon,
+                sortable: ['nombreConcatenado', 'fecha'],
+                filterable: ['nombreConcatenado', 'fecha'],
+                filterByColumn: true,
+                texts: config.texts
+            }
+
+        };
+    },
+
+    computed: {},
+    methods: {
+        //se listan los pacientes desde la base de datos
+        listarSolicitudes: function listarSolicitudes() {
+            var me = this; //creamos variable me
+            var url = '/listadoCopro';
+            axios.get(url).then(function (response) {
+                me.tableData = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        listadodePacientes: function listadodePacientes() {
+            var me = this;
+            axios.get('/listadoPaciente').then(function (response) {
+                me.arrayPacientes = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        listarCategoria: function listarCategoria() {
+            var me = this;
+            axios.get('/listadodeCategoria').then(function (response) {
+                me.arrayCategoria = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        registrarPacientes: function registrarPacientes() {
+            if (this.validarRegistro()) {
+                return;
+            }
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Los datos de la solicitud han sido almacenados',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            var me = this;
+            //se envian 2 parametros, ruta y valores
+            axios.post('/copro/registrar', {
+                'fecha': this.fecha,
+                'paciente': this.paciente
+
+            }).then(function (response) {
+                me.cerrarModal();
+                me.listarSolicitudes();
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        actualizarPaciente: function actualizarPaciente() {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Los datos de la solicitud se han actualizado',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            var me = this;
+            //se envian 2 parametros, ruta y valores
+            axios.put('/solicitud/actualizar', {
+                'fecha': this.fecha,
+                'paciente': this.paciente,
+                'categoriaArray': this.categoriaArray,
+                'id': this.id
+
+            }).then(function (response) {
+                me.cerrarModal();
+                me.listarSolicitudes();
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        validarRegistro: function validarRegistro() {
+            this.errorCajatexto = 0; //se inicializa en 0
+            this.errorMostrarmsj = []; //se inicializa array vacio
+            //si la condicion esta vacia se inserta con push que el nombre no puede estar vacio
+            if (!this.paciente) this.errorMostrarmsj.push("el nombre no puede estar vacio");
+            if (!this.fecha) this.errorMostrarmsj.push("fecha  no puede estar vacio");
+            if (this.errorMostrarmsj.length) this.errorCajatexto = 1;
+            return this.errorCajatexto;
+        },
+        cerrarModal: function cerrarModal() {
+            this.modal = 0;
+            this.tituloModal = '';
+            this.fecha = '';
+            this.paciente = '';
+            this.categoriaArray = '';
+        },
+        descargar: function descargar(data) {
+
+            window.open('copropdf/' + data, '_blank');
+        },
+        descargarSobre: function descargarSobre(data) {
+
+            window.open('sobrepdf/' + data.idPaciente, '_blank');
+        },
+
+
+        //modelo=nombre
+        //accion:registrar o actualizar
+        //data:objeto de la fila de la tabla paciente
+        abrirModal: function abrirModal(modelo, accion) {
+            var _this = this;
+
+            var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+
+            switch (modelo) {
+                case "solicitud":
+                    {
+                        switch (accion) {
+                            case 'registrar':
+                                {
+                                    this.modal = 1;
+                                    this.tituloModal = 'Registrar Solicitud';
+                                    this.fecha = '';
+                                    this.paciente = '';
+                                    this.tipoAccion = 1;
+                                    break;
+                                }
+                            case 'actualizar':
+                                {
+
+                                    this.modal = 1;
+                                    this.tituloModal = 'Actualizar Solicitud';
+                                    this.tipoAccion = 2;
+                                    this.id = data['id'];
+                                    this.fecha = data.registro.fecha;
+                                    this.paciente = data.registro.paciente_id;
+
+                                    data.categorias.forEach(function (item, i) {
+                                        _this.categoriaArray.push({ id: item.categoria.id, nombres: item.categoria.nombreCategoria });
+                                    });
+                                    break;
+                                }
+                        }
+                    }
+            }
+        },
+        guardarResultado: function guardarResultado(idRegistro, data, idCategoria) {
+
+            axios.post('solicitud/guardaresultados', {
+                'idRegistro': idRegistro,
+                'data': data.target.value,
+                'idCategoria': idCategoria
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarColor: function guardarColor(idPaciente, data) {
+
+            axios.post('copro/guardarColor', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarOlor: function guardarOlor(idPaciente, data) {
+
+            axios.post('copro/guardarOlor', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarRestos: function guardarRestos(idPaciente, data) {
+
+            axios.post('copro/guardarRestos', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarConsistencia: function guardarConsistencia(idPaciente, data) {
+
+            axios.post('copro/guardarConsistencia', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarElementos: function guardarElementos(idPaciente, data) {
+
+            axios.post('copro/guardarElementos', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarMoco: function guardarMoco(idPaciente, data) {
+
+            axios.post('copro/guardarMoco', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarPehache: function guardarPehache(idPaciente, data) {
+
+            axios.post('copro/guardarPehache', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarSangre: function guardarSangre(idPaciente, data) {
+
+            axios.post('copro/guardarSangre', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarPigmentos: function guardarPigmentos(idPaciente, data) {
+
+            axios.post('copro/guardarPigmentos', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarAzucares: function guardarAzucares(idPaciente, data) {
+
+            axios.post('copro/guardarAzucares', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarOtros: function guardarOtros(idPaciente, data) {
+
+            axios.post('copro/guardarOtros', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarFibra: function guardarFibra(idPaciente, data) {
+
+            axios.post('copro/guardarFibra', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarFibrano: function guardarFibrano(idPaciente, data) {
+
+            axios.post('copro/guardarFibrano', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarFibraveg: function guardarFibraveg(idPaciente, data) {
+
+            axios.post('copro/guardarFibraveg', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarGrasa: function guardarGrasa(idPaciente, data) {
+
+            axios.post('copro/guardarGrasa', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarAlmidon: function guardarAlmidon(idPaciente, data) {
+
+            axios.post('copro/guardarAlmidon', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarLeuco: function guardarLeuco(idPaciente, data) {
+
+            axios.post('copro/guardarLeuco', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarEri: function guardarEri(idPaciente, data) {
+
+            axios.post('copro/guardarEri', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarLevadura: function guardarLevadura(idPaciente, data) {
+
+            axios.post('copro/guardarLevadura', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarCristal: function guardarCristal(idPaciente, data) {
+
+            axios.post('copro/guardarCristal', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarParasito: function guardarParasito(idPaciente, data) {
+
+            axios.post('copro/guardarParasito', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        },
+        guardarObservacion: function guardarObservacion(idPaciente, data) {
+
+            axios.post('copro/guardarObservacion', {
+
+                'idPaciente': idPaciente,
+                'data': data.target.value
+
+            }).then(function (response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Correcto',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
+        }
+    },
+    mounted: function mounted() {
+        //se carga la lista de pacientes para ser mostrada
+        this.listarCategoria();
+        this.listadodePacientes();
+        this.listarSolicitudes();
+    }
+});
+
+/***/ }),
+/* 308 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("main", { staticClass: "main" }, [
+    _c("div", { staticClass: "container-fluid" }, [
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _c("i", { staticClass: "fa fa-align-justify" }),
+          _vm._v(" Listado Análisis Coprológico "),
+          _c("br"),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.detalle,
+                  expression: "detalle"
+                }
+              ],
+              staticClass: "btn btn-secondary float-sm-right",
+              attrs: {
+                "data-toggle": "tooltip",
+                "data-placement": "right",
+                title: "Regresa a listado de solicitudes"
+              },
+              on: {
+                click: function($event) {
+                  _vm.detalle = false
+                  _vm.listarSolicitudes()
+                }
+              }
+            },
+            [_vm._v(" Regresar ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.detalle,
+                  expression: "!detalle"
+                }
+              ],
+              staticClass: "btn btn-secondary float-sm-right",
+              attrs: {
+                type: "button",
+                "data-toggle": "tooltip",
+                "data-placement": "right",
+                title: "Agregar solicitud"
+              },
+              on: {
+                click: function($event) {
+                  return _vm.abrirModal("solicitud", "registrar")
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "icon-user-follow" }),
+              _vm._v(" Nuevo\n                 ")
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "card-body" },
+          [
+            _c("v-client-table", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.detalle,
+                  expression: "!detalle"
+                }
+              ],
+              ref: "myTable",
+              attrs: {
+                columns: _vm.columns,
+                data: _vm.tableData,
+                options: _vm.options
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "id",
+                  fn: function(props) {
+                    return [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "btn-group btn-group-sm",
+                          attrs: { role: "group", "aria-label": "group" }
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-warning",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.detalle = true
+                                  _vm.dataDetalle = props.row
+                                }
+                              }
+                            },
+                            [_vm._v("Asignar resultado")]
+                          ),
+                          _vm._v(" \n                             "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.descargarSobre(props.row)
+                                }
+                              }
+                            },
+                            [_vm._v("Descargar sobre")]
+                          )
+                        ]
+                      )
+                    ]
+                  }
+                },
+                {
+                  key: "paciente",
+                  fn: function(props) {
+                    return [
+                      _c("div", [
+                        _c("span", { staticClass: "help-block" }, [
+                          _vm._v(_vm._s(props.row.nombreConcatenado))
+                        ]),
+                        _c("br")
+                      ])
+                    ]
+                  }
+                },
+                {
+                  key: "fecha",
+                  fn: function(props) {
+                    return [
+                      _c("div", [
+                        _c("span", { staticClass: "help-block" }, [
+                          _vm._v(_vm._s(props.row.fecha))
+                        ]),
+                        _c("br")
+                      ])
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.detalle,
+                    expression: "detalle"
+                  }
+                ]
+              },
+              [
+                [
+                  _c("div", { staticClass: "table-responsive" }, [
+                    _c("table", { staticClass: "table" }, [
+                      _c("tr", [
+                        _c("th", { attrs: { colspan: "4" } }, [
+                          _c("h4", [
+                            _vm._v(
+                              "Resultados de laboratorio de: " +
+                                _vm._s(_vm.dataDetalle.nombreConcatenado) +
+                                " "
+                            )
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("COLOR")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.color },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarColor(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("AMARILLO-CAFE")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("OLOR")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.olor },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarOlor(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("CARACTERÍSTICO")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("RESTOS ALIMENTICIOS")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: {
+                              value: _vm.dataDetalle.restos_alimenticios
+                            },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarRestos(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("ESCASOS")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("CONSISTENCIA")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.consistencia },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarConsistencia(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("PASTOSA")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("ELEMENTOS MACROSCÓPICOS")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: {
+                              value: _vm.dataDetalle.elementos_macroscopicos
+                            },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarElementos(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("NEGATIVO")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("MOCO FECAL")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.moco_fecal },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarMoco(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("NEGATIVO")])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("PH")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.ph },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarPehache(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("ALCALINO")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("SANGRE OCULTA")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.sangre_oculta },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarSangre(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("NEGATIVO")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("PIGMENTOS BILIARES")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.pig_biliares },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarPigmentos(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("NEGATIVO")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("AZUCARES REDUCTORES")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: {
+                              value: _vm.dataDetalle.azucares_reductores
+                            },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarAzucares(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("NEGATIVO")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("OTROS")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.otros },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarOtros(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("NEGATIVO")])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("FIBRAS DIGERIDAS")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: {
+                              value: _vm.dataDetalle.fibras_digeridas
+                            },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarFibra(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("ESCASAS")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("FIBRAS NO DIGERIDAS")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: {
+                              value: _vm.dataDetalle.fibras_nodigeridas
+                            },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarFibrano(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("NEGATIVO")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("FIBRAS VEGETALES")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: {
+                              value: _vm.dataDetalle.fibras_vegetales
+                            },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarFibraveg(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("ESCASAS")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("GRASAS")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.grasas },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarGrasa(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("ESCASOS")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("ALMIDONES")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.almidones },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarAlmidon(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("ESCASOS")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("LEUCOCITOS")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.leucocitos },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarLeuco(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("5-7 X CAMPO")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("ERITROCITOS")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.eritrocitos },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarEri(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("3-5 X CAMPO")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("LEVADURAS")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.levaduras },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarLevadura(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("NEGATIVO")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("CRISTALES")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.cristales },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarCristal(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("NEGATIVO")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("PARÁSITOS")]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.dataDetalle.parasitos },
+                            on: {
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "tab",
+                                    9,
+                                    $event.key,
+                                    "Tab"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarParasito(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("NEGATIVO")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", { attrs: { colspan: "2" } }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "exampleFormControlTextarea1" } },
+                            [_vm._v("Observaciones:")]
+                          ),
+                          _vm._v(" "),
+                          _c("textarea", {
+                            staticClass: "form-control",
+                            attrs: {
+                              id: "exampleFormControlTextarea1",
+                              rows: "3"
+                            },
+                            domProps: { value: _vm.dataDetalle.observaciones },
+                            on: {
+                              keyup: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "enter",
+                                    13,
+                                    $event.key,
+                                    "Enter"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.guardarObservacion(
+                                  _vm.dataDetalle.idPaciente,
+                                  $event
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-info",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.descargar(
+                                    _vm.dataDetalle.idPaciente
+                                  )
+                                }
+                              }
+                            },
+                            [_vm._v("Descargar resultado de laboratorio")]
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
+                ],
+                _vm._v(" "),
+                [_c("h5"), _vm._v(" "), _vm._m(4)]
+              ],
+              2
+            )
+          ],
+          1
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        class: { mostrar: _vm.modal },
+        staticStyle: { display: "none" },
+        attrs: {
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "myModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-primary modal-lg",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("h4", {
+                  staticClass: "modal-title",
+                  domProps: { textContent: _vm._s(_vm.tituloModal) }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: { type: "button", "aria-label": "Close" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModal()
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "form",
+                  {
+                    staticClass: "form-horizontal",
+                    attrs: {
+                      action: "",
+                      method: "post",
+                      enctype: "multipart/form-data"
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Seleccione fecha de análisis.")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.fecha,
+                              expression: "fecha"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "date",
+                            placeholder: "(*) Ingrese el nombre del paciente",
+                            "data-vv-as": "fecha"
+                          },
+                          domProps: { value: _vm.fecha },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.fecha = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errorCajatexto,
+                            expression: "errorCajatexto"
+                          }
+                        ],
+                        staticClass: "form-group row text-error"
+                      },
+                      [
+                        _c("span", { staticClass: "help-block" }, [
+                          _vm._v("(*) Ingrese fecha ")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Agregar paciente ")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-9" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.paciente,
+                                expression: "paciente"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              id: "id",
+                              name: "id",
+                              "data-vv-as": "paciente"
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.paciente = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "0" } }, [
+                              _vm._v("---Nombre---")
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.arrayPacientes, function(item) {
+                              return _c(
+                                "option",
+                                { key: item.id, domProps: { value: item.id } },
+                                [_vm._v(_vm._s(item.nombreConcatenado))]
+                              )
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errorCajatexto,
+                            expression: "errorCajatexto"
+                          }
+                        ],
+                        staticClass: "form-group row text-error"
+                      },
+                      [
+                        _c("span", { staticClass: "help-block" }, [
+                          _vm._v("(*) Seleccione paciente")
+                        ])
+                      ]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModal()
+                      }
+                    }
+                  },
+                  [_vm._v("Cerrar")]
+                ),
+                _vm._v(" "),
+                _vm.tipoAccion == 1
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.registrarPacientes()
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  : _vm._e()
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { attrs: { width: "10%" } }, [_vm._v("Parámetro")]),
+      _vm._v(" "),
+      _c("th", { attrs: { width: "30%" } }, [_vm._v("Resultado")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Valores de Referencia")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { attrs: { colspan: "3", align: "center" } }, [
+        _vm._v("EXAMEN FISICO")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { attrs: { colspan: "3", align: "center" } }, [
+        _vm._v("EXAMEN QUÍMICO")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { attrs: { colspan: "3", align: "center" } }, [
+        _vm._v("EXAMEN MICROSCÓPICO")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "table-responsive" }, [
+      _c("table", { staticClass: "table" }, [
+        _c("tr", [_c("td", { attrs: { colspan: "2" } })]),
+        _vm._v(" "),
+        _c("tr", [_c("td")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-d3f702cc", module.exports)
   }
 }
 

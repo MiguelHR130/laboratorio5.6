@@ -77,7 +77,7 @@
                color: #000000;
                position: fixed;
                top: 210px;
-               left: 210px; 
+               left: 70px; 
                border-width: 1px;
                border-style: solid;
                border-color: white;
@@ -111,6 +111,13 @@
             border: solid;
             margin: 0;
             padding: 0;
+        }
+        .observaciones{
+               font-size: 12px;
+               font-family: Arial, Helvetica, sans-serif;
+               position: fixed;
+               top: 850px;
+               left: 50px; 
         }
 
     </style>
@@ -172,22 +179,55 @@
         </div>  
         <div>
             <table class="letraRESULT" width="100%">
-                <tr>
-                    <th align="left">{{$otropdf->encabezado}}</th><br><br>
-                </tr>        
-                <tr>
-                   <td>
-                        <pre>
-                        {{$otropdf->cuerpo}}
-                        </pre>
-                   </td>
-                        
-                   
-                    
-                </tr>            
+            <tr align="left">
+            <th>PARAMETRO</th><br><br>
+            <th>RESULTADO</th><br><br>
+            <th>VALORES DE REFERENCIA</th><br><br>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr><td align="left" colspan="3"><b>EXAMEN FISICO</b> </td></tr>
+            <tr><td>COLOR</td><td>{{$otropdf->color}}</td><td>AMARILLO-CAFE</td></tr>
+            <tr><td>OLOR</td><td>{{$otropdf->olor}}</td><td>CARACTERISTICO</td></tr>
+            <tr><td>RESTOS ALIMENTICIOS</td><td>{{$otropdf->restos_alimenticios}}</td><td>ESCASOS</td></tr>
+            <tr><td>CONSISTENCIA</td><td>{{$otropdf->consistencia}}</td><td>PASTOSA</td></tr>
+            <tr><td>ELEMENTOS MACROSCOPICOS</td><td>{{$otropdf->elementos_macroscopicos}}</td><td>NEGATIVO</td></tr>
+            <tr><td>MOCO FECAL </td><td>{{$otropdf->moco_fecal}}</td><td>NEGATIVO</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr><td align="left" colspan="3"><b>EXAMEN QUIMICO</b> </td></tr></tr>
+            <tr><td>PH</td><td>{{$otropdf->ph}}</td><td>ALCALINO</td></tr>
+            <tr><td>SANGRE OCULTA</td><td>{{$otropdf->sangre_oculta}}</td><td>NEGATIVO</td></tr>
+            <tr><td>PIG. BILIARES</td><td>{{$otropdf->pig_biliares}}</td><td>NEGATIVO</td></tr>
+            <tr><td>AZUCARES REDUCTORES</td><td>{{$otropdf->azucares_reductores}}</td><td>NEGATIVO</td></tr>
+            <tr><td>OTROS</td><td>{{$otropdf->otros}}</td><td>NEGATIVO</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr><td align="left" colspan="3"><b>EXAMEN MICROSCÓPICO</b> </td></tr>
+            <tr><td>FIBRAS DIGERIDAS</td><td>{{$otropdf->fibras_digeridas}}</td><td>ESCASAS</td></tr>
+            <tr><td>FIBRAS NO DIGERIDAS</td><td>{{$otropdf->fibras_nodigeridas}}</td><td>NEGATIVO</td></tr>
+            <tr><td>FIBRAS VEGETALES</td><td>{{$otropdf->fibras_vegetales}}</td><td>ESCASAS</td></tr>
+            <tr><td>GRASAS</td><td>{{$otropdf->grasas}}</td><td>ESCASOS</td></tr>
+            <tr><td>ALMIDONES</td><td>{{$otropdf->almidones}}</td><td>ESCASOS</td></tr>
+            <tr><td>LEUCOCITOS</td><td>{{$otropdf->leucocitos}}</td><td>5 – 7 X CAMPO</td></tr>
+            <tr><td>ERITROCITOS</td><td>{{$otropdf->eritrocitos}}</td><td>3 – 5  X CAMPO</td></tr>
+            <tr><td>LEVADURAS</td><td>{{$otropdf->levaduras}}</td><td>NEGATIVO</td></tr>
+            <tr><td>CRISTALES</td><td>{{$otropdf->cristales}}</td><td>NEGATIVO</td></tr>
+            <tr><td>PARÁSITOS</td><td>{{$otropdf->parasitos}}</td><td>NEGATIVO</td></tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr><td>&nbsp;</td></tr>
             </table>
-       
         </div>
+
+        <div>
+            <table class="observaciones">
+            <tr>
+            <td><b>Observaciones:</b></td>
+            </tr>
+            <tr>
+            <td colspan="3"><pre>{{$otropdf->observaciones}}</pre></td>
+            </tr>
+            </table>
+        </div>
+
+       
         <div>
             <table class="letrafirma">
                 <tr>

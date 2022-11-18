@@ -19,6 +19,9 @@
                             <li @click="menu=9" class="nav-item">
                                 <a class="nav-link" href="#"><i class="icon-bag"></i> Asignar otros resultados</a>
                             </li>
+                            <li @click="menu=11" class="nav-item">
+                                <a class="nav-link" href="#"><i class="icon-bag"></i> Análisis Coprológico</a>
+                            </li>
                         </ul>|
                     </li>
                     <li class="nav-item nav-dropdown">

@@ -44,7 +44,7 @@
             </template>
 
             <template v-if="menu==11">
-                <h1>cont menu 11</h1>
+                <copro></copro>
             </template>
 
             <template v-if="menu==12">
@@ -74,6 +74,10 @@
             
             <template v-if="menu==9">
                 <otros></otros>
+            </template>
+            
+            <template v-if="menu==11">
+                <copro></copro>
             </template>
                
             @elseif(Auth::user()->idrol==3)

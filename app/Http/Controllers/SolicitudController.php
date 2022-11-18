@@ -332,4 +332,15 @@ class SolicitudController extends Controller
       }
       return $resultado;
     }
+
+    public function eliminar(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+        $eliminarSolicitud = Solicitud::findOrFail($request->id);
+        $eliminarSolicitud->delete();
+
+        return response()->json(array(
+            'status' => true
+        ));
+    }
 }

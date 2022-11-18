@@ -31,6 +31,7 @@ Vue.component('user',require('./components/User.vue'));
 Vue.component('solicitud',require('./components/Solicitud.vue'));
 Vue.component('resultado',require('./components/Resultados.vue'));
 Vue.component('otros',require('./components/Otrosresultados.vue'));
+Vue.component('copro',require('./components/Copro.vue'));
 
 
 

@@ -1,11 +1,6 @@
 <template>
     <main class="main">
        <!-- Breadcrumb -->
-       <ol class="breadcrumb">
-           <li class="breadcrumb-item">Home</li>
-           <li class="breadcrumb-item"><a href="#">Admin</a></li>
-           <li class="breadcrumb-item active">Dashboard</li>
-       </ol>
        <div class="container-fluid">
            <!-- Ejemplo de tabla Listado -->
            <div class="card">
@@ -317,6 +312,7 @@ export default {
                 console.log(error);
             }); 
         },
+        
         eliminarSubcategoria(data){
             Swal.fire({
                 position: 'top-end',
@@ -341,7 +337,6 @@ export default {
             this.errorMostrarmsj=[];//se inicializa array vacio
             //si la condicion esta vacia se inserta con push que el nombre no puede estar vacio
             if(!this.nombreSubcategoria)this.errorMostrarmsj.push("el nombre no puede estar vacio");
-            if(!this.unidadMedida)this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if(!this.idCategorias)this.errorMostrarmsj.push("el nombre no puede estar vacio");
             if(this.errorMostrarmsj.length) this.errorCajatexto = 1;
             return this.errorCajatexto;
