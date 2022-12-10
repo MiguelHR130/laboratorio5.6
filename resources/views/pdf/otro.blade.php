@@ -78,9 +78,10 @@
                position: fixed;
                top: 210px;
                left: 210px; 
-               border-width: 1px;
-               border-style: solid;
-               border-color: white;
+               margin-left:auto;
+               margin-right:auto;
+               text-align:left;
+             
             }
         .letrafirma{
                font-size: 12px;
@@ -171,15 +172,21 @@
                 </table>   
         </div>  
         <div>
-            <table class="letraRESULT" width="100%">
+            <table class="letraRESULT" width="300px">
                 <tr>
                     <th align="left">{{$otropdf->encabezado}}</th><br><br>
                 </tr>        
                 <tr>
                    <td>
-                        <pre>
-                        {{$otropdf->cuerpo}}
-                        </pre>
+                        
+                           <pre>
+                           
+                            {{$otropdf->cuerpo}}
+                           
+                           </pre>
+                           
+                          
+                    
                    </td>
                         
                    

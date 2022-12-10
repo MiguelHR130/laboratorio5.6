@@ -55,6 +55,16 @@
                 top: 45px;
                 text-transform: uppercase; 
             }
+            .letratablamembarazo{
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                color: #000000;
+                position: fixed;
+                left: 230px;
+                top: 55px;
+                text-transform: uppercase; 
+            }
         .letratablam2{
                 font-size: 18px;
                 font-family: Arial, Helvetica, sans-serif;
@@ -63,6 +73,16 @@
                 position: fixed;
                 left: 215px;
                 top: 160px;
+                text-transform: uppercase; 
+            }
+            .letratablam2embarazo{
+                font-size: 22px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: bold;
+                color: #000000;
+                position: fixed;
+                left: 230px;
+                top: 200px;
                 text-transform: uppercase; 
             }
             .letratablambiometria{
@@ -143,6 +163,13 @@
                 left: 40px;
                 text-transform: uppercase;  
         }    
+        .datosembarazo{
+                font-size: 13px;
+                position: fixed;
+                top: 100px;
+                left: 40px;
+                text-transform: uppercase;  
+        }    
         .letraRESULT{
                font-size: 17px;
                font-family: Arial, Helvetica, sans-serif;
@@ -161,7 +188,15 @@
             position: fixed;
             top: 250px;
             left: 45px;
-            
+        }
+        .letraresultElseembarazo{
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            color: #000000;
+            position: fixed;
+            top: 300px;
+            left: 45px;
         }
         .letraresultcopro{
             font-size: 14px;
@@ -2226,6 +2261,133 @@
                 </th>
             </table>
         </div>
+         
+
+            <div>
+            <table class="letrafirma">
+                <tr>
+                    <th>ATENTAMENTE</th>
+                </tr>
+                <tr>
+                    <th>&nbsp;</th>
+                </tr>
+                <tr >
+                    <th class="linea">Q.F.B MALENY GUZMAN HERNANDEZ</th>
+                </tr>
+                <tr>
+                    <th>CED.PROF 10307821</th>
+                </tr>
+            </table>
+            </div>
+           
+
+        </div>
+
+</body>
+@elseif($itemp['categoria']->id==23)
+<body class="borde">
+    <header>
+        <img src="img\logo5.png" width="700" height="130"class="img" alignt="center" style="padding-bottom: 40px; padding-top: 30px;">
+    </header>
+    <footer>
+        <table>
+        <tr>
+            <td>
+                <p class="izq">
+                Laboratorio de Análisis Clínicos San Miguel
+                </p>
+            </td>
+            <td>
+            <p class="page">
+                Pág.
+            </p>
+            </td>
+        </tr>
+        </table>
+  </footer>
+
+  <div class="div" >
+    
+        @foreach($arreglo as $item)
+        <div>
+            <table class="letratablamembarazo">
+                <tr>
+                    <td>INFORMACIÓN DEL PACIENTE</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+        <table class="datosembarazo" width="100%" style="border-collapse: collapse;  color: #e66900;">
+          <tr>
+            <td style="background-color: #fdddca;" width="20%">NOMBRE</td>
+            <td  width="110%">&nbsp;&nbsp;{{$item['registro']->nombreConcatenado}} </td>
+            <td style="background-color: #fdddca;">EDAD</td>
+            <td  width="30%">&nbsp;&nbsp;{{$item['registro']->edad }} años </td>
+            <td style="background-color: #fdddca;"  width="16%">NACIMIENTO</td>
+            <td width="80%">&nbsp;&nbsp;{{$fecha_finalc}}</td>
+          </tr>
+          <tr>
+            <td style="background-color: #fdddca;">FECHA </td>
+            <td >&nbsp;&nbsp;{{$fecha_final}}</td>
+            <td style="background-color: #fdddca;">SEXO</td>
+            <td>&nbsp;&nbsp;{{$item['registro']->sexo}}</td>
+          </tr>
+        </table>
+        </div>
+      <div>
+         
+      @foreach($item['categorias'] as $itemp)           
+      <table class="letratablam2embarazo">
+        <tr>
+            <th>{{$itemp['categoria']->nombreCategoria}}</th>
+        </tr>
+            <td>&nbsp;</td>
+        @endforeach
+      </table>   
+      </div>
+      
+      <div>
+      <table class="letraresultElseembarazo" width="100%">
+       
+            @foreach($item['categorias'] as $itemp)
+            <tr>
+               <td>&nbsp;</td>
+            </tr>
+            @foreach($itemp['partidas'] as $child)
+            <tr>
+                <td align="center">{{$child->nombreSubcategoria}}</td>
+                
+            </tr>
+            <tr>
+               <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><b>{{$child->descripcionResultado}}</b> </td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            @endforeach
+    @endforeach
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr><td></td></tr>
+        @foreach($item['categorias'] as $itemp)
+        @if($itemp['categoria']->observaciones==null)
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        @else
+        <tr>
+            <th>Observaciones:</th>
+            <td colspan="3"><pre>{{$itemp['categoria']->observaciones}}</pre></td>
+        </tr>
+        <tr><td></td></tr>
+        @endif
+        @endforeach
+      </table>
+@endforeach
+</div>
+
          
 
             <div>
