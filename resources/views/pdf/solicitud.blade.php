@@ -2490,7 +2490,7 @@
         </div>
 
 </body>
-@elseif($itemp['categoria']->id==26)
+@elseif($itemp['categoria']->id==23)
 
 <body class="borde">
     <header>
@@ -2637,7 +2637,7 @@
 
 </body>
 
-@elseif($itemp['categoria']->id==24)
+@elseif($itemp['categoria']->id == 21)
         <body class="borde">
     <header>
         <img src="img\logo5.png" width="700" height="130"class="img" alignt="center" style="padding-bottom: 40px; padding-top: 30px;">
@@ -2710,7 +2710,7 @@
             @foreach($itemp['partidas'] as $child)
             <tr>
                 <td align="left">{{$child->nombreSubcategoria}}</td>
-                @if(($child->id==143 || $child->id==144))
+                @if(($child->id==165 || $child->id==166))
                 <td>{{$child->descripcionResultado}}</td>
                 <td>{{$child->unidadMedida}}</td>
                 <td>Hasta {{$child->vmaxH}}</td>
@@ -2767,7 +2767,7 @@
         </div>
 
 </body>
-@elseif($itemp['categoria']->id==25)
+@elseif($itemp['categoria']->id==22)
         <body class="borde">
     <header>
         <img src="img\logo5.png" width="700" height="130"class="img" alignt="center" style="padding-bottom: 40px; padding-top: 30px;">
@@ -2840,7 +2840,7 @@
             @foreach($itemp['partidas'] as $child)
             <tr>
                 <td align="left">{{$child->nombreSubcategoria}}</td>
-                @if(($child->id==145 || $child->id==146))
+                @if(($child->id==167 || $child->id==168))
                 <td>{{$child->descripcionResultado}}</td>
                 <td>{{$child->unidadMedida}}</td>
                 <td>Hasta {{$child->vmaxH}}</td>
@@ -2897,7 +2897,7 @@
         </div>
 
 </body>
-@elseif($itemp['categoria']->id==27)
+@elseif($itemp['categoria']->id==24)
         <body class="borde">
     <header>
         <img src="img\logo5.png" width="700" height="130"class="img" alignt="center" style="padding-bottom: 40px; padding-top: 30px;">
@@ -2971,7 +2971,7 @@
             <tr>
                 <td align="left">{{$child->nombreSubcategoria}}</td>
                 @if($child->descripcionResultado>$child->vmaxH)
-                 @if($child->id==121)
+                 @if($child->id==172)
                 <td><font color ="#007fff">{{$child->descripcionResultado}}</font></td>
                 <td>{{$child->unidadMedida}}</td>
                 <td>Hasta {{$child->vmaxH}}</td>
@@ -2981,7 +2981,7 @@
                 <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
                 @endif
                 @elseif($child->descripcionResultado<$child->vminH)
-                @if($child->id==121)
+                @if($child->id==172)
                 <td><font color ="#ff0000">{{$child->descripcionResultado}}</font></td>
                 <td>{{$child->unidadMedida}}</td>
                 <td>Hasta {{$child->vmaxH}}</td>
@@ -2991,7 +2991,7 @@
                 <td>{{$child->vminH}}-{{$child->vmaxH}}</td>
                 @endif
                 @else
-                @if($child->id==121)
+                @if($child->id==172)
                 <td>{{$child->descripcionResultado}}</td>
                 <td>{{$child->unidadMedida}}</td>
                 <td>Hasta {{$child->vmaxH}}</td>
